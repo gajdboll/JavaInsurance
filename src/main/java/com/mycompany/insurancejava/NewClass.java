@@ -7,7 +7,7 @@ public class NewClass {
             {
 
             System.out.println("Testowa klasa dla Bartka i Krzyska");
-            System.out.println("Testowa klasa dla Bartka i Krzyskax");
+            System.out.println("Testowa klasa dla Bartka i Kdfsghbjhjghrzyskax");
             System.out.println("Testowa klasa dla Bartka i KrzyskaX");
             
 
