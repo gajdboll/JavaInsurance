@@ -1,6 +1,9 @@
+package com.mycompany.insurancejava;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.GridLayout;
+import java.awt.PopupMenu;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
  
@@ -19,25 +22,15 @@ public class InsuranceGui extends JFrame implements ActionListener
 {
 
 // pola (buttony fieldy etc.) znajdujace sie na interfacie
-    private JLabel projectTitle;
-    private JTextField customerNname;
-    private JTextField address;
-    private JTextField registrationNumber; 
-    private JTextField valuation;
-    private JTextField estimatedValuedMilage;
-    private JTextField claimInLast5Years;
-    private JTextField postCode;
-    private JTextField telNo;
-    private JTextField dob;
-    private JTextField coverType;
-    private JTextField makeAndModel;
-    private JTextField yearFirstRegistered;
-    private JTextField engineCC;
-    private JButton saveQuote;
-    private JButton calculatePremiun;
-    private JButton printQuote;
-    private JLabel customerNnameJLabel;
+    private JLabel projectTitle;//
+    private JTextField [] polaTekstowe;
+    private JButton saveQuote;//
+    private JButton calculatePremiun;//
+    private JButton printQuote;//
+    private JLabel customerNameJLabel;
     private JLabel addressJLabel;
+    private JLabel emptyLabel1;
+    private JLabel emptyLabel2;
     private JLabel registrationNumberJLabel; 
     private JLabel valuationJLabel;
     private JLabel estimatedValuedMilageJLabel;
@@ -49,65 +42,16 @@ public class InsuranceGui extends JFrame implements ActionListener
     private JLabel makeAndModelJLabel;
     private JLabel yearFirstRegisteredJLabel;
     private JLabel engineCCJLabel;
+
     
 //getters & setters
 
     public JLabel getProjectTitle() {
         return projectTitle;
     }
-
-    public JTextField getCustomerNname() {
-        return customerNname;
+    public JTextField[] getPolaTekstowe() {
+        return polaTekstowe;
     }
-
-    public JTextField getAddress() {
-        return address;
-    }
-
-    public JTextField getRegistrationNumber() {
-        return registrationNumber;
-    }
-
-    public JTextField getValuation() {
-        return valuation;
-    }
-
-    public JTextField getEstimatedValuedMilage() {
-        return estimatedValuedMilage;
-    }
-
-    public JTextField getClaimInLast5Years() {
-        return claimInLast5Years;
-    }
-
-    public JTextField getPostCode() {
-        return postCode;
-    }
-
-    public JTextField getTelNo() {
-        return telNo;
-    }
-
-    public JTextField getDob() {
-        return dob;
-    }
-
-    public JTextField getCoverType() {
-        return coverType;
-    }
-
-    public JTextField getMakeAndModel() {
-        return makeAndModel;
-    }
-
-    public JTextField getYearFirstRegistered() {
-        return yearFirstRegistered;
-    }
-
-    public JTextField getEngineCC() {
-        return engineCC;
-    }
-
     public JButton getSaveQuote() {
         return saveQuote;
     }
@@ -121,11 +65,19 @@ public class InsuranceGui extends JFrame implements ActionListener
     }
 
     public JLabel getCustomerNnameJLabel() {
-        return customerNnameJLabel;
+        return customerNameJLabel;
     }
 
     public JLabel getAddressJLabel() {
         return addressJLabel;
+    }
+    
+    public JLabel getEmptyLabel1() {
+        return emptyLabel1;
+    }
+
+    public JLabel getEmptyLabel2() {
+        return emptyLabel2;
     }
 
     public JLabel getRegistrationNumberJLabel() {
@@ -176,57 +128,8 @@ public class InsuranceGui extends JFrame implements ActionListener
     public void setProjectTitle(JLabel projectTitle) {
         this.projectTitle = projectTitle;
     }
-
-    public void setCustomerNname(JTextField customerNname) {
-        this.customerNname = customerNname;
-    }
-
-    public void setAddress(JTextField address) {
-        this.address = address;
-    }
-
-    public void setRegistrationNumber(JTextField registrationNumber) {
-        this.registrationNumber = registrationNumber;
-    }
-
-    public void setValuation(JTextField valuation) {
-        this.valuation = valuation;
-    }
-
-    public void setEstimatedValuedMilage(JTextField estimatedValuedMilage) {
-        this.estimatedValuedMilage = estimatedValuedMilage;
-    }
-
-    public void setClaimInLast5Years(JTextField claimInLast5Years) {
-        this.claimInLast5Years = claimInLast5Years;
-    }
-
-    public void setPostCode(JTextField postCode) {
-        this.postCode = postCode;
-    }
-
-    public void setTelNo(JTextField telNo) {
-        this.telNo = telNo;
-    }
-
-    public void setDob(JTextField dob) {
-        this.dob = dob;
-    }
-
-    public void setCoverType(JTextField coverType) {
-        this.coverType = coverType;
-    }
-
-    public void setMakeAndModel(JTextField makeAndModel) {
-        this.makeAndModel = makeAndModel;
-    }
-
-    public void setYearFirstRegistered(JTextField yearFirstRegistered) {
-        this.yearFirstRegistered = yearFirstRegistered;
-    }
-
-    public void setEngineCC(JTextField engineCC) {
-        this.engineCC = engineCC;
+        public void setPolaTekstowe(JTextField[] polaTekstowe) {
+        this.polaTekstowe = polaTekstowe;
     }
 
     public void setSaveQuote(JButton saveQuote) {
@@ -242,13 +145,20 @@ public class InsuranceGui extends JFrame implements ActionListener
     }
 
     public void setCustomerNnameJLabel(JLabel customerNnameJLabel) {
-        this.customerNnameJLabel = customerNnameJLabel;
+        this.customerNameJLabel = customerNnameJLabel;
     }
 
     public void setAddressJLabel(JLabel addressJLabel) {
         this.addressJLabel = addressJLabel;
     }
 
+    public void setEmptyLabel1(JLabel emptyLabel1) {
+        this.emptyLabel1 = emptyLabel1;
+    }
+    public void setEmptyLabel2(JLabel emptyLabel2) {
+        this.emptyLabel2 = emptyLabel2;
+    }
+    
     public void setRegistrationNumberJLabel(JLabel registrationNumberJLabel) {
         this.registrationNumberJLabel = registrationNumberJLabel;
     }
@@ -293,20 +203,132 @@ public class InsuranceGui extends JFrame implements ActionListener
         this.engineCCJLabel = engineCCJLabel;
     }
 
+    
+    //konstruktor
     public InsuranceGui()
     {
         
-                super("Insurance Quote");
-        setSize(500,500);
-// tworzenie obiektow / przyciskow
+        super("Insurance Quote");
+        setSize(1000,500); 
+        
+
+
+        // tworzenie obiektow / przyciskow
+        
+        //tworzenie obiektu tytul
+        projectTitle = new JLabel("Direct Quote Motor Insurance") ;
+
+        // tworzenie pol tekstowych
+        polaTekstowe = new JTextField[13];
+        for(int i=1; i<14; i++)
+        {
+            polaTekstowe[i-1] = new JTextField(""+i);
+ 
+            polaTekstowe[i-1].setSize(30, 15);
+          //  textTable[i-1].addActionListener(new LiczbyListener(i, poleDoTekstu));
+        }
+        //dodanie labelow
+        customerNameJLabel = new JLabel("Name");
+        addressJLabel = new JLabel("Address");
+        emptyLabel1 = new JLabel(" ");
+        emptyLabel2 = new JLabel(" ");
+        registrationNumberJLabel = new JLabel("Registration Number"); 
+        valuationJLabel = new JLabel(" Valuation $");
+        estimatedValuedMilageJLabel = new JLabel("Estimated annual mileage");
+        claimInLast5YearsJLabel = new JLabel("Claim in last 5 years");
+        postCodeJLabel = new JLabel("Post Code");
+        telNoJLabel = new JLabel("Tel No");
+        dobJLabel = new JLabel("Date of Birth dd/mm/yyyy");
+        coverTypeJLabel = new JLabel("Cover Type");
+        makeAndModelJLabel = new JLabel("Make and Model");
+        yearFirstRegisteredJLabel = new JLabel("Year first registered");
+        engineCCJLabel = new JLabel("Engine cc");
+
+        // pomocnicze tablice
+
+         JLabel[] textTable = { customerNameJLabel, addressJLabel, emptyLabel1, emptyLabel2,
+        registrationNumberJLabel, valuationJLabel, estimatedValuedMilageJLabel,
+        claimInLast5YearsJLabel, postCodeJLabel, telNoJLabel, dobJLabel,
+        coverTypeJLabel, makeAndModelJLabel, yearFirstRegisteredJLabel, engineCCJLabel};
+     
+        
+        
+        
+        
+        // dolne przyciski
         saveQuote = new JButton("Save Quote");
         calculatePremiun = new JButton("Calculate Premium");
         printQuote = new JButton("Print Quote");
+       
+
+        
+        //
+        setContentPane(UstawLayoutElementy(textTable));
+
+        setVisible(true);
+        setResizable(false);
+        setDefaultCloseOperation(EXIT_ON_CLOSE); 
+    }   
+    
+    
+    
+         protected JPanel UstawLayoutElementy(JLabel[] c)
+    {
+
 // okno nie do edycji
 //oknoWyniku.setEditable(false);
 // dodanie przyciskow na Frame
+        JPanel jp = new JPanel(new BorderLayout());
+        JPanel jp1 = new JPanel();
+        JPanel jp4 = new JPanel();
+        JPanel jp2 = new JPanel(new GridLayout(4,2));
+        JPanel jp3 = new JPanel(new GridLayout(4,2));
+        JPanel jp5 = new JPanel(new GridLayout(7,4));
+        JPanel jp6 = new JPanel();
+        //dodanie przyciskow do panelpw
+        jp1.add(projectTitle);
+        
+      for(int i =0; i<4;i++)
+        {
+            c[i].setSize(30, 15);
+            jp2.add(c[i]);
+            jp2.add(new JTextField("",20));
+ 
+        }
+         for(int i =4; i<8;i++)
+        {
 
-        add(projectTitle);
+            jp3.add(c[i]);
+            jp3.add(new JTextField("",20));
+ 
+        }
+        for(int i =8; i<15;i++)
+        {
+            c[i].setSize(30, 15);
+            jp5.add(c[i]);
+            jp5.add(new JTextField("",20));
+            jp5.add(new JLabel(""));
+            jp5.add(new JLabel(""));
+ 
+        }
+        jp4.add(jp2);
+        jp4.add(jp3);
+        jp4.add(jp5);
+
+          
+        jp6.add(saveQuote);
+        jp6.add(calculatePremiun);
+        jp6.add(printQuote);
+        
+        jp.add(jp1, BorderLayout.NORTH );
+        jp.add(jp4, BorderLayout.CENTER );
+        jp.add(jp6, BorderLayout.SOUTH );
+        
+        return jp;
+    }
+        
+        
+      /*  add(projectTitle);
         add(address);
         add(registrationNumber);
         add(valuation);
@@ -334,19 +356,16 @@ public class InsuranceGui extends JFrame implements ActionListener
         add(makeAndModelJLabel);
         add(yearFirstRegisteredJLabel);
         add(engineCCJLabel);
-        
+        */
 //listenery        
-        saveQuote.addActionListener(this);
+     /*   saveQuote.addActionListener(this);
         calculatePremiun.addActionListener(this);
-        printQuote.addActionListener(this);
-// dodatkowe listenery musz byc ustawione jak inna opcja bedzie ustawiona ???
+        printQuote.addActionListener(this);*/
+
     
-        setLayout(null);
-// pozostale 
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setVisible(true);
-        setResizable(false);
-    }
+
+
+   
 //layout
 /*             protected JPanel UstawLayoutElementy()
     {
