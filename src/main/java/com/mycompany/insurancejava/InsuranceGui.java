@@ -21,11 +21,11 @@ import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 public class InsuranceGui extends JFrame implements ActionListener
 {
 // pola (buttony fieldy etc.) znajdujace sie na interfacie
-    private JLabel projectTitle;//
+    private JLabel projectTitle;
     private JTextField [] polaTekstowe;
-    private JButton saveQuote;//
-    private JButton calculatePremiun;//
-    private JButton printQuote;//
+    private JButton saveQuote;
+    private JButton calculatePremiun;
+    private JButton printQuote;
     private JLabel customerNameJLabel;
     private JLabel addressJLabel;
     private JLabel emptyLabel1;
@@ -41,15 +41,82 @@ public class InsuranceGui extends JFrame implements ActionListener
     private JLabel makeAndModelJLabel;
     private JLabel yearFirstRegisteredJLabel;
     private JLabel engineCCJLabel;
-<<<<<<< HEAD
     private JLabel annualPremiumLabel;
     private JLabel monthlyPremiumLabel;
+    
     private JTextField annualPremiumTekstowe;
     private JTextField monthlyPremiumTekstowe;
-=======
     
->>>>>>> fb7ac389b4ff062ffdae74a43c3668eefa95df64
+    private JTextField customerNameText;
+    private JTextField addressText;
+    private JTextField emptyLabel1Text;
+    private JTextField emptyLabel2Text;
+    private JTextField postCodeText;
+    private JTextField telNoText;
+    private JTextField dobText;
+    private JTextField makeAndModelText;
+    private JTextField registrationNumberText;
+    private JTextField valuationText;
+    private JTextField yearFirstRegisteredText;
+    private JTextField engineCCText;
+
+    
 //getters & setters
+    public JLabel getCustomerNameJLabel() {
+        return customerNameJLabel;
+    }
+
+    public JLabel getAnnualPremiumLabel() {
+        return annualPremiumLabel;
+    }
+
+    public JTextField getAnnualPremiumTekstowe() {
+        return annualPremiumTekstowe;
+    }
+
+    public JTextField getCustomerNameText() {
+        return customerNameText;
+    }
+
+    public JTextField getAddressText() {
+        return addressText;
+    }
+
+    public JTextField getEmptyLabel1Text() {
+        return emptyLabel1Text;
+    }
+
+    public JTextField getEmptyLabel2Text() {
+        return emptyLabel2Text;
+    }
+
+    public JTextField getPostCodeText() {
+        return postCodeText;
+    }
+
+    public JTextField getTelNoText() {
+        return telNoText;
+    }
+
+    public JTextField getDobText() {
+        return dobText;
+    }
+
+    public JTextField getRegistrationNumberText() {
+        return registrationNumberText;
+    }
+
+    public JTextField getValuationText() {
+        return valuationText;
+    }
+
+    public JTextField getYearFirstRegisteredText() {
+        return yearFirstRegisteredText;
+    }
+
+    public JTextField getEngineCCText() {
+        return engineCCText;
+    }
 
     public void setAnualPremiumLabel(JLabel anualPremiumLabel) {
         this.annualPremiumLabel = anualPremiumLabel;
@@ -161,6 +228,62 @@ public class InsuranceGui extends JFrame implements ActionListener
         return engineCCJLabel;
     }
 //setters
+
+    public void setCustomerNameJLabel(JLabel customerNameJLabel) {
+        this.customerNameJLabel = customerNameJLabel;
+    }
+
+    public void setAnnualPremiumLabel(JLabel annualPremiumLabel) {
+        this.annualPremiumLabel = annualPremiumLabel;
+    }
+
+    public void setAnnualPremiumTekstowe(JTextField annualPremiumTekstowe) {
+        this.annualPremiumTekstowe = annualPremiumTekstowe;
+    }
+
+    public void setCustomerNameText(JTextField customerNameText) {
+        this.customerNameText = customerNameText;
+    }
+
+    public void setAddressText(JTextField addressText) {
+        this.addressText = addressText;
+    }
+
+    public void setEmptyLabel1Text(JTextField emptyLabel1Text) {
+        this.emptyLabel1Text = emptyLabel1Text;
+    }
+
+    public void setEmptyLabel2Text(JTextField emptyLabel2Text) {
+        this.emptyLabel2Text = emptyLabel2Text;
+    }
+
+    public void setPostCodeText(JTextField postCodeText) {
+        this.postCodeText = postCodeText;
+    }
+
+    public void setTelNoText(JTextField telNoText) {
+        this.telNoText = telNoText;
+    }
+
+    public void setDobText(JTextField dobText) {
+        this.dobText = dobText;
+    }
+
+    public void setRegistrationNumberText(JTextField registrationNumberText) {
+        this.registrationNumberText = registrationNumberText;
+    }
+
+    public void setValuationText(JTextField valuationText) {
+        this.valuationText = valuationText;
+    }
+
+    public void setYearFirstRegisteredText(JTextField yearFirstRegisteredText) {
+        this.yearFirstRegisteredText = yearFirstRegisteredText;
+    }
+
+    public void setEngineCCText(JTextField engineCCText) {
+        this.engineCCText = engineCCText;
+    }
 
     public void setProjectTitle(JLabel projectTitle) {
         this.projectTitle = projectTitle;
@@ -277,46 +400,49 @@ public class InsuranceGui extends JFrame implements ActionListener
         makeAndModelJLabel = new JLabel("Make and Model");
         yearFirstRegisteredJLabel = new JLabel("Year first registered");
         engineCCJLabel = new JLabel("Engine cc");
-<<<<<<< HEAD
         annualPremiumLabel = new JLabel("Annual Premium");
         monthlyPremiumLabel = new JLabel("Monthly Premium");
-        annualPremiumTekstowe = new JTextField();
-        monthlyPremiumTekstowe = new JTextField();
-=======
-//
->>>>>>> fb7ac389b4ff062ffdae74a43c3668eefa95df64
-
-
-
+        //input fileds
+        customerNameText = new JTextField("",20);
+        addressText = new JTextField("",20);
+        emptyLabel1Text  = new JTextField("",20);
+        emptyLabel2Text = new JTextField("",20);
+        postCodeText = new JTextField("",20);
+        telNoText = new JTextField("",20);
+        dobText = new JTextField("",20);
+        makeAndModelText = new JTextField("",20);
+        registrationNumberText = new JTextField("",20);
+        valuationText = new JTextField("",20);
+        yearFirstRegisteredText = new JTextField("",20);
+        engineCCText = new JTextField("",20);
+        //rezultat                              
+        annualPremiumTekstowe = new JTextField("",20);
+        monthlyPremiumTekstowe = new JTextField("",20);
 
         // pomocnicze tablice
-         JLabel[] textTable = { customerNameJLabel, addressJLabel, emptyLabel1, emptyLabel2,
+         JLabel[] textLables = { customerNameJLabel, addressJLabel, emptyLabel1, emptyLabel2,
         postCodeJLabel, telNoJLabel, dobJLabel,
         makeAndModelJLabel, registrationNumberJLabel, valuationJLabel, yearFirstRegisteredJLabel,engineCCJLabel,
         claimInLast5YearsJLabel,coverTypeJLabel, estimatedValuedMilageJLabel};
-   
+        // pomocnicze tablice do inputow
+        JTextField[] inputText = { customerNameText, addressText, emptyLabel1Text, emptyLabel2Text,
+        postCodeText, telNoText, dobText,
+        makeAndModelText, registrationNumberText, valuationText, yearFirstRegisteredText,engineCCText};
         // dolne przyciski
         saveQuote = new JButton("Save Quote");
         calculatePremiun = new JButton("Calculate Premium");
         printQuote = new JButton("Print Quote");
-  
         //
-        setContentPane(UstawLayoutElementy(textTable));
-
+        setContentPane(UstawLayoutElementy(textLables, inputText));
         setVisible(true);
         setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE); 
     }   
-    
- 
-         protected JPanel UstawLayoutElementy(JLabel[] c)
+         protected JPanel UstawLayoutElementy(JLabel[] c, JTextField[] inputText)
     {
-<<<<<<< HEAD
         JLabel premiumLabelTable []= {annualPremiumLabel, monthlyPremiumLabel};
         JTextField premiumTekstoweTable [] = {annualPremiumTekstowe, monthlyPremiumTekstowe};
  
-=======
->>>>>>> fb7ac389b4ff062ffdae74a43c3668eefa95df64
         /*// nic nie robi na razie -> sprawdzic strona 18 wyklad 2
         Vector dane = new Vector();
         // obiekt listy bierze dane z Vectora
@@ -326,11 +452,7 @@ public class InsuranceGui extends JFrame implements ActionListener
         */
         String claimsTab [] = {"Yes", "No"};
         String[] coverTypeTab = { "Comprehensive", "Third Party" };
-<<<<<<< HEAD
         String[] engineCCTab = { "800 or less", "Between 800 - 1000", "Between 1000 - 1500", "Between 1500 - 2000", "More than 2000" };
-=======
-        String[] engineCCTab = { "800 or less", "Between 800 - 1000", "Between 1000 - 1500", "Between 1500 - 2000", "More than 1000" };
->>>>>>> fb7ac389b4ff062ffdae74a43c3668eefa95df64
         JComboBox dropDown [] = {new JComboBox(claimsTab), new JComboBox(coverTypeTab),new JComboBox(engineCCTab) };
             /*MOga byc jeszcze przydatne*/
         //JComboBox claimsBox = new JComboBox(claimsTab);
@@ -342,17 +464,10 @@ public class InsuranceGui extends JFrame implements ActionListener
         JPanel main = new JPanel();
         //tytul
         JPanel mainHeader = new JPanel();
-<<<<<<< HEAD
         mainHeader.add(projectTitle);
         //pierwszy kontener podzielony na regiony
         JPanel p1 = new JPanel(new BorderLayout());
         p1.add(new JLabel(" Customer Information"),BorderLayout.NORTH );                
-=======
-        mainHeader.add(new JLabel("Direct Insurance Company"));
-        //pierwszy kontener podzielony na regiony
-        JPanel p1 = new JPanel(new BorderLayout());
-        p1.add(new JLabel(" Profilu Klienta - Informacje"),BorderLayout.NORTH );                
->>>>>>> fb7ac389b4ff062ffdae74a43c3668eefa95df64
         p1.add(new JLabel(" "),BorderLayout.CENTER );                
         JPanel grid1 = new JPanel();             
         JPanel g1 = new JPanel(new GridLayout(4,2));
@@ -363,14 +478,16 @@ public class InsuranceGui extends JFrame implements ActionListener
         {
             c[i].setSize(30, 15);
             g1.add(c[i]);
-            g1.add(new JTextField("",20));
+            //g1.add(inputText[i]);
+            g1.add(new JTextField("",20)); //-- usunac
         }
-<<<<<<< HEAD
 
         for(int i =4; i<7;i++)
-        {
+        {            
+            c[i].setSize(30, 15);
             g2.add(c[i]);
-            g2.add(new JTextField("",20));
+           // g1.add(inputText[i]);
+            g2.add(new JTextField("",20)); //-- usunac
         }
         
         // daodanie pierwszy kontener z regionanami zakonczony
@@ -389,15 +506,16 @@ public class InsuranceGui extends JFrame implements ActionListener
         // panel przechowujacy przyciski
         JPanel jp6 = new JPanel();
         //ustawienie pol tekstowych i labeli na gridzie
-        for(int i =7; i<12;i++)
+     /*   for(int i =7; i<12;i++)
         {    
                 c[i].setSize(30, 15);
                 jp5.add(c[i]);
-                jp5.add(new JTextField(""));
+               // g1.add(inputText[i]);
+                jp5.add(new JTextField(""));// -- usunac
                 jp5.add(new JLabel(""));
                 jp5.add(new JLabel(""));
 
-        }
+        }*/
         int j=0;
         
         //loop petla do ostatnich 3 drop downow
@@ -423,70 +541,16 @@ public class InsuranceGui extends JFrame implements ActionListener
         p2.add(jp5, BorderLayout.SOUTH );
         // dodanie przyciskow na ostatni kontener
    
-=======
-
-        for(int i =4; i<7;i++)
-        {
-            g2.add(c[i]);
-            g2.add(new JTextField("",20));
-        }
-        
-        // daodanie pierwszy kontener z regionanami zakonczony
-        grid1.add(g1);
-        grid1.add(g2);             
-        p1.add(grid1,BorderLayout.SOUTH); 
-        
-        // tworzenie drugiego kontenera z regionami  
-                                        
-        JPanel p2 = new JPanel(new BorderLayout());
-
-        p2.add(new JLabel ("Informacje o pojezdzie"), BorderLayout.NORTH);
-        p2.add(new JLabel (" "), BorderLayout.CENTER);
-       
-        JPanel jp5 = new JPanel(new GridLayout(8,4));
-        // panel przechowujacy przyciski
-        JPanel jp6 = new JPanel();
-        //ustawienie pol tekstowych i labeli na gridzie
-        for(int i =7; i<12;i++)
-        {    
-                c[i].setSize(30, 15);
-                jp5.add(c[i]);
-                jp5.add(new JTextField("",20));
-                jp5.add(new JLabel(""));
-                jp5.add(new JLabel(""));
-
-        }
-        int j=0;
-        //loop petla do ostatnich 3 drop downow
-        for(int i =12;i<15;i++)
-        {       //add(sp); // nic nie robi na razie -> sprawdzic strona 18 wyklad 2
-                c[i].setSize(30, 15);
-                jp5.add(c[i]); 
-                jp5.add(dropDown[j++]);
-                jp5.add(new JLabel(""));
-                jp5.add(new JLabel(""));
-        }
- 
-        p2.add(jp5, BorderLayout.SOUTH );
-        // dodanie przyciskow na ostatni kontener
-        jp6.add(new JLabel("                                                                                                                                                                                  "));
->>>>>>> fb7ac389b4ff062ffdae74a43c3668eefa95df64
         jp6.add(saveQuote);
         jp6.add(calculatePremiun);
         jp6.add(printQuote);
 
-<<<<<<< HEAD
 
-=======
->>>>>>> fb7ac389b4ff062ffdae74a43c3668eefa95df64
         // dodanie wszystkich kontenerow na glowny panel main
         main.add(mainHeader);  
         main.add(p1);
         main.add(p2);
-<<<<<<< HEAD
         main.add(premium);
-=======
->>>>>>> fb7ac389b4ff062ffdae74a43c3668eefa95df64
         main.add(jp6);
         
         return main;
