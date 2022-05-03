@@ -1,0 +1,411 @@
+package com.mycompany.insurancejava;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.GridLayout;
+import java.awt.PopupMenu;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+ 
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+ 
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
+
+ 
+public class InsuranceGui extends JFrame implements ActionListener
+
+{
+
+// pola (buttony fieldy etc.) znajdujace sie na interfacie
+    private JLabel projectTitle;//
+    private JTextField [] polaTekstowe;
+    private JButton saveQuote;//
+    private JButton calculatePremiun;//
+    private JButton printQuote;//
+    private JLabel customerNameJLabel;
+    private JLabel addressJLabel;
+    private JLabel emptyLabel1;
+    private JLabel emptyLabel2;
+    private JLabel registrationNumberJLabel; 
+    private JLabel valuationJLabel;
+    private JLabel estimatedValuedMilageJLabel;
+    private JLabel claimInLast5YearsJLabel;
+    private JLabel postCodeJLabel;
+    private JLabel telNoJLabel;
+    private JLabel dobJLabel;
+    private JLabel coverTypeJLabel;
+    private JLabel makeAndModelJLabel;
+    private JLabel yearFirstRegisteredJLabel;
+    private JLabel engineCCJLabel;
+
+    
+//getters & setters
+
+    public JLabel getProjectTitle() {
+        return projectTitle;
+    }
+    public JTextField[] getPolaTekstowe() {
+        return polaTekstowe;
+    }
+    public JButton getSaveQuote() {
+        return saveQuote;
+    }
+
+    public JButton getCalculatePremiun() {
+        return calculatePremiun;
+    }
+
+    public JButton getPrintQuote() {
+        return printQuote;
+    }
+
+    public JLabel getCustomerNnameJLabel() {
+        return customerNameJLabel;
+    }
+
+    public JLabel getAddressJLabel() {
+        return addressJLabel;
+    }
+    
+    public JLabel getEmptyLabel1() {
+        return emptyLabel1;
+    }
+
+    public JLabel getEmptyLabel2() {
+        return emptyLabel2;
+    }
+
+    public JLabel getRegistrationNumberJLabel() {
+        return registrationNumberJLabel;
+    }
+
+    public JLabel getValuationJLabel() {
+        return valuationJLabel;
+    }
+
+    public JLabel getEstimatedValuedMilageJLabel() {
+        return estimatedValuedMilageJLabel;
+    }
+
+    public JLabel getClaimInLast5YearsJLabel() {
+        return claimInLast5YearsJLabel;
+    }
+
+    public JLabel getPostCodeJLabel() {
+        return postCodeJLabel;
+    }
+
+    public JLabel getTelNoJLabel() {
+        return telNoJLabel;
+    }
+
+    public JLabel getDobJLabel() {
+        return dobJLabel;
+    }
+
+    public JLabel getCoverTypeJLabel() {
+        return coverTypeJLabel;
+    }
+
+    public JLabel getMakeAndModelJLabel() {
+        return makeAndModelJLabel;
+    }
+
+    public JLabel getYearFirstRegisteredJLabel() {
+        return yearFirstRegisteredJLabel;
+    }
+
+    public JLabel getEngineCCJLabel() {
+        return engineCCJLabel;
+    }
+//setters
+
+    public void setProjectTitle(JLabel projectTitle) {
+        this.projectTitle = projectTitle;
+    }
+        public void setPolaTekstowe(JTextField[] polaTekstowe) {
+        this.polaTekstowe = polaTekstowe;
+    }
+
+    public void setSaveQuote(JButton saveQuote) {
+        this.saveQuote = saveQuote;
+    }
+
+    public void setCalculatePremiun(JButton calculatePremiun) {
+        this.calculatePremiun = calculatePremiun;
+    }
+
+    public void setPrintQuote(JButton printQuote) {
+        this.printQuote = printQuote;
+    }
+
+    public void setCustomerNnameJLabel(JLabel customerNnameJLabel) {
+        this.customerNameJLabel = customerNnameJLabel;
+    }
+
+    public void setAddressJLabel(JLabel addressJLabel) {
+        this.addressJLabel = addressJLabel;
+    }
+
+    public void setEmptyLabel1(JLabel emptyLabel1) {
+        this.emptyLabel1 = emptyLabel1;
+    }
+    public void setEmptyLabel2(JLabel emptyLabel2) {
+        this.emptyLabel2 = emptyLabel2;
+    }
+    
+    public void setRegistrationNumberJLabel(JLabel registrationNumberJLabel) {
+        this.registrationNumberJLabel = registrationNumberJLabel;
+    }
+
+    public void setValuationJLabel(JLabel valuationJLabel) {
+        this.valuationJLabel = valuationJLabel;
+    }
+
+    public void setEstimatedValuedMilageJLabel(JLabel estimatedValuedMilageJLabel) {
+        this.estimatedValuedMilageJLabel = estimatedValuedMilageJLabel;
+    }
+
+    public void setClaimInLast5YearsJLabel(JLabel claimInLast5YearsJLabel) {
+        this.claimInLast5YearsJLabel = claimInLast5YearsJLabel;
+    }
+
+    public void setPostCodeJLabel(JLabel postCodeJLabel) {
+        this.postCodeJLabel = postCodeJLabel;
+    }
+
+    public void setTelNoJLabel(JLabel telNoJLabel) {
+        this.telNoJLabel = telNoJLabel;
+    }
+
+    public void setDobJLabel(JLabel dobJLabel) {
+        this.dobJLabel = dobJLabel;
+    }
+
+    public void setCoverTypeJLabel(JLabel coverTypeJLabel) {
+        this.coverTypeJLabel = coverTypeJLabel;
+    }
+
+    public void setMakeAndModelJLabel(JLabel makeAndModelJLabel) {
+        this.makeAndModelJLabel = makeAndModelJLabel;
+    }
+
+    public void setYearFirstRegisteredJLabel(JLabel yearFirstRegisteredJLabel) {
+        this.yearFirstRegisteredJLabel = yearFirstRegisteredJLabel;
+    }
+
+    public void setEngineCCJLabel(JLabel engineCCJLabel) {
+        this.engineCCJLabel = engineCCJLabel;
+    }
+
+    
+    //konstruktor
+    public InsuranceGui()
+    {
+        
+        super("Insurance Quote");
+        setSize(1000,500); 
+        
+
+
+        // tworzenie obiektow / przyciskow
+        
+        //tworzenie obiektu tytul
+        projectTitle = new JLabel("Direct Quote Motor Insurance") ;
+
+        // tworzenie pol tekstowych
+        polaTekstowe = new JTextField[13];
+        for(int i=1; i<14; i++)
+        {
+            polaTekstowe[i-1] = new JTextField(""+i);
+ 
+            polaTekstowe[i-1].setSize(30, 15);
+          //  textTable[i-1].addActionListener(new LiczbyListener(i, poleDoTekstu));
+        }
+        //dodanie labelow
+        customerNameJLabel = new JLabel("Name");
+        addressJLabel = new JLabel("Address");
+        emptyLabel1 = new JLabel(" ");
+        emptyLabel2 = new JLabel(" ");
+        registrationNumberJLabel = new JLabel("Registration Number"); 
+        valuationJLabel = new JLabel(" Valuation $");
+        estimatedValuedMilageJLabel = new JLabel("Estimated annual mileage");
+        claimInLast5YearsJLabel = new JLabel("Claim in last 5 years");
+        postCodeJLabel = new JLabel("Post Code");
+        telNoJLabel = new JLabel("Tel No");
+        dobJLabel = new JLabel("Date of Birth dd/mm/yyyy");
+        coverTypeJLabel = new JLabel("Cover Type");
+        makeAndModelJLabel = new JLabel("Make and Model");
+        yearFirstRegisteredJLabel = new JLabel("Year first registered");
+        engineCCJLabel = new JLabel("Engine cc");
+
+        // pomocnicze tablice
+
+         JLabel[] textTable = { customerNameJLabel, addressJLabel, emptyLabel1, emptyLabel2,
+        registrationNumberJLabel, valuationJLabel, estimatedValuedMilageJLabel,
+        claimInLast5YearsJLabel, postCodeJLabel, telNoJLabel, dobJLabel,
+        coverTypeJLabel, makeAndModelJLabel, yearFirstRegisteredJLabel, engineCCJLabel};
+     
+        
+        
+        
+        
+        // dolne przyciski
+        saveQuote = new JButton("Save Quote");
+        calculatePremiun = new JButton("Calculate Premium");
+        printQuote = new JButton("Print Quote");
+       
+
+        
+        //
+        setContentPane(UstawLayoutElementy(textTable));
+
+        setVisible(true);
+        setResizable(false);
+        setDefaultCloseOperation(EXIT_ON_CLOSE); 
+    }   
+    
+    
+    
+         protected JPanel UstawLayoutElementy(JLabel[] c)
+    {
+
+// okno nie do edycji
+//oknoWyniku.setEditable(false);
+// dodanie przyciskow na Frame
+        JPanel jp = new JPanel(new BorderLayout());
+        JPanel jp1 = new JPanel();
+        JPanel jp4 = new JPanel();
+        JPanel jp2 = new JPanel(new GridLayout(4,2));
+        JPanel jp3 = new JPanel(new GridLayout(4,2));
+        JPanel jp5 = new JPanel(new GridLayout(7,4));
+        JPanel jp6 = new JPanel();
+        //dodanie przyciskow do panelpw
+        jp1.add(projectTitle);
+        
+      for(int i =0; i<4;i++)
+        {
+            c[i].setSize(30, 15);
+            jp2.add(c[i]);
+            jp2.add(new JTextField("",20));
+ 
+        }
+         for(int i =4; i<8;i++)
+        {
+
+            jp3.add(c[i]);
+            jp3.add(new JTextField("",20));
+ 
+        }
+        for(int i =8; i<15;i++)
+        {
+            c[i].setSize(30, 15);
+            jp5.add(c[i]);
+            jp5.add(new JTextField("",20));
+            jp5.add(new JLabel(""));
+            jp5.add(new JLabel(""));
+ 
+        }
+        jp4.add(jp2);
+        jp4.add(jp3);
+        jp4.add(jp5);
+
+          
+        jp6.add(saveQuote);
+        jp6.add(calculatePremiun);
+        jp6.add(printQuote);
+        
+        jp.add(jp1, BorderLayout.NORTH );
+        jp.add(jp4, BorderLayout.CENTER );
+        jp.add(jp6, BorderLayout.SOUTH );
+        
+        return jp;
+    }
+        
+        
+      /*  add(projectTitle);
+        add(address);
+        add(registrationNumber);
+        add(valuation);
+        add(estimatedValuedMilage);
+        add(claimInLast5Years);
+        add(postCode);
+        add(telNo);
+        add(dob);
+        add(coverType);
+        add(makeAndModel);
+        add(yearFirstRegistered);
+        add(engineCC);
+        add(saveQuote);
+        add(calculatePremiun);
+        add(printQuote);
+        add(customerNnameJLabel);
+        add(addressJLabel);
+        add(valuationJLabel);
+        add(estimatedValuedMilageJLabel);
+        add(claimInLast5YearsJLabel);
+        add(postCodeJLabel);
+        add(telNoJLabel);
+        add(dobJLabel);
+        add(coverTypeJLabel);
+        add(makeAndModelJLabel);
+        add(yearFirstRegisteredJLabel);
+        add(engineCCJLabel);
+        */
+//listenery        
+     /*   saveQuote.addActionListener(this);
+        calculatePremiun.addActionListener(this);
+        printQuote.addActionListener(this);*/
+
+    
+
+
+   
+//layout
+/*             protected JPanel UstawLayoutElementy()
+    {
+        
+      
+        JPanel jpanel = new JPanel(new BorderLayout() );
+        
+        JPanel jpanel2 = new JPanel();
+        JPanel jpanel3 = new JPanel();
+        JPanel jpanel4 = new JPanel();
+ 
+             //  jpanel.setLayout(new BorderLayout());
+
+       // JTextField t1 = new JTextField("południe");
+       // JButton cb1 = new JButton("wschód");
+        
+        //dodanie labela do aplikacji
+        jpanel2.add(new JLabel("Po angielsku"));
+        //dodanie inputa do aplikacji
+        jpanel2.add(slowoAng,0,1);
+        jpanel2.add(new JLabel("Po polsku"));        
+        jpanel2.add(slowoPol);
+        //dodanie przycisku
+        jpanel3.add(nastepneSlowo);
+        jpanel4.add(blad);
+        //nastepneSlowo.setVgap(3);
+        
+        blad.setForeground(Color.RED);
+        ////////////////////////////////////////////////////////////
+        jpanel.add(jpanel2, BorderLayout.NORTH);
+        jpanel.add(jpanel3, BorderLayout.CENTER);
+        jpanel.add(jpanel4, BorderLayout.SOUTH);
+        
+        return jpanel;  
+        
+ */       
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    
+}
