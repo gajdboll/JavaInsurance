@@ -41,14 +41,10 @@ public class InsuranceGui extends JFrame implements ActionListener
     private JLabel makeAndModelJLabel;
     private JLabel yearFirstRegisteredJLabel;
     private JLabel engineCCJLabel;
-<<<<<<< HEAD
     private JLabel annualPremiumLabel;
     private JLabel monthlyPremiumLabel;
     private JTextField annualPremiumTekstowe;
     private JTextField monthlyPremiumTekstowe;
-=======
-    
->>>>>>> fb7ac389b4ff062ffdae74a43c3668eefa95df64
 //getters & setters
 
     public void setAnualPremiumLabel(JLabel anualPremiumLabel) {
@@ -277,14 +273,10 @@ public class InsuranceGui extends JFrame implements ActionListener
         makeAndModelJLabel = new JLabel("Make and Model");
         yearFirstRegisteredJLabel = new JLabel("Year first registered");
         engineCCJLabel = new JLabel("Engine cc");
-<<<<<<< HEAD
         annualPremiumLabel = new JLabel("Annual Premium");
         monthlyPremiumLabel = new JLabel("Monthly Premium");
         annualPremiumTekstowe = new JTextField();
         monthlyPremiumTekstowe = new JTextField();
-=======
-//
->>>>>>> fb7ac389b4ff062ffdae74a43c3668eefa95df64
 
 
 
@@ -311,12 +303,9 @@ public class InsuranceGui extends JFrame implements ActionListener
  
          protected JPanel UstawLayoutElementy(JLabel[] c)
     {
-<<<<<<< HEAD
         JLabel premiumLabelTable []= {annualPremiumLabel, monthlyPremiumLabel};
         JTextField premiumTekstoweTable [] = {annualPremiumTekstowe, monthlyPremiumTekstowe};
  
-=======
->>>>>>> fb7ac389b4ff062ffdae74a43c3668eefa95df64
         /*// nic nie robi na razie -> sprawdzic strona 18 wyklad 2
         Vector dane = new Vector();
         // obiekt listy bierze dane z Vectora
@@ -326,11 +315,7 @@ public class InsuranceGui extends JFrame implements ActionListener
         */
         String claimsTab [] = {"Yes", "No"};
         String[] coverTypeTab = { "Comprehensive", "Third Party" };
-<<<<<<< HEAD
         String[] engineCCTab = { "800 or less", "Between 800 - 1000", "Between 1000 - 1500", "Between 1500 - 2000", "More than 2000" };
-=======
-        String[] engineCCTab = { "800 or less", "Between 800 - 1000", "Between 1000 - 1500", "Between 1500 - 2000", "More than 1000" };
->>>>>>> fb7ac389b4ff062ffdae74a43c3668eefa95df64
         JComboBox dropDown [] = {new JComboBox(claimsTab), new JComboBox(coverTypeTab),new JComboBox(engineCCTab) };
             /*MOga byc jeszcze przydatne*/
         //JComboBox claimsBox = new JComboBox(claimsTab);
@@ -342,17 +327,10 @@ public class InsuranceGui extends JFrame implements ActionListener
         JPanel main = new JPanel();
         //tytul
         JPanel mainHeader = new JPanel();
-<<<<<<< HEAD
         mainHeader.add(projectTitle);
         //pierwszy kontener podzielony na regiony
         JPanel p1 = new JPanel(new BorderLayout());
         p1.add(new JLabel(" Customer Information"),BorderLayout.NORTH );                
-=======
-        mainHeader.add(new JLabel("Direct Insurance Company"));
-        //pierwszy kontener podzielony na regiony
-        JPanel p1 = new JPanel(new BorderLayout());
-        p1.add(new JLabel(" Profilu Klienta - Informacje"),BorderLayout.NORTH );                
->>>>>>> fb7ac389b4ff062ffdae74a43c3668eefa95df64
         p1.add(new JLabel(" "),BorderLayout.CENTER );                
         JPanel grid1 = new JPanel();             
         JPanel g1 = new JPanel(new GridLayout(4,2));
@@ -365,7 +343,6 @@ public class InsuranceGui extends JFrame implements ActionListener
             g1.add(c[i]);
             g1.add(new JTextField("",20));
         }
-<<<<<<< HEAD
 
         for(int i =4; i<7;i++)
         {
@@ -423,70 +400,16 @@ public class InsuranceGui extends JFrame implements ActionListener
         p2.add(jp5, BorderLayout.SOUTH );
         // dodanie przyciskow na ostatni kontener
    
-=======
-
-        for(int i =4; i<7;i++)
-        {
-            g2.add(c[i]);
-            g2.add(new JTextField("",20));
-        }
-        
-        // daodanie pierwszy kontener z regionanami zakonczony
-        grid1.add(g1);
-        grid1.add(g2);             
-        p1.add(grid1,BorderLayout.SOUTH); 
-        
-        // tworzenie drugiego kontenera z regionami  
-                                        
-        JPanel p2 = new JPanel(new BorderLayout());
-
-        p2.add(new JLabel ("Informacje o pojezdzie"), BorderLayout.NORTH);
-        p2.add(new JLabel (" "), BorderLayout.CENTER);
-       
-        JPanel jp5 = new JPanel(new GridLayout(8,4));
-        // panel przechowujacy przyciski
-        JPanel jp6 = new JPanel();
-        //ustawienie pol tekstowych i labeli na gridzie
-        for(int i =7; i<12;i++)
-        {    
-                c[i].setSize(30, 15);
-                jp5.add(c[i]);
-                jp5.add(new JTextField("",20));
-                jp5.add(new JLabel(""));
-                jp5.add(new JLabel(""));
-
-        }
-        int j=0;
-        //loop petla do ostatnich 3 drop downow
-        for(int i =12;i<15;i++)
-        {       //add(sp); // nic nie robi na razie -> sprawdzic strona 18 wyklad 2
-                c[i].setSize(30, 15);
-                jp5.add(c[i]); 
-                jp5.add(dropDown[j++]);
-                jp5.add(new JLabel(""));
-                jp5.add(new JLabel(""));
-        }
- 
-        p2.add(jp5, BorderLayout.SOUTH );
-        // dodanie przyciskow na ostatni kontener
-        jp6.add(new JLabel("                                                                                                                                                                                  "));
->>>>>>> fb7ac389b4ff062ffdae74a43c3668eefa95df64
         jp6.add(saveQuote);
         jp6.add(calculatePremiun);
         jp6.add(printQuote);
 
-<<<<<<< HEAD
 
-=======
->>>>>>> fb7ac389b4ff062ffdae74a43c3668eefa95df64
         // dodanie wszystkich kontenerow na glowny panel main
         main.add(mainHeader);  
         main.add(p1);
         main.add(p2);
-<<<<<<< HEAD
         main.add(premium);
-=======
->>>>>>> fb7ac389b4ff062ffdae74a43c3668eefa95df64
         main.add(jp6);
         
         return main;
