@@ -46,6 +46,7 @@ public class InsuranceGui extends JFrame implements ActionListener
     
     private JTextField annualPremiumTekstowe;
     private JTextField monthlyPremiumTekstowe;
+
     
     private JTextField customerNameText;
     private JTextField addressText;
@@ -60,7 +61,7 @@ public class InsuranceGui extends JFrame implements ActionListener
     private JTextField yearFirstRegisteredText;
     private JTextField engineCCText;
 
-    
+
 //getters & setters
     public JLabel getCustomerNameJLabel() {
         return customerNameJLabel;
@@ -402,6 +403,7 @@ public class InsuranceGui extends JFrame implements ActionListener
         engineCCJLabel = new JLabel("Engine cc");
         annualPremiumLabel = new JLabel("Annual Premium");
         monthlyPremiumLabel = new JLabel("Monthly Premium");
+
         //input fileds
         customerNameText = new JTextField("",20);
         addressText = new JTextField("",20);
@@ -418,6 +420,11 @@ public class InsuranceGui extends JFrame implements ActionListener
         //rezultat                              
         annualPremiumTekstowe = new JTextField("",20);
         monthlyPremiumTekstowe = new JTextField("",20);
+
+
+
+
+
 
         // pomocnicze tablice
          JLabel[] textLables = { customerNameJLabel, addressJLabel, emptyLabel1, emptyLabel2,
