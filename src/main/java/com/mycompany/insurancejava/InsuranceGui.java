@@ -466,7 +466,7 @@ public class InsuranceGui extends JFrame implements ActionListener
         //JComboBox coverTypeBox = new JComboBox(coverTypeTab); 
         //JComboBox engineCCBox = new JComboBox(engineCCTab);
         
-
+//test
         // dodanie przyciskow na Frame
         JPanel main = new JPanel();
         //tytul
