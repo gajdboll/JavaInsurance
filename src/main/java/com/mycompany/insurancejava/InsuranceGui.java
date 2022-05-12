@@ -5,22 +5,21 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.PopupMenu;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
- 
+import java.awt.event.ActionListener; 
+import java.util.Vector;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
- 
-import javax.swing.JTextArea;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
  
 public class InsuranceGui extends JFrame implements ActionListener
-
 {
-
 // pola (buttony fieldy etc.) znajdujace sie na interfacie
     private JLabel projectTitle;//
     private JTextField [] polaTekstowe;
@@ -42,9 +41,43 @@ public class InsuranceGui extends JFrame implements ActionListener
     private JLabel makeAndModelJLabel;
     private JLabel yearFirstRegisteredJLabel;
     private JLabel engineCCJLabel;
-
-    
+    private JLabel annualPremiumLabel;
+    private JLabel monthlyPremiumLabel;
+    private JTextField annualPremiumTekstowe;
+    private JTextField monthlyPremiumTekstowe;
 //getters & setters
+
+    public void setAnualPremiumLabel(JLabel anualPremiumLabel) {
+        this.annualPremiumLabel = anualPremiumLabel;
+    }
+
+    public void setMonthlyPremiumLabel(JLabel monthlyPremiumLabel) {
+        this.monthlyPremiumLabel = monthlyPremiumLabel;
+    }
+
+    public void setAnualPremiumTekstowe(JTextField anualPremiumTekstowe) {
+        this.annualPremiumTekstowe = anualPremiumTekstowe;
+    }
+
+    public void setMonthlyPremiumTekstowe(JTextField monthlyPremiumTekstowe) {
+        this.monthlyPremiumTekstowe = monthlyPremiumTekstowe;
+    }
+
+    public JLabel getAnualPremiumLabel() {
+        return annualPremiumLabel;
+    }
+
+    public JLabel getMonthlyPremiumLabel() {
+        return monthlyPremiumLabel;
+    }
+
+    public JTextField getAnualPremiumTekstowe() {
+        return annualPremiumTekstowe;
+    }
+
+    public JTextField getMonthlyPremiumTekstowe() {
+        return monthlyPremiumTekstowe;
+    }
 
     public JLabel getProjectTitle() {
         return projectTitle;
@@ -206,13 +239,10 @@ public class InsuranceGui extends JFrame implements ActionListener
     
     //konstruktor
     public InsuranceGui()
-    {
-        
+    { 
         super("Insurance Quote");
-        setSize(1000,500); 
+        setSize(1000,600); 
         
-
-
         // tworzenie obiektow / przyciskow
         
         //tworzenie obiektu tytul
@@ -233,7 +263,7 @@ public class InsuranceGui extends JFrame implements ActionListener
         emptyLabel1 = new JLabel(" ");
         emptyLabel2 = new JLabel(" ");
         registrationNumberJLabel = new JLabel("Registration Number"); 
-        valuationJLabel = new JLabel(" Valuation $");
+        valuationJLabel = new JLabel("Valuation $");
         estimatedValuedMilageJLabel = new JLabel("Estimated annual mileage");
         claimInLast5YearsJLabel = new JLabel("Claim in last 5 years");
         postCodeJLabel = new JLabel("Post Code");
@@ -243,25 +273,25 @@ public class InsuranceGui extends JFrame implements ActionListener
         makeAndModelJLabel = new JLabel("Make and Model");
         yearFirstRegisteredJLabel = new JLabel("Year first registered");
         engineCCJLabel = new JLabel("Engine cc");
+        annualPremiumLabel = new JLabel("Annual Premium");
+        monthlyPremiumLabel = new JLabel("Monthly Premium");
+        annualPremiumTekstowe = new JTextField();
+        monthlyPremiumTekstowe = new JTextField();
+
+
+
 
         // pomocnicze tablice
-
          JLabel[] textTable = { customerNameJLabel, addressJLabel, emptyLabel1, emptyLabel2,
-        registrationNumberJLabel, valuationJLabel, estimatedValuedMilageJLabel,
-        claimInLast5YearsJLabel, postCodeJLabel, telNoJLabel, dobJLabel,
-        coverTypeJLabel, makeAndModelJLabel, yearFirstRegisteredJLabel, engineCCJLabel};
-     
-        
-        
-        
-        
+        postCodeJLabel, telNoJLabel, dobJLabel,
+        makeAndModelJLabel, registrationNumberJLabel, valuationJLabel, yearFirstRegisteredJLabel,engineCCJLabel,
+        claimInLast5YearsJLabel,coverTypeJLabel, estimatedValuedMilageJLabel};
+   
         // dolne przyciski
         saveQuote = new JButton("Save Quote");
         calculatePremiun = new JButton("Calculate Premium");
         printQuote = new JButton("Print Quote");
-       
-
-        
+  
         //
         setContentPane(UstawLayoutElementy(textTable));
 
@@ -270,61 +300,119 @@ public class InsuranceGui extends JFrame implements ActionListener
         setDefaultCloseOperation(EXIT_ON_CLOSE); 
     }   
     
-    
-    
+ 
          protected JPanel UstawLayoutElementy(JLabel[] c)
     {
-
-// okno nie do edycji
-//oknoWyniku.setEditable(false);
-// dodanie przyciskow na Frame
-        JPanel jp = new JPanel(new BorderLayout());
-        JPanel jp1 = new JPanel();
-        JPanel jp4 = new JPanel();
-        JPanel jp2 = new JPanel(new GridLayout(4,2));
-        JPanel jp3 = new JPanel(new GridLayout(4,2));
-        JPanel jp5 = new JPanel(new GridLayout(7,4));
-        JPanel jp6 = new JPanel();
-        //dodanie przyciskow do panelpw
-        jp1.add(projectTitle);
+        JLabel premiumLabelTable []= {annualPremiumLabel, monthlyPremiumLabel};
+        JTextField premiumTekstoweTable [] = {annualPremiumTekstowe, monthlyPremiumTekstowe};
+ 
+        /*// nic nie robi na razie -> sprawdzic strona 18 wyklad 2
+        Vector dane = new Vector();
+        // obiekt listy bierze dane z Vectora
+        JList lista = new JList(dane);
+        // dodajemy "przewijacz" związany z listą
+        JScrollPane sp = new JScrollPane(lista);
+        */
+        String claimsTab [] = {"Yes", "No"};
+        String[] coverTypeTab = { "Comprehensive", "Third Party" };
+        String[] engineCCTab = { "800 or less", "Between 800 - 1000", "Between 1000 - 1500", "Between 1500 - 2000", "More than 2000" };
+        JComboBox dropDown [] = {new JComboBox(claimsTab), new JComboBox(coverTypeTab),new JComboBox(engineCCTab) };
+            /*MOga byc jeszcze przydatne*/
+        //JComboBox claimsBox = new JComboBox(claimsTab);
+        //JComboBox coverTypeBox = new JComboBox(coverTypeTab); 
+        //JComboBox engineCCBox = new JComboBox(engineCCTab);
         
-      for(int i =0; i<4;i++)
+
+        // dodanie przyciskow na Frame
+        JPanel main = new JPanel();
+        //tytul
+        JPanel mainHeader = new JPanel();
+        mainHeader.add(projectTitle);
+        //pierwszy kontener podzielony na regiony
+        JPanel p1 = new JPanel(new BorderLayout());
+        p1.add(new JLabel(" Customer Information"),BorderLayout.NORTH );                
+        p1.add(new JLabel(" "),BorderLayout.CENTER );                
+        JPanel grid1 = new JPanel();             
+        JPanel g1 = new JPanel(new GridLayout(4,2));
+        JPanel g2 = new JPanel(new GridLayout(4,2));
+        
+        //dodawanie pol tekstowych i labelow na gridy
+        for(int i =0; i<4;i++)
         {
             c[i].setSize(30, 15);
-            jp2.add(c[i]);
-            jp2.add(new JTextField("",20));
- 
+            g1.add(c[i]);
+            g1.add(new JTextField("",20));
         }
-         for(int i =4; i<8;i++)
-        {
 
-            jp3.add(c[i]);
-            jp3.add(new JTextField("",20));
- 
-        }
-        for(int i =8; i<15;i++)
+        for(int i =4; i<7;i++)
         {
-            c[i].setSize(30, 15);
-            jp5.add(c[i]);
-            jp5.add(new JTextField("",20));
-            jp5.add(new JLabel(""));
-            jp5.add(new JLabel(""));
- 
+            g2.add(c[i]);
+            g2.add(new JTextField("",20));
         }
-        jp4.add(jp2);
-        jp4.add(jp3);
-        jp4.add(jp5);
+        
+        // daodanie pierwszy kontener z regionanami zakonczony
+        grid1.add(g1);
+        grid1.add(g2);             
+        p1.add(grid1,BorderLayout.SOUTH); 
+        
+        // tworzenie drugiego kontenera z regionami  
+                                        
+        JPanel p2 = new JPanel(new BorderLayout());
 
+        p2.add(new JLabel ("Vehicle Information"), BorderLayout.NORTH);
+        p2.add(new JLabel (" "), BorderLayout.CENTER);
+       
+        JPanel jp5 = new JPanel(new GridLayout(8,2));
+        // panel przechowujacy przyciski
+        JPanel jp6 = new JPanel();
+        //ustawienie pol tekstowych i labeli na gridzie
+        for(int i =7; i<12;i++)
+        {    
+                c[i].setSize(30, 15);
+                jp5.add(c[i]);
+                jp5.add(new JTextField(""));
+                jp5.add(new JLabel(""));
+                jp5.add(new JLabel(""));
+
+        }
+        int j=0;
+        
+        //loop petla do ostatnich 3 drop downow
+        for(int i =12;i<15;i++)
+        {       //add(sp); // nic nie robi na razie -> sprawdzic strona 18 wyklad 2
+                c[i].setSize(30, 15);
+                jp5.add(c[i]); 
+                jp5.add(dropDown[j++]);
+                jp5.add(new JLabel(""));
+                jp5.add(new JLabel(""));
+        }
+
+
+         JPanel premium = new JPanel(new GridLayout(2,2));
           
+         for(int i=0; i<2; i++)
+         {
+         premium.add(new JLabel(""));
+         premium.add(premiumLabelTable[i]);
+         premium.add(premiumTekstoweTable[i]);
+         }
+
+        p2.add(jp5, BorderLayout.SOUTH );
+        // dodanie przyciskow na ostatni kontener
+   
         jp6.add(saveQuote);
         jp6.add(calculatePremiun);
         jp6.add(printQuote);
+
+
+        // dodanie wszystkich kontenerow na glowny panel main
+        main.add(mainHeader);  
+        main.add(p1);
+        main.add(p2);
+        main.add(premium);
+        main.add(jp6);
         
-        jp.add(jp1, BorderLayout.NORTH );
-        jp.add(jp4, BorderLayout.CENTER );
-        jp.add(jp6, BorderLayout.SOUTH );
-        
-        return jp;
+        return main;
     }
         
         
@@ -405,7 +493,7 @@ public class InsuranceGui extends JFrame implements ActionListener
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet.");   
     }
     
 }
