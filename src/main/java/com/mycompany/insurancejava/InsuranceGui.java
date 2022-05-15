@@ -499,6 +499,50 @@ public class InsuranceGui extends JFrame implements ActionListener,ItemListener 
         setVisible(true);
         setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        /*********************************Setting up Tool tips**************************************************/
+        customerNameJLabel.setToolTipText(" Name ");
+        addressJLabel.setToolTipText (" Address ");
+        registrationNumberJLabel.setToolTipText(" Registration Number ");
+        valuationJLabel.setToolTipText (" Valuation $ ");
+        estimatedValuedMilageJLabel.setToolTipText (" Estimated annual mileage ");
+        claimInLast5YearsJLabel.setToolTipText(" Claim in last 5 years ");
+        postCodeJLabel.setToolTipText (" Post Code ");
+        telNoJLabel.setToolTipText (" Tel No ");
+        dobJLabel.setToolTipText (" Date of Birth dd/mm/yyyy ");
+        coverTypeJLabel.setToolTipText (" Cover Type ");
+        makeAndModelJLabel.setToolTipText (" Make and Model ");
+        yearFirstRegisteredJLabel.setToolTipText(" Year first registered ");
+        engineCCJLabel.setToolTipText (" Engine cc ");
+        annualPremiumLabel.setToolTipText (" Annual Premium ");    
+        monthlyPremiumLabel.setToolTipText(" Monthly Premium ");
+        logowanieLabel.setToolTipText("Status");
+        vehicleInformationLabel.setToolTipText ("   Vehicle Information ");
+        customerInformationLabel.setToolTipText("Customer Information ");
+        //input fileds
+        customerNameText.setToolTipText(" Name ");
+        addressText.setToolTipText(" Address ");
+        emptyLabel1Text.setToolTipText(" Address ");
+        emptyLabel2Text.setToolTipText(" Address ");
+        postCodeText.setToolTipText(" Post Code ");
+        telNoText.setToolTipText(" Tel No ");
+        dobText.setToolTipText(" Date of Birth dd/mm/yyyy ");
+        makeAndModelText.setToolTipText(" Make and Model ");
+        registrationNumberText.setToolTipText(" Registration Number ");
+        valuationText.setToolTipText(" Valuation $ ");
+        yearFirstRegisteredText.setToolTipText(" Year first registered ");
+        engineCCText.setToolTipText(" Engine cc ");
+        checkBoxYes.setToolTipText("Yes");
+        checkBoxNo.setToolTipText(" No ");
+        checkBoxComprehensive.setToolTipText(" Comprehensive ");
+        checkBoxThirdParty.setToolTipText   (" Third Party ");                         
+        annualPremiumTekstowe.setToolTipText(" Annual Premium");
+        monthlyPremiumTekstowe.setToolTipText(" Monthly Premium ");
+        saveQuote.setToolTipText(" Save Quote ");
+        calculatePremiun.setToolTipText(" CalculatePremium ");
+        calculateMultiple .setToolTipText(" Calculate Multiple ");
+        /****************************************************Finish setting tooltips***************************************/
+
+    
     }
 
     protected JPanel UstawLayoutElementy() {
