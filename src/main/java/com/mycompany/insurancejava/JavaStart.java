@@ -10,4 +10,3 @@ public class JavaStart
        // new InsuranceGui1();
     }
 }
-s

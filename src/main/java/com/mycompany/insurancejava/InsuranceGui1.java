@@ -7,32 +7,20 @@ import java.awt.GridLayout;
 import java.awt.PopupMenu;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.util.Vector;
-import javax.swing.ButtonGroup;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
-public class InsuranceGui extends JFrame implements ActionListener,ItemListener {
+public class InsuranceGui1 extends JFrame implements ActionListener {
 // pola (buttony fieldy etc.) znajdujace sie na interfacie
 
     private JLabel projectTitle;
@@ -77,18 +65,13 @@ public class InsuranceGui extends JFrame implements ActionListener,ItemListener 
     private JTextField yearFirstRegisteredText;
     private JTextField engineCCText;
     //CheckBoxy
-    private JRadioButton checkBoxYes;
-    private JRadioButton checkBoxNo;
+    private JCheckBox checkBoxYes;
+    private JCheckBox checkBoxNo;
     private JCheckBox checkBoxComprehensive;
     private JCheckBox checkBoxThirdParty;
     
     private JComboBox estiamtionAnnualMilage;
-    //Ikony
-    Icon r1 = new ImageIcon("save.png");
-    //menu elementy
-    JMenuItem newFile, saveFile, saveAs, openFile;
-    JRadioButtonMenuItem loginMenu, signInMenu;
-    JMenu m3;
+    
 // pomocniczy FontStyle
     private Font font = new Font("Helvetica", Font.BOLD, 20);
 
@@ -423,16 +406,17 @@ public class InsuranceGui extends JFrame implements ActionListener,ItemListener 
     }
 
     //konstruktor
-    public InsuranceGui() {
+    public InsuranceGui1() {
         super("Insurance Quote");
-        setSize(1050, 735);
-        //new MenuDesign().tworzenieMenu();   // nie dziala gdy jest w innej klasie??    
-        tworzenieMenu();
-            //ustawienie wygladu
+        setSize(1050, 638);
+        //ustawienie wygladu
         try{
-			UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+			UIManager.setLookAndFeel(
+				  "javax.swing.plaf.nimbus.NimbusLookAndFeel"
+			);
 	} catch(Exception e){}
 
+        // tworzenie obiektow / przyciskow
         //tworzenie obiektu tytul
         projectTitle = new JLabel("Direct Quote Motor Insurance");
         projectTitle.setFont(font);
@@ -473,8 +457,8 @@ public class InsuranceGui extends JFrame implements ActionListener,ItemListener 
         valuationText = new JTextField("", 20);
         yearFirstRegisteredText = new JTextField("", 20);
         engineCCText = new JTextField("", 20);
-        checkBoxYes = new JRadioButton("Yes");
-        checkBoxNo = new JRadioButton("No");
+        checkBoxYes = new JCheckBox("Yes");
+        checkBoxNo = new JCheckBox("No");
         checkBoxComprehensive = new JCheckBox("Comprehensive");
         checkBoxThirdParty = new JCheckBox("Third Party");
         //rezultat                              
@@ -487,9 +471,9 @@ public class InsuranceGui extends JFrame implements ActionListener,ItemListener 
 
 
         // dolne przyciski
-        saveQuote = new JButton("<html><h3><font color=red>Save</font> Quote");
-        calculatePremiun = new JButton("<html><h3><font color=green>Calculate</font> Premium");
-        calculateMultiple = new JButton("<html><h3><font color=purple>Calculate</font> Multiple");
+        saveQuote = new JButton("Save Quote");
+        calculatePremiun = new JButton("Calculate Premium");
+        calculateMultiple = new JButton("Calculate Multiple");
         //  drop down
         String[] engineCCTab = {"800 or less", "Between 800 - 1000", "Between 1000 - 1500", "Between 1500 - 2000", "More than 2000"};
         
@@ -578,14 +562,9 @@ public class InsuranceGui extends JFrame implements ActionListener,ItemListener 
         p2.add(p2Grid, BorderLayout.NORTH);
 
         JPanel jp5 = new JPanel(new GridLayout(8, 2));
-        
+
         //check boxy
         jp5.add(claimInLast5YearsJLabel);
-        //dodanie do grupy by jeden radio sie wlaczal
-        ButtonGroup grupa = new ButtonGroup();
-        grupa.add(checkBoxYes);
-        grupa.add(checkBoxNo);
-        
         jp5.add(checkBoxYes);
         checkBoxYes.addActionListener(this);
         
@@ -593,11 +572,6 @@ public class InsuranceGui extends JFrame implements ActionListener,ItemListener 
         checkBoxNo.addActionListener(this);
         
         jp5.add(coverTypeJLabel);
-        //grupowanie
-        ButtonGroup grupa2 = new ButtonGroup();
-        grupa2.add(checkBoxComprehensive);
-        grupa2.add(checkBoxThirdParty);
-        
         jp5.add(checkBoxComprehensive);
         checkBoxComprehensive.addActionListener(this);
         jp5.add(checkBoxThirdParty);  
@@ -616,6 +590,7 @@ public class InsuranceGui extends JFrame implements ActionListener,ItemListener 
             premium.add(new JLabel(""));
             premium.add(premiumLabelTable[i]);
             premium.add(premiumTekstoweTable[i]);
+            premiumTekstoweTable[i].addActionListener(this);
         }
 
         // dodanie przyciskow do ostatniego kontenera
@@ -624,11 +599,8 @@ public class InsuranceGui extends JFrame implements ActionListener,ItemListener 
         // panel przechowujacy przyciski
         JPanel jp6 = new JPanel();
         jp6.add(saveQuote);
-        saveQuote.addActionListener(this);
         jp6.add(calculatePremiun);
-        calculatePremiun.addActionListener(this);
         jp6.add(calculateMultiple);
-        calculateMultiple.addActionListener(this);
         //dodanie Footera na layout
         JPanel footer = new JPanel(new BorderLayout());
         JPanel breakLine1 = new JPanel();
@@ -640,17 +612,17 @@ public class InsuranceGui extends JFrame implements ActionListener,ItemListener 
         footer.add(breakLine2, BorderLayout.CENTER);
 
         JPanel footer3 = new JPanel();
-        JLabel tworcy = new JLabel(" Created by: Bartosz Wasko & Krzysztof Gajdosz                          ");
+        JLabel tworcy = new JLabel(" Wykonano przez: Bartosz Wasko & Krzysztof Gajdosz                          ");
         //tworcy.setEditable(false);
         tworcy.setHorizontalAlignment(JTextField.LEFT);
         footer3.add(tworcy);
 
-        JLabel copyWrights = new JLabel("                                 © Copyrights 2022 Dublin                                             ");
+        JLabel copyWrights = new JLabel("                           © Copyrights 2022 Dublin                                 ");
         //copyWrights.setEditable(false);   
         footer3.add(copyWrights);
 
 
-        JTextField pasekStanu = new JTextField("                                                             Program is opened");
+        JTextField pasekStanu = new JTextField("                                                             Program uruchomiony ");
         pasekStanu.addActionListener(this);
         pasekStanu.setEditable(false);
         footer3.add(pasekStanu);
@@ -667,93 +639,9 @@ public class InsuranceGui extends JFrame implements ActionListener,ItemListener 
         return main;
     }
 
-    //tworzenie menu gornego
-    public void tworzenieMenu(){
-     //tworzę listwę menu
-        JMenuBar mBar = new JMenuBar();
-        
-        JMenu m1 = new JMenu("File");
-        JMenu m2 = new JMenu("Options");
-        m3 = new JMenu("About");
-        m3.addActionListener(this);
-        
-        newFile = new JMenuItem("New File");
-        newFile.addItemListener(this);  
-        
-        openFile = new JMenuItem("Open");
-        openFile.addItemListener(this);  
-        
-        saveFile = new JMenuItem("Save Now");
-        saveFile.addItemListener(this);    
-        
-        saveAs = new JMenuItem("Save As...");
-        saveAs.addItemListener(this);    
-        
-        loginMenu = new JRadioButtonMenuItem("Login");
-        loginMenu.addItemListener(this);      
-        
-        signInMenu = new JRadioButtonMenuItem("Sign In");
-        signInMenu.addItemListener(this);
-        
-        // konstrukcja pierwszej głównej pozycji menu
-        m1.add(newFile );
-        m1.add(openFile);
-        m1.addSeparator();        
-        
-        //a tu dam nowe podmenu
-        JMenu podmenu = new JMenu("Save");
-        //dodaję elementy do podmenu
-        podmenu.add(saveFile);  // z ikona   podmenu.add(new JMenuItem("Save Now"),r);
-        podmenu.add(saveAs);
-        //dodaje podmenu do menu
-        m1.add(podmenu);
-
-        m2.add(loginMenu );
-        m2.addSeparator();
-        m2.add(signInMenu );
-        
-        mBar.add(m1);
-        mBar.add(m2);
-        mBar.add(m3);
-        setJMenuBar(mBar);
-}
-    //metody
-    
-    
-    //Listeners
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (logowanieLabel.getText() == ("OFF-LINE")){
-           logowanieLabel.setBackground(Color.red);//??
-
-          if(e.getSource()==m3)
-        {
-                         JOptionPane.showMessageDialog(this,
-                                           "Wedle rozkazu",
-                                           "Informacja",
-                                           JOptionPane.INFORMATION_MESSAGE);
-        }
-        if (e.getSource() == calculatePremiun)  
-        {System.out.println(logowanieLabel.getText());
-             
-            
-          //  {annualPremiumTekstowe, monthlyPremiumTekstowe};
-          System.out.println("Przycisk:"+ e.getSource());
-            annualPremiumTekstowe.setText("asd");
-        }   
-        }
-    }
-
-    @Override
-    public void itemStateChanged(ItemEvent e) {
-        
-        if(e.getSource()==m3)
-        {
-                         JOptionPane.showMessageDialog(this,
-                                           "Wedle rozkazu",
-                                           "Informacja",
-                                           JOptionPane.INFORMATION_MESSAGE);
-        }
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
 }
