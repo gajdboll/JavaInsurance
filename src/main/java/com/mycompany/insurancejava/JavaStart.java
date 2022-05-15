@@ -7,5 +7,7 @@ public class JavaStart
     {
     
         new InsuranceGui();
+       // new InsuranceGui1();
     }
 }
+s
