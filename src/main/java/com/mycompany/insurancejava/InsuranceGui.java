@@ -691,7 +691,7 @@ public class InsuranceGui extends JFrame implements ActionListener,ItemListener 
         tworcy.setHorizontalAlignment(JTextField.LEFT);
         footer3.add(tworcy);
 
-        JLabel copyWrights = new JLabel("                                 © Copyrights 2022 Dublin                                             ");
+        JLabel copyWrights = new JLabel("                         © Copyrights 2022 Dublin                                     ");
         //copyWrights.setEditable(false);   
         footer3.add(copyWrights);
 
