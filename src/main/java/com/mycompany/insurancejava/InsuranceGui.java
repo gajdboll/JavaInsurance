@@ -535,7 +535,7 @@ public class InsuranceGui extends JFrame implements ActionListener,ItemListener 
         checkBoxNo.setToolTipText(" No ");
         checkBoxComprehensive.setToolTipText(" Comprehensive ");
         checkBoxThirdParty.setToolTipText   (" Third Party ");                         
-        annualPremiumTekstowe.setToolTipText(" Annual Premium");
+        annualPremiumTekstowe.setToolTipText(" Annual Premium ");
         monthlyPremiumTekstowe.setToolTipText(" Monthly Premium ");
         saveQuote.setToolTipText(" Save Quote ");
         calculatePremiun.setToolTipText(" CalculatePremium ");
@@ -655,15 +655,17 @@ public class InsuranceGui extends JFrame implements ActionListener,ItemListener 
 
         //Premium quote REZULTAT- po porawej
         JPanel premium = new JPanel(new GridLayout(2, 2));
-
+ JPanel kubelek = new JPanel();
         for (int i = 0; i < 2; i++) {
-            premium.add(new JLabel(""));
+            premium.add(new JLabel(" "));
             premium.add(premiumLabelTable[i]);
             premium.add(premiumTekstoweTable[i]);
         }
+            
+    kubelek.add(premium);
 
         // dodanie przyciskow do ostatniego kontenera
-        p2.add(premium, BorderLayout.EAST);
+        p2.add(kubelek, BorderLayout.EAST);
  
         // panel przechowujacy przyciski
         JPanel jp6 = new JPanel();
