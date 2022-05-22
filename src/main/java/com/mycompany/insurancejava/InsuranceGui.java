@@ -75,14 +75,14 @@ public class InsuranceGui extends JFrame implements ActionListener, ItemListener
     private JTextField registrationNumberText;
     private JTextField valuationText;
     private JTextField yearFirstRegisteredText;
-    private JTextField engineCCText;
+    private JTextField estiamtionAnnualMilage;
     //CheckBoxy
     private JRadioButton checkBoxYes;
     private JRadioButton checkBoxNo;
     private JCheckBox checkBoxComprehensive;
     private JCheckBox checkBoxThirdParty;
 
-    private JComboBox estiamtionAnnualMilage;
+    private JComboBox engineCCText;
 
     private JTextField zegarek;
     private JLabel copyWrights;
@@ -95,7 +95,7 @@ public class InsuranceGui extends JFrame implements ActionListener, ItemListener
     
     //menu elementy
     JMenuItem newFile, saveFile, saveAs, openFile, about, links;
-    JRadioButtonMenuItem loginMenu, signInMenu;
+    JRadioButtonMenuItem loginMenu, signUPMenu;
 
 // pomocniczy FontStyle
     private Font font = new Font("Helvetica", Font.BOLD, 20);
@@ -200,7 +200,7 @@ public class InsuranceGui extends JFrame implements ActionListener, ItemListener
         return yearFirstRegisteredText;
     }
 
-    public JTextField getEngineCCText() {
+    public JComboBox getEngineCCText() {
         return engineCCText;
     }
 
@@ -381,7 +381,7 @@ public class InsuranceGui extends JFrame implements ActionListener, ItemListener
         this.yearFirstRegisteredText = yearFirstRegisteredText;
     }
 
-    public void setEngineCCText(JTextField engineCCText) {
+    public void setEngineCCText(JComboBox engineCCText) {
         this.engineCCText = engineCCText;
     }
 
@@ -468,7 +468,7 @@ public class InsuranceGui extends JFrame implements ActionListener, ItemListener
     //konstruktor
     public InsuranceGui() {
         super("Insurance Quote");
-        setSize(1050, 735);
+        setSize(1050, 1500);
         //new MenuDesign().tworzenieMenu();   // nie dziala gdy jest w innej klasie??    
         tworzenieMenu();
         guiLook();
@@ -543,7 +543,7 @@ public class InsuranceGui extends JFrame implements ActionListener, ItemListener
         registrationNumberText = new JTextField("", 20);
         valuationText = new JTextField("", 20);
         yearFirstRegisteredText = new JTextField("", 20);
-        engineCCText = new JTextField("", 20);
+        estiamtionAnnualMilage = new JTextField("", 20);
         checkBoxYes = new JRadioButton("Yes");
         checkBoxNo = new JRadioButton("No");
         checkBoxComprehensive = new JCheckBox("Comprehensive");
@@ -563,7 +563,7 @@ public class InsuranceGui extends JFrame implements ActionListener, ItemListener
         //  drop down
         String[] engineCCTab = {"800 or less", "Between 800 - 1000", "Between 1000 - 1500", "Between 1500 - 2000", "More than 2000"};
 
-        estiamtionAnnualMilage = new JComboBox(engineCCTab);
+        engineCCText = new JComboBox(engineCCTab);
     }
     /**
      * *******************************Setting up Tool tips*************************************************
@@ -618,14 +618,14 @@ public class InsuranceGui extends JFrame implements ActionListener, ItemListener
         // pomocnicze tablice
         JLabel[] textLables = {customerNameJLabel, addressJLabel, emptyLabel1, emptyLabel2,
             postCodeJLabel, telNoJLabel, dobJLabel,
-            makeAndModelJLabel, registrationNumberJLabel, valuationJLabel, yearFirstRegisteredJLabel, engineCCJLabel,
-            claimInLast5YearsJLabel, coverTypeJLabel, estimatedValuedMilageJLabel};
+            makeAndModelJLabel, registrationNumberJLabel, valuationJLabel, yearFirstRegisteredJLabel, estimatedValuedMilageJLabel,
+            claimInLast5YearsJLabel, coverTypeJLabel };
 
         // pomocnicze tablice do inputow
         JTextField[] inputText = {customerNameText, addressText, emptyLabel1Text, emptyLabel2Text,
             postCodeText, telNoText, dobText,
-            makeAndModelText, registrationNumberText, valuationText, yearFirstRegisteredText, engineCCText};
-
+            makeAndModelText, registrationNumberText, valuationText, yearFirstRegisteredText, estiamtionAnnualMilage};
+/**pomocnicze tablice ktore mialybyc wyswietlaniem ostatnej quota*/
         JLabel premiumLabelTable[] = {annualPremiumLabel, monthlyPremiumLabel};
         JTextField premiumTekstoweTable[] = {annualPremiumTekstowe, monthlyPremiumTekstowe};
 
@@ -673,7 +673,7 @@ public class InsuranceGui extends JFrame implements ActionListener, ItemListener
             g2.add(inputText[i]);
             inputText[i].addActionListener(this);
         }
-        // daodanie pierwszy kontener z regionanami zakonczony
+        // dodanie pierwszy kontener z regionanami zakonczony
         grid1.add(g1);
         grid1.add(g2);
         p1.add(grid1, BorderLayout.SOUTH);
@@ -712,14 +712,28 @@ public class InsuranceGui extends JFrame implements ActionListener, ItemListener
         jp5.add(checkBoxThirdParty);
         checkBoxThirdParty.addActionListener(this);
         //drop down
-        jp5.add(estimatedValuedMilageJLabel);
-        jp5.add(estiamtionAnnualMilage);//do dropdowna kazdego osobno chyba?? sprawdzic
-        estiamtionAnnualMilage.addActionListener(this);
+        jp5.add(engineCCJLabel);
+        jp5.add(engineCCText);//do dropdowna kazdego osobno chyba?? sprawdzic
+        engineCCText.addActionListener(this);
 
         p2.add(jp5, BorderLayout.WEST);
+        JPanel premium = new JPanel(new GridLayout(9, 2));
+         for (int i = 7; i < 12; i++) {
+            textLables[i].setSize(30, 15);
+            premium.add(textLables[i]);
+            premium.add(inputText[i]);
+            inputText[i].addActionListener(this);
+        }
+        p2.add(premium, BorderLayout.EAST);
+        JPanel center = new JPanel(new GridLayout(9, 2));
+         for (int i = 7; i < 12; i++) {
+            textLables[i].setSize(30, 15);
+            center.add(new JLabel("                                                                                                   *"));
 
-        //Premium quote REZULTAT- po porawej
-        JPanel premium = new JPanel(new GridLayout(2, 2));
+        }
+        p2.add(center, BorderLayout.CENTER);
+        //Premium quote REZULTAT- po porawej /// wypisanie jako pop up - poprawic
+       /* JPanel premium = new JPanel(new GridLayout(2, 2));
         JPanel kubelek = new JPanel();
         for (int i = 0; i < 2; i++) {
             premium.add(new JLabel(" "));
@@ -730,7 +744,7 @@ public class InsuranceGui extends JFrame implements ActionListener, ItemListener
         kubelek.add(premium);
 
         // dodanie przyciskow do ostatniego kontenera
-        p2.add(kubelek, BorderLayout.EAST);
+        p2.add(kubelek, BorderLayout.EAST);*/
 
         // panel przechowujacy przyciski
         JPanel jp6 = new JPanel();
@@ -804,8 +818,8 @@ public class InsuranceGui extends JFrame implements ActionListener, ItemListener
         loginMenu = new JRadioButtonMenuItem("Login");
         loginMenu.addItemListener(this);
 
-        signInMenu = new JRadioButtonMenuItem("Sign In");
-        signInMenu.addItemListener(this);
+        signUPMenu = new JRadioButtonMenuItem("Sign UP");
+        signUPMenu.addItemListener(this);
 
         about = new JRadioButtonMenuItem("About");
         about.addItemListener(this);
@@ -827,7 +841,7 @@ public class InsuranceGui extends JFrame implements ActionListener, ItemListener
 
         m2.add(loginMenu);
         m2.addSeparator();
-        m2.add(signInMenu);
+        m2.add(signUPMenu);
 
         m3.add(about);
         m3.add(links);
@@ -930,9 +944,9 @@ public class InsuranceGui extends JFrame implements ActionListener, ItemListener
         {
             new Login(logowanieText,bazaDanych);
         }
-        if (e.getSource() == signInMenu)
+        if (e.getSource() == signUPMenu)
         {
-            new SignIn(bazaDanych);
+            new SignUp(bazaDanych);
            
         }
     }
