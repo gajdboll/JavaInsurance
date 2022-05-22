@@ -1,44 +1,171 @@
 package com.mycompany.insurancejava;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
-import javax.swing.JOptionPane;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import javax.swing.*;
+
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
-public class Login {
+public class Login extends JFrame implements ActionListener, KeyListener {
 
-    private JTextField loginLabel;
-    private JTextField passwordText;
+    private JLabel loginLabel;
+    private JLabel passwordLabel;
+    private JTextField loginText;
+    private JPasswordField passwordText;
+    private JButton login;
+    private JButton cancel;
+
+    private JTextField status;
     private BazaDanych baza;
+    private Font font = new Font("Helvetica", Font.ITALIC, 15);
 
     //setters & getters 
-    public JTextField getLogowanieLabel() {
+    public JLabel getLoginLabel() {
         return loginLabel;
     }
 
-    public Login(JTextField loginText, BazaDanych baza) {
-        this.baza = baza;
-        this.loginLabel = loginText;
+    public JTextField getStatus() {
+        return status;
+    }
+
+    public JLabel getPasswordLabel() {
+        return passwordLabel;
+    }
+
+    public JTextField getLoginText() {
+        return loginText;
+    }
+
+    public JPasswordField getPasswordText() {
+        return passwordText;
+    }
+
+    public JButton getLogin() {
+        return login;
+    }
+
+    public JButton getCancel() {
+        return cancel;
+    }
+
+    public void setLoginLabel(JLabel loginLabel) {
+        this.loginLabel = loginLabel;
+    }
+
+    public void setStatus(JTextField status) {
+        this.status = status;
+    }
+
+    public void setPasswordLabel(JLabel passwordLabel) {
+        this.passwordLabel = passwordLabel;
+    }
+
+    public void setLoginText(JTextField loginText) {
+        this.loginText = loginText;
+    }
+
+    public void setPasswordText(JPasswordField passwordText) {
         this.passwordText = passwordText;
+    }
 
-        String userName, password;
+    public void setLogin(JButton login) {
+        this.login = login;
+    }
 
+    public void setCancel(JButton cancel) {
+        this.cancel = cancel;
+    }
+
+    public Login(JTextField status, BazaDanych baza) {
+
+        super("Login Window");
+        this.baza = baza;
+        this.status=status;
+        setSize(600, 200);
+        init();
+        setContentPane(UstawLayoutElementy());
+        setVisible(true);
+        setResizable(false);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+    }
+
+    public void init() {
+        loginLabel = new JLabel("Login/Username");
+        loginLabel.setFont(font);
+        passwordLabel = new JLabel("Password");
+        passwordLabel.setFont(font);
+        loginText = new JTextField("");
+        loginText.setFont(font);
+        passwordText = new JPasswordField(10);
+        passwordText.setEchoChar('*');
+        passwordText.setFont(font);
+        login = new JButton("Login");
+        login.setFont(font);
+        cancel = new JButton("Cancel");
+        cancel.setFont(font);
+    }
+
+    public JPanel UstawLayoutElementy() {
+        JPanel jpanel = new JPanel();
+        jpanel.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
+
+        JPanel border = new JPanel(new BorderLayout());
+
+        border.add(new JLabel(""), BorderLayout.NORTH);
+
+        JPanel grid = new JPanel(new GridLayout(2, 2));
+
+        grid.add(loginLabel);
+        grid.add(new JLabel("", 10));
+        grid.add(loginText);
+        loginText.addActionListener(this);
+        grid.add(passwordLabel);
+        grid.add(new JLabel("", 10));
+        grid.add(passwordText);
+        passwordText.addActionListener(this);
+
+        border.add(grid, BorderLayout.CENTER);
+
+        JPanel footer = new JPanel();
+        footer.add(login);
+        login.addActionListener(this);
+        footer.add(cancel);
+        cancel.addActionListener(this);
+
+        border.add(footer, BorderLayout.SOUTH);
+
+        jpanel.add(border);
+
+        return jpanel;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
         if (loginLabel.getText().equals("ON-LINE")) {
             JOptionPane.showMessageDialog(null, "You are logged in already\n Loggout first in case login using different account", "Login", JOptionPane.ERROR_MESSAGE);
             System.exit(0);
 
         }
 
-        for (int i = 1; i <= 3; i++) {
+        for (int i = 0; i <= 3; i++) {
             baza.WypiszLIsteUzytkownikow();
-            userName = JOptionPane.showInputDialog("Enter login");
-            password = JOptionPane.showInputDialog("Enter password");
-            if (baza.szukajHasla(userName, password)) {
+
+            if (baza.szukajHasla(loginText.getText(), passwordText.getText())) {
                 System.out.println("correct");
                 JOptionPane.showMessageDialog(null, "Successful", "Login", JOptionPane.INFORMATION_MESSAGE);
-                loginText.setText("ON-LINE");
-                loginText.setBackground(Color.green);
-                loginText.setForeground(Color.BLACK);
-
+                status.setText("ON-LINE");
+                status.setBackground(Color.green);
+                status.setForeground(Color.BLACK);
+                dispose();
                 break;
             } else if (i == 1) {
                 JOptionPane.showMessageDialog(null, "Invalid username or password", "Login", JOptionPane.WARNING_MESSAGE);
@@ -47,10 +174,25 @@ public class Login {
                 JOptionPane.showMessageDialog(null, "Try again, That is your last chance", "Login", JOptionPane.WARNING_MESSAGE);
                 System.out.println("incorrect 1");
             } else {
-                JOptionPane.showMessageDialog(null, "Sorry that was your last chance try again later", "Login", JOptionPane.ERROR_MESSAGE);
-                System.exit(0);
+                   dispose();
             }
 
+          
         }
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); 
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); 
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); 
     }
 }
