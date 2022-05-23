@@ -1,5 +1,6 @@
 package com.mycompany.insurancejava;
 
+import Exceptions.*;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
@@ -9,6 +10,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
@@ -92,17 +94,16 @@ public class InsuranceGui extends JFrame implements ActionListener, ItemListener
     Icon r1 = new ImageIcon("save.png");///?/???
     //baza danych 
     private BazaDanych bazaDanych;
-    
+
     //menu elementy
     JMenuItem newFile, saveFile, saveAs, openFile, about, links;
-    JRadioButtonMenuItem loginMenu, signUPMenu;
+    JRadioButtonMenuItem loginMenu, signUPMenu, logoutMenu;
 
 // pomocniczy FontStyle
     private Font font = new Font("Helvetica", Font.BOLD, 20);
 
     //getters & setters
     //na koncu projektu wywalic i implementowac od poczatku wszystkie pola
-    
     public void setBazaDanych(BazaDanych bazaDanych) {
         this.bazaDanych = bazaDanych;
     }
@@ -468,7 +469,7 @@ public class InsuranceGui extends JFrame implements ActionListener, ItemListener
     //konstruktor
     public InsuranceGui() {
         super("Insurance Quote");
-        setSize(1050, 1500);
+        setSize(1050, 785);
         //new MenuDesign().tworzenieMenu();   // nie dziala gdy jest w innej klasie??    
         tworzenieMenu();
         guiLook();
@@ -484,19 +485,22 @@ public class InsuranceGui extends JFrame implements ActionListener, ItemListener
         bazaDanych = new BazaDanych();
 
     }
-       /**
-     * *******************************GUI colors etc*************************************************
+
+    /**
+     * *******************************GUI colors
+     * etc*************************************************
      */
-    public void guiLook()
-    {
-    //GUI Graphical Look
+    public void guiLook() {
+        //GUI Graphical Look
         try {
             UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
         } catch (Exception e) {
         }
     }
+
     /**
-     * *******************************Initialising Elements*************************************************
+     * *******************************Initialising
+     * Elements*************************************************
      */
     public void elementsInitiator() {
 
@@ -528,8 +532,8 @@ public class InsuranceGui extends JFrame implements ActionListener, ItemListener
         logowanieText.setBackground(Color.red);
         logowanieText.setForeground(Color.WHITE);
         logowanieText.setEditable(false);
-        
-        vehicleInformationLabel = new JLabel("   Vehicle Information ");
+
+        vehicleInformationLabel = new JLabel("        Vehicle Information ");
         customerInformationLabel = new JLabel("Customer Information ");
         //input fileds
         customerNameText = new JTextField("", 20);
@@ -565,8 +569,10 @@ public class InsuranceGui extends JFrame implements ActionListener, ItemListener
 
         engineCCText = new JComboBox(engineCCTab);
     }
+
     /**
-     * *******************************Setting up Tool tips*************************************************
+     * *******************************Setting up Tool
+     * tips*************************************************
      */
     public void settingToolTips() {
         customerNameJLabel.setToolTipText(" Name ");
@@ -610,8 +616,10 @@ public class InsuranceGui extends JFrame implements ActionListener, ItemListener
         calculatePremiun.setToolTipText(" CalculatePremium ");
         calculateMultiple.setToolTipText(" Calculate Multiple ");
     }
+
     /**
-     * **************************************************Setting Up Layout**************************************
+     * **************************************************Setting Up
+     * Layout**************************************
      */
     protected JPanel UstawLayoutElementy() {
 
@@ -619,13 +627,15 @@ public class InsuranceGui extends JFrame implements ActionListener, ItemListener
         JLabel[] textLables = {customerNameJLabel, addressJLabel, emptyLabel1, emptyLabel2,
             postCodeJLabel, telNoJLabel, dobJLabel,
             makeAndModelJLabel, registrationNumberJLabel, valuationJLabel, yearFirstRegisteredJLabel, estimatedValuedMilageJLabel,
-            claimInLast5YearsJLabel, coverTypeJLabel };
+            claimInLast5YearsJLabel, coverTypeJLabel};
 
         // pomocnicze tablice do inputow
         JTextField[] inputText = {customerNameText, addressText, emptyLabel1Text, emptyLabel2Text,
             postCodeText, telNoText, dobText,
             makeAndModelText, registrationNumberText, valuationText, yearFirstRegisteredText, estiamtionAnnualMilage};
-/**pomocnicze tablice ktore mialybyc wyswietlaniem ostatnej quota*/
+        /**
+         * pomocnicze tablice ktore mialybyc wyswietlaniem ostatnej quota
+         */
         JLabel premiumLabelTable[] = {annualPremiumLabel, monthlyPremiumLabel};
         JTextField premiumTekstoweTable[] = {annualPremiumTekstowe, monthlyPremiumTekstowe};
 
@@ -718,7 +728,7 @@ public class InsuranceGui extends JFrame implements ActionListener, ItemListener
 
         p2.add(jp5, BorderLayout.WEST);
         JPanel premium = new JPanel(new GridLayout(9, 2));
-         for (int i = 7; i < 12; i++) {
+        for (int i = 7; i < 12; i++) {
             textLables[i].setSize(30, 15);
             premium.add(textLables[i]);
             premium.add(inputText[i]);
@@ -726,14 +736,14 @@ public class InsuranceGui extends JFrame implements ActionListener, ItemListener
         }
         p2.add(premium, BorderLayout.EAST);
         JPanel center = new JPanel(new GridLayout(9, 2));
-         for (int i = 7; i < 12; i++) {
+        for (int i = 7; i < 12; i++) {
             textLables[i].setSize(30, 15);
             center.add(new JLabel("                                                                                                   *"));
 
         }
         p2.add(center, BorderLayout.CENTER);
         //Premium quote REZULTAT- po porawej /// wypisanie jako pop up - poprawic
-       /* JPanel premium = new JPanel(new GridLayout(2, 2));
+        /* JPanel premium = new JPanel(new GridLayout(2, 2));
         JPanel kubelek = new JPanel();
         for (int i = 0; i < 2; i++) {
             premium.add(new JLabel(" "));
@@ -792,8 +802,10 @@ public class InsuranceGui extends JFrame implements ActionListener, ItemListener
 
         return main;
     }
-     /**
-     * **************************************************Setting Up Header Main Menu**************************************
+
+    /**
+     * **************************************************Setting Up Header Main
+     * Menu**************************************
      */
     public void tworzenieMenu() {
         //tworzę listwę menu
@@ -821,11 +833,18 @@ public class InsuranceGui extends JFrame implements ActionListener, ItemListener
         signUPMenu = new JRadioButtonMenuItem("Sign UP");
         signUPMenu.addItemListener(this);
 
+        logoutMenu = new JRadioButtonMenuItem("Logout");
+        logoutMenu.addItemListener(this);
+
         about = new JRadioButtonMenuItem("About");
         about.addItemListener(this);
 
         links = new JRadioButtonMenuItem("Links");
         links.addItemListener(this);
+
+        ButtonGroup grupaAbout = new ButtonGroup();
+        grupaAbout.add(about);
+        grupaAbout.add(links);
         // konstrukcja pierwszej głównej pozycji menu
         m1.add(newFile);
         m1.add(openFile);
@@ -842,6 +861,8 @@ public class InsuranceGui extends JFrame implements ActionListener, ItemListener
         m2.add(loginMenu);
         m2.addSeparator();
         m2.add(signUPMenu);
+        m2.addSeparator();
+        m2.add(logoutMenu);
 
         m3.add(about);
         m3.add(links);
@@ -851,8 +872,10 @@ public class InsuranceGui extends JFrame implements ActionListener, ItemListener
         mBar.add(m3);
         setJMenuBar(mBar);
     }
-      /**
-     * **************************************************Methods **************************************
+
+    /**
+     * **************************************************Methods
+     * **************************************
      */
     //Date validator
     //@Override
@@ -869,63 +892,134 @@ public class InsuranceGui extends JFrame implements ActionListener, ItemListener
             return false;
         }
     }
+
     // Numbers Validator
     public static boolean isANumber(String number) {
 
         try {
             Long.parseLong(number);
-            return true;
+            return false;
         } catch (Exception e) {
 
-            return false;
+            return true;
         }
     }
 
     //Listeners
     @Override
     public void actionPerformed(ActionEvent e) {
-    //Fields validation - date section
+        //Fields validation - date section
         if (e.getSource() == calculatePremiun) {
+
             try {//sprawdzanie pola daty
-                if (!isValid(dobText.getText())) {
+                if (!isValid(dobText.getText()) || (dobText.getText() == "")) {
+                    throw new InvalidDateFormatException("Invalid Date Format");
 
-                    JOptionPane.showMessageDialog(this, "Date format is invalid\n Please enter date with format dd/MM/yyyy", "DATE info", JOptionPane.INFORMATION_MESSAGE);
-                    dobText.setText("");
                 }
             } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Date format is invalid\n Please enter date with format dd/MM/yyyy", "DATE info", JOptionPane.INFORMATION_MESSAGE);
+                dobText.setText("");
+
                 Logger.getLogger(InsuranceGui.class.getName()).log(Level.SEVERE, null, ex);
+                return;
             }
-    //Fields validation - phone number section
+            //Fields validation - phone number section
+
             try {
-                if (!isANumber(telNoText.getText())) {
+                if (Double.valueOf(telNoText.getText()) < 0) {
+                    throw new NegativeNumberException("Negative Number Exception");
+                } else if (isANumber(telNoText.getText()) || (telNoText.getText() == "")) {
 
-                    JOptionPane.showMessageDialog(this, "Phone format is invalid\n Please enter phone using only digits\n ex: 08x xxx xxx", "Phone Info", JOptionPane.ERROR_MESSAGE);
-                    dobText.setText("");
+                    throw new Exception("Phone Number Exception");
+
                 }
-            } catch (Exception ex) {
-                Logger.getLogger(InsuranceGui.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        Object obj = e.getSource() ;
-        if( obj == about)
-        {
-            try{
-            JOptionPane.showMessageDialog(this, "Projekt wykonany przez:\n Bartosz Wasko\n Krzysztof Gajdosz", "About", JOptionPane.ERROR_MESSAGE);
-                   System.out.println("test about");
-              
+            } catch (NegativeNumberException ex) {
+                JOptionPane.showMessageDialog(this, "Phone Number format is invalid\n Value should not be negative", "Value Info", JOptionPane.ERROR_MESSAGE);
+                valuationText.setText("");
 
-            } catch (Exception ex) {
                 Logger.getLogger(InsuranceGui.class.getName()).log(Level.SEVERE, null, ex);
+                return;
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Phone format is invalid\n Please enter phone using only digits\n ex: 08x xxx xxx", "Phone Info", JOptionPane.ERROR_MESSAGE);
+                telNoText.setText("");
+                Logger.getLogger(InsuranceGui.class.getName()).log(Level.SEVERE, null, ex);
+                return;
             }
-             
+            // valuation field
+            try {
+                if (Double.valueOf(valuationText.getText()) < 0) {
+                    throw new NegativeNumberException("Negative Number Exception");
+                } else if (isANumber(valuationText.getText()) || (valuationText.getText() == "")) {
+
+                    throw new Exception("Value Format Exception");
+                }
+            } catch (NegativeNumberException ex) {
+                JOptionPane.showMessageDialog(this, "Value format is invalid\n Value should not be negative", "Value Info", JOptionPane.ERROR_MESSAGE);
+                valuationText.setText("");
+
+                Logger.getLogger(InsuranceGui.class.getName()).log(Level.SEVERE, null, ex);
+                return;
+            } catch (Exception ex) {
+
+                JOptionPane.showMessageDialog(this, "Value format is invalid\n Value should have numeric value", "Value Info", JOptionPane.ERROR_MESSAGE);
+                valuationText.setText("");
+
+                Logger.getLogger(InsuranceGui.class.getName()).log(Level.SEVERE, null, ex);
+                return;
+
+            }
+
+            // annual milage
+            try {
+                if (Double.valueOf(estiamtionAnnualMilage.getText()) < 0) {
+                    throw new NegativeNumberException("Negative Number Exception");
+                } else if (isANumber(estiamtionAnnualMilage.getText()) || (estiamtionAnnualMilage.getText() == "")) {
+
+                    throw new Exception("Annual Milage Exception");
+
+                }
+            } catch (NegativeNumberException ex) {
+                JOptionPane.showMessageDialog(this, "Annual milage should not be negative", "Value Info", JOptionPane.ERROR_MESSAGE);
+                valuationText.setText("");
+
+                Logger.getLogger(InsuranceGui.class.getName()).log(Level.SEVERE, null, ex);
+                return;
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Annual milage format is invalid\n Annual milage should have numberic value", "Annual milage", JOptionPane.ERROR_MESSAGE);
+                estiamtionAnnualMilage.setText("");
+                Logger.getLogger(InsuranceGui.class.getName()).log(Level.SEVERE, null, ex);
+                return;
+            }
+
+            // registration year
+            try {
+                if (Double.valueOf(yearFirstRegisteredText.getText()) < 0) {
+                    throw new NegativeNumberException("Negative Number Exception");
+                } else if (isANumber(yearFirstRegisteredText.getText()) || (yearFirstRegisteredText.getText() == "")) {
+                    System.out.println(yearFirstRegisteredText.getText());
+                    throw new Exception("Registration Year Exception");
+
+                }
+            } catch (NegativeNumberException ex) {
+                JOptionPane.showMessageDialog(this, "Registration Year should not be negative", "Value Info", JOptionPane.ERROR_MESSAGE);
+                valuationText.setText("");
+
+                Logger.getLogger(InsuranceGui.class.getName()).log(Level.SEVERE, null, ex);
+                return;
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Registration Year format is invalid\n Registration Year should have numberic value", "Registration Info", JOptionPane.ERROR_MESSAGE);
+                yearFirstRegisteredText.setText("");
+                Logger.getLogger(InsuranceGui.class.getName()).log(Level.SEVERE, null, ex);
+                return;
+            }
         }
+
         /*metody odpowiedzialne za plik*/
-        
     }
 
     @Override
     public void itemStateChanged(ItemEvent e) {
-    
+
         if (e.getSource() == links) {
             System.out.println("nasze dane");
             JOptionPane.showMessageDialog(this,
@@ -933,21 +1027,24 @@ public class InsuranceGui extends JFrame implements ActionListener, ItemListener
                     "Project directory",
                     JOptionPane.INFORMATION_MESSAGE);
         }
-         if (e.getSource() == about) {
+        if (e.getSource() == about) {
             System.out.println("nasze dane");
             JOptionPane.showMessageDialog(this,
                     "Created by:\n Bartosz Wasko,\n Krzysztof Gajdosz",
                     "Created By",
                     JOptionPane.INFORMATION_MESSAGE);
         }
-        if (e.getSource() == loginMenu)
-        {
-            new Login(logowanieText,bazaDanych);
+        if (e.getSource() == loginMenu) {
+            new Login(logowanieText, bazaDanych);
         }
-        if (e.getSource() == signUPMenu)
-        {
+        if (e.getSource() == signUPMenu) {
             new SignUp(bazaDanych);
-           
+
+        }
+        if (e.getSource() == logoutMenu) {
+            logowanieText.setText("OFF-LINE");
+            logowanieText.setBackground(Color.red);
+            logowanieText.setForeground(Color.WHITE);
         }
     }
 
