@@ -22,7 +22,7 @@ public class SignUp extends JFrame implements ActionListener, KeyListener {
     private JButton cancel;
 
     private Font font = new Font("Helvetica", Font.ITALIC, 15);
-    private BazaDanych bazaDanych;
+    private DataBase bazaDanych;
 
     /**
      * Gettery & Settery
@@ -95,7 +95,7 @@ public class SignUp extends JFrame implements ActionListener, KeyListener {
     /**
      * Konstruktor
      */
-    public SignUp(BazaDanych bazaDanych) {
+    public SignUp(DataBase bazaDanych) {
 
         super("Sign UP Window");
         this.bazaDanych = bazaDanych;
@@ -183,7 +183,7 @@ public class SignUp extends JFrame implements ActionListener, KeyListener {
             } else if (!passwordText.getText().equals(re_passwordText.getText())) {
                 JOptionPane.showMessageDialog(null, "Passwords DO NOT MATCH!!!\nPlease try again ", "Sign-Up Warning", JOptionPane.WARNING_MESSAGE);
             } else {
-                bazaDanych.listaKlientow.add(new Uzytkownik(loginText.getText(), passwordText.getText()));
+                bazaDanych.listaKlientow.add(new User(loginText.getText(), passwordText.getText()));
                 JOptionPane.showMessageDialog(this, "Successful Sign-Up\n Please login now", "Sign-Up Error", JOptionPane.INFORMATION_MESSAGE);
                 bazaDanych.WypiszLIsteUzytkownikow();
                 dispose();

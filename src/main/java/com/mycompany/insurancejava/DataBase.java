@@ -5,21 +5,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class BazaDanych 
+public class DataBase 
 {
-        List<Uzytkownik> listaKlientow;
+        List<User> listaKlientow;
         
         
-        public BazaDanych()
+        public DataBase()
         {
-        listaKlientow = new ArrayList<Uzytkownik>();
-        listaKlientow.add(new Uzytkownik());
+        listaKlientow = new ArrayList<User>();
+        listaKlientow.add(new User());
         
         }
         
         public boolean szukajKLientow(String name)
         {
-            for(Uzytkownik e : listaKlientow)
+            for(User e : listaKlientow)
             {
                 if (e.getUserName().equals(name))
                 {
@@ -34,7 +34,7 @@ public class BazaDanych
         }
                 public boolean szukajHasla(String name, String password)
         {
-            for(Uzytkownik e : listaKlientow)
+            for(User e : listaKlientow)
             {
                 if (e.getUserName().equals(name))
                 {
@@ -50,7 +50,7 @@ public class BazaDanych
         }
         public void WypiszLIsteUzytkownikow()
         {
-            for(Uzytkownik e : listaKlientow)
+            for(User e : listaKlientow)
             {
                 System.out.println("Login: " + e.getUserName()+ "\n password:  "+ e.getPassword() + "\n***********************");
             

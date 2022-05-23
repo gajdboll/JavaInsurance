@@ -24,7 +24,7 @@ public class Login extends JFrame implements ActionListener, KeyListener {
     private JButton cancel;
 
     private JTextField status;
-    private BazaDanych baza;
+    private DataBase baza;
     private Font font = new Font("Helvetica", Font.ITALIC, 15);
 
     private int i;
@@ -85,7 +85,7 @@ public class Login extends JFrame implements ActionListener, KeyListener {
         this.cancel = cancel;
     }
 
-    public Login(JTextField status, BazaDanych baza) {
+    public Login(JTextField status, DataBase baza) {
 
         super("Login Window");
         this.baza = baza;

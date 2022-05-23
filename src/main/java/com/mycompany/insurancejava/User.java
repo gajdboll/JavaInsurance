@@ -2,7 +2,7 @@
 package com.mycompany.insurancejava;
 
 
-public class Uzytkownik 
+public class User 
 {
 private int id;
 private String userName;
@@ -39,13 +39,13 @@ return numer++;
         this.password = password;
     }
 
-    public Uzytkownik() 
+    public User() 
     {
         this.userName = "admin";
         this.password = "admin";
     }
 
-    public Uzytkownik(String userName, String password) {
+    public User(String userName, String password) {
         this.userName = userName;
         this.password = password;
         this.id = zwieksz_numer();
