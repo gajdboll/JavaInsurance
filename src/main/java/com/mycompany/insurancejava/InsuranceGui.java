@@ -93,7 +93,7 @@ public class InsuranceGui extends JFrame implements ActionListener, ItemListener
     //Ikony
     Icon r1 = new ImageIcon("save.png");///?/???
     //baza danych 
-    private BazaDanych bazaDanych;
+    private DataBase bazaDanych;
 
     //menu elementy
     JMenuItem newFile, saveFile, saveAs, openFile, about, links;
@@ -104,11 +104,11 @@ public class InsuranceGui extends JFrame implements ActionListener, ItemListener
 
     //getters & setters
     //na koncu projektu wywalic i implementowac od poczatku wszystkie pola
-    public void setBazaDanych(BazaDanych bazaDanych) {
+    public void setBazaDanych(DataBase bazaDanych) {
         this.bazaDanych = bazaDanych;
     }
 
-    public BazaDanych getBazaDanych() {
+    public DataBase getBazaDanych() {
         return bazaDanych;
     }
 
@@ -481,8 +481,8 @@ public class InsuranceGui extends JFrame implements ActionListener, ItemListener
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         settingToolTips();
         //zegar
-        new Zegar(zegarek).start();
-        bazaDanych = new BazaDanych();
+        new Clock(zegarek).start();
+        bazaDanych = new DataBase();
 
     }
 

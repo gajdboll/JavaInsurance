@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 import javax.swing.JTextField;
 
 
-public class Zegar extends Thread
+public class Clock extends Thread
 {
 
     public JTextField getZegarek() {
@@ -22,7 +22,7 @@ public class Zegar extends Thread
     }
   
 //konstruktor
-    public Zegar(JTextField zegarek) {
+    public Clock(JTextField zegarek) {
         this.zegarek = zegarek;
     }
 
@@ -39,7 +39,7 @@ public class Zegar extends Thread
             try {
                 sleep(1000);
             } catch (InterruptedException ex) {
-                Logger.getLogger(Zegar.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Clock.class.getName()).log(Level.SEVERE, null, ex);
             }
         }        
     }
