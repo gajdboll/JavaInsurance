@@ -27,6 +27,7 @@ public class Login extends JFrame implements ActionListener, KeyListener {
     private BazaDanych baza;
     private Font font = new Font("Helvetica", Font.ITALIC, 15);
 
+    private int i;
     //setters & getters 
     public JLabel getLoginLabel() {
         return loginLabel;
@@ -150,15 +151,16 @@ public class Login extends JFrame implements ActionListener, KeyListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (loginLabel.getText().equals("ON-LINE")) {
+        
+        if (status.getText().equals("ON-LINE")) {
             JOptionPane.showMessageDialog(null, "You are logged in already\n Loggout first in case login using different account", "Login", JOptionPane.ERROR_MESSAGE);
-            System.exit(0);
+              dispose();
+              return ;
+                
 
         }
 
-        for (int i = 0; i <= 3; i++) {
-            baza.WypiszLIsteUzytkownikow();
-
+ 
             if (baza.szukajHasla(loginText.getText(), passwordText.getText())) {
                 System.out.println("correct");
                 JOptionPane.showMessageDialog(null, "Successful", "Login", JOptionPane.INFORMATION_MESSAGE);
@@ -166,20 +168,17 @@ public class Login extends JFrame implements ActionListener, KeyListener {
                 status.setBackground(Color.green);
                 status.setForeground(Color.BLACK);
                 dispose();
-                break;
-            } else if (i == 1) {
-                JOptionPane.showMessageDialog(null, "Invalid username or password", "Login", JOptionPane.WARNING_MESSAGE);
-                System.out.println("incorrect 0");
-            } else if (i == 2) {
-                JOptionPane.showMessageDialog(null, "Try again, That is your last chance", "Login", JOptionPane.WARNING_MESSAGE);
-                System.out.println("incorrect 1");
-            } else {
-                   dispose();
+             
+            } else  {
+                
+                JOptionPane.showMessageDialog(null, "Invalid username or password\nTry again!!!", "Login", JOptionPane.WARNING_MESSAGE);
+                System.out.println("incorrect try"+i);
+               
             }
 
-          
+    
         }
-    }
+    
 
     @Override
     public void keyTyped(KeyEvent e) {
