@@ -32,7 +32,8 @@ public class DataBase
             }
             return true;
         }
-                public boolean szukajHasla(String name, String password)
+        
+        public boolean szukajHasla(String name, String password)
         {
             for(User e : listaKlientow)
             {
@@ -40,13 +41,9 @@ public class DataBase
                 {
                     if(e.getPassword().equals(password))
                     return true;
-                }
-                else{
-                    return false;
-                }
-                
+                }                               
             }
-            return true;
+            return false;
         }
         public void WypiszLIsteUzytkownikow()
         {

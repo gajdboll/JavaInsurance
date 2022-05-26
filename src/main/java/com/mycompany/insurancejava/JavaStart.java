@@ -8,8 +8,8 @@ public class JavaStart
      public static void main(String [] args)
     {
     
-       // new InsuranceGui();
-        new InsuranceQuote();
+        new InsuranceGui();
+        //new InsuranceQuote();
         
     }
 }

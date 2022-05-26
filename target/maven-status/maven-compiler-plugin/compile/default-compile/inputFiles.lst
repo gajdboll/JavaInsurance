@@ -1,10 +1,17 @@
-C:\Others\WSB\2 ROK\4 semestr\cwiczenia\JAVA - Programowanie zaawansowanych aplikacji w JAVA\projekt\Insurance\JavaInsurance\src\main\java\com\mycompany\insurancejava\Login.java
-C:\Others\WSB\2 ROK\4 semestr\cwiczenia\JAVA - Programowanie zaawansowanych aplikacji w JAVA\projekt\Insurance\JavaInsurance\src\main\java\com\mycompany\insurancejava\BazaDanych.java
-C:\Others\WSB\2 ROK\4 semestr\cwiczenia\JAVA - Programowanie zaawansowanych aplikacji w JAVA\projekt\Insurance\JavaInsurance\src\main\java\com\mycompany\insurancejava\SignUp.java
-C:\Others\WSB\2 ROK\4 semestr\cwiczenia\JAVA - Programowanie zaawansowanych aplikacji w JAVA\projekt\Insurance\JavaInsurance\src\main\java\com\mycompany\insurancejava\Zegar.java
-C:\Others\WSB\2 ROK\4 semestr\cwiczenia\JAVA - Programowanie zaawansowanych aplikacji w JAVA\projekt\Insurance\JavaInsurance\src\main\java\com\mycompany\insurancejava\Uzytkownik.java
-C:\Others\WSB\2 ROK\4 semestr\cwiczenia\JAVA - Programowanie zaawansowanych aplikacji w JAVA\projekt\Insurance\JavaInsurance\src\main\java\Exceptions\InvalidDateFormatException.java
-C:\Others\WSB\2 ROK\4 semestr\cwiczenia\JAVA - Programowanie zaawansowanych aplikacji w JAVA\projekt\Insurance\JavaInsurance\src\main\java\Exceptions\NegativeNumberException.java
-C:\Others\WSB\2 ROK\4 semestr\cwiczenia\JAVA - Programowanie zaawansowanych aplikacji w JAVA\projekt\Insurance\JavaInsurance\src\main\java\com\mycompany\insurancejava\InsuranceGui.java
-C:\Others\WSB\2 ROK\4 semestr\cwiczenia\JAVA - Programowanie zaawansowanych aplikacji w JAVA\projekt\Insurance\JavaInsurance\src\main\java\com\mycompany\insurancejava\JavaStart.java
-C:\Others\WSB\2 ROK\4 semestr\cwiczenia\JAVA - Programowanie zaawansowanych aplikacji w JAVA\projekt\Insurance\JavaInsurance\src\main\java\com\mycompany\insurancejava\InsuranceQuote.java
+D:\Informatyka Interaktywne\Inf Semestr IV\Prog Zaaw Aplikacji w Java\Labolatoria\JavaInsurance2\JAVA4\src\main\java\com\mycompany\server\ServerThread.java
+D:\Informatyka Interaktywne\Inf Semestr IV\Prog Zaaw Aplikacji w Java\Labolatoria\JavaInsurance2\JAVA4\src\main\java\com\mycompany\insurancejava\JavaStart.java
+D:\Informatyka Interaktywne\Inf Semestr IV\Prog Zaaw Aplikacji w Java\Labolatoria\JavaInsurance2\JAVA4\src\main\java\com\mycompany\insurancejava\Client.java
+D:\Informatyka Interaktywne\Inf Semestr IV\Prog Zaaw Aplikacji w Java\Labolatoria\JavaInsurance2\JAVA4\src\main\java\com\mycompany\insurancejava\Clock.java
+D:\Informatyka Interaktywne\Inf Semestr IV\Prog Zaaw Aplikacji w Java\Labolatoria\JavaInsurance2\JAVA4\src\main\java\com\mycompany\insurancejava\InsuranceQuote.java
+D:\Informatyka Interaktywne\Inf Semestr IV\Prog Zaaw Aplikacji w Java\Labolatoria\JavaInsurance2\JAVA4\src\main\java\com\mycompany\insurancejava\SignUp.java
+D:\Informatyka Interaktywne\Inf Semestr IV\Prog Zaaw Aplikacji w Java\Labolatoria\JavaInsurance2\JAVA4\src\main\java\com\mycompany\insurancejava\Calculation.java
+D:\Informatyka Interaktywne\Inf Semestr IV\Prog Zaaw Aplikacji w Java\Labolatoria\JavaInsurance2\JAVA4\src\main\java\com\mycompany\server\Calculation.java
+D:\Informatyka Interaktywne\Inf Semestr IV\Prog Zaaw Aplikacji w Java\Labolatoria\JavaInsurance2\JAVA4\src\main\java\com\mycompany\insurancejava\InsuranceGui.java
+D:\Informatyka Interaktywne\Inf Semestr IV\Prog Zaaw Aplikacji w Java\Labolatoria\JavaInsurance2\JAVA4\src\main\java\Exceptions\InvalidDateFormatException.java
+D:\Informatyka Interaktywne\Inf Semestr IV\Prog Zaaw Aplikacji w Java\Labolatoria\JavaInsurance2\JAVA4\src\main\java\com\mycompany\insurancejava\ClientListenThread.java
+D:\Informatyka Interaktywne\Inf Semestr IV\Prog Zaaw Aplikacji w Java\Labolatoria\JavaInsurance2\JAVA4\src\main\java\Exceptions\NegativeNumberException.java
+D:\Informatyka Interaktywne\Inf Semestr IV\Prog Zaaw Aplikacji w Java\Labolatoria\JavaInsurance2\JAVA4\src\main\java\com\mycompany\insurancejava\Login.java
+D:\Informatyka Interaktywne\Inf Semestr IV\Prog Zaaw Aplikacji w Java\Labolatoria\JavaInsurance2\JAVA4\src\main\java\com\mycompany\insurancejava\User.java
+D:\Informatyka Interaktywne\Inf Semestr IV\Prog Zaaw Aplikacji w Java\Labolatoria\JavaInsurance2\JAVA4\src\main\java\com\mycompany\insurancejava\DataBase.java
+D:\Informatyka Interaktywne\Inf Semestr IV\Prog Zaaw Aplikacji w Java\Labolatoria\JavaInsurance2\JAVA4\src\main\java\com\mycompany\insurancejava\ClientToServerConnect.java
+D:\Informatyka Interaktywne\Inf Semestr IV\Prog Zaaw Aplikacji w Java\Labolatoria\JavaInsurance2\JAVA4\src\main\java\com\mycompany\server\Server.java
