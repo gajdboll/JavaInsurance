@@ -12,7 +12,9 @@ import java.awt.event.ItemListener;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ButtonGroup;
@@ -36,6 +38,9 @@ import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 public class InsuranceGui extends JFrame implements ActionListener, ItemListener {
 // pola (buttony fieldy etc.) znajdujace sie na interfacie
+    
+    Client client;
+    List klienci;
 
     private JLabel projectTitle;
     private JTextField[] polaTekstowe;
@@ -469,7 +474,7 @@ public class InsuranceGui extends JFrame implements ActionListener, ItemListener
     //konstruktor
     public InsuranceGui() {
         super("Insurance Quote");
-        setSize(1050, 785);
+        setSize(1050, 985);
         //new MenuDesign().tworzenieMenu();   // nie dziala gdy jest w innej klasie??    
         tworzenieMenu();
         guiLook();
@@ -483,6 +488,7 @@ public class InsuranceGui extends JFrame implements ActionListener, ItemListener
         //zegar
         new Clock(zegarek).start();
         bazaDanych = new DataBase();
+        klienci = new ArrayList<Client>();
 
     }
 
@@ -743,18 +749,18 @@ public class InsuranceGui extends JFrame implements ActionListener, ItemListener
         }
         p2.add(center, BorderLayout.CENTER);
         //Premium quote REZULTAT- po porawej /// wypisanie jako pop up - poprawic
-        /* JPanel premium = new JPanel(new GridLayout(2, 2));
+        JPanel premium2 = new JPanel(new GridLayout(2, 2));
         JPanel kubelek = new JPanel();
         for (int i = 0; i < 2; i++) {
-            premium.add(new JLabel(" "));
-            premium.add(premiumLabelTable[i]);
-            premium.add(premiumTekstoweTable[i]);
+            premium2.add(new JLabel(" "));
+            premium2.add(premiumLabelTable[i]);
+            premium2.add(premiumTekstoweTable[i]);
         }
 
-        kubelek.add(premium);
+        kubelek.add(premium2);
 
         // dodanie przyciskow do ostatniego kontenera
-        p2.add(kubelek, BorderLayout.EAST);*/
+        p2.add(kubelek, BorderLayout.SOUTH);
 
         // panel przechowujacy przyciski
         JPanel jp6 = new JPanel();
@@ -1012,7 +1018,26 @@ public class InsuranceGui extends JFrame implements ActionListener, ItemListener
                 Logger.getLogger(InsuranceGui.class.getName()).log(Level.SEVERE, null, ex);
                 return;
             }
+            if(logowanieText.getText().equals("ON-LINE"))
+            {
+                client = new Client(customerNameText.getText(),
+                postCodeText.getText(),
+                telNoText.getText(),
+                dobText.getText(),
+                (checkBoxYes.isSelected()+""),
+                (checkBoxThirdParty.isSelected()+""),
+                (engineCCText.getSelectedItem()+""));
+                System.out.println(client.toString());
+                ClientToServerConnect nowy = new ClientToServerConnect(client, annualPremiumTekstowe, monthlyPremiumTekstowe);
+                nowy.connect();
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(this,"You are not logged in", "Message",JOptionPane.INFORMATION_MESSAGE);
+            }
         }
+        
+        
 
         /*metody odpowiedzialne za plik*/
     }
