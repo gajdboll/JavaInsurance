@@ -96,7 +96,7 @@ public class Login extends JFrame implements ActionListener, KeyListener {
         setContentPane(UstawLayoutElementy());
         setVisible(true);
         setResizable(false);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     }
 
@@ -157,11 +157,11 @@ public class Login extends JFrame implements ActionListener, KeyListener {
             JOptionPane.showMessageDialog(null, "You are logged in already\n Loggout first in case login using different account", "Login", JOptionPane.ERROR_MESSAGE);
               dispose();
               return ;
-                
-
         }
-
- 
+        if (e.getActionCommand().equals("Cancel"))
+            {
+               dispose();
+            }
             if (baza.szukajHasla(loginText.getText(), passwordText.getText())) {
                 System.out.println("correct");
                 JOptionPane.showMessageDialog(null, "Successful", "Login", JOptionPane.INFORMATION_MESSAGE);
@@ -170,14 +170,13 @@ public class Login extends JFrame implements ActionListener, KeyListener {
                 status.setForeground(Color.BLACK);
                 dispose();
              
-            } else  {
-                
+            } else if (baza.szukajHasla(loginText.getText(), passwordText.getText()))
+            {   
                 JOptionPane.showMessageDialog(null, "Invalid username or password\nTry again!!!", "Login", JOptionPane.WARNING_MESSAGE);
                 System.out.println("incorrect try"+i);
-               
+ 
             }
-
-    
+            
         }
     
 

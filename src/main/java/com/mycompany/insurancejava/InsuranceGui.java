@@ -783,8 +783,14 @@ public class InsuranceGui extends JFrame implements ActionListener, ItemListener
         annualPremiumTekstowe.setToolTipText(" Annual Premium ");
         monthlyPremiumTekstowe.setToolTipText(" Monthly Premium ");
         saveQuote.setToolTipText(" Save Quote ");
+        saveQuote.setRolloverEnabled(true);
+        saveQuote.setPressedIcon(r10);
         calculatePremiun.setToolTipText(" CalculatePremium ");
+        calculatePremiun.setRolloverEnabled(true);
+        calculatePremiun.setPressedIcon(r11);
         calculateMultiple.setToolTipText(" Calculate Multiple ");
+        calculateMultiple.setRolloverEnabled(true);
+        calculateMultiple.setPressedIcon(r12);
     }
 
     /**
@@ -809,13 +815,6 @@ public class InsuranceGui extends JFrame implements ActionListener, ItemListener
         JLabel premiumLabelTable[] = {annualPremiumLabel, monthlyPremiumLabel};
         JTextField premiumTekstoweTable[] = {annualPremiumTekstowe, monthlyPremiumTekstowe};
 
-        /*// nic nie robi na razie -> sprawdzic strona 18 wyklad 2
-        Vector dane = new Vector();
-        // obiekt listy bierze dane z Vectora
-        JList lista = new JList(dane);
-        // dodajemy "przewijacz" związany z listą
-        JScrollPane sp = new JScrollPane(lista);
-         */
         // dodanie przyciskow na Frame
         JPanel main = new JPanel();
         JPanel breakLine = new JPanel();
@@ -893,7 +892,7 @@ public class InsuranceGui extends JFrame implements ActionListener, ItemListener
         checkBoxThirdParty.addActionListener(this);
         //drop down
         jp5.add(engineCCJLabel);
-        jp5.add(engineCCText);//do dropdowna kazdego osobno chyba?? sprawdzic
+        jp5.add(engineCCText);
         engineCCText.addActionListener(this);
 
         p2.add(jp5, BorderLayout.WEST);
@@ -935,7 +934,7 @@ public class InsuranceGui extends JFrame implements ActionListener, ItemListener
         jp6.add(calculateMultiple);
         calculateMultiple.addActionListener(new CalculateMultipleListener(annualPremiumTekstowe, monthlyPremiumTekstowe, customerNameText, addressText, emptyLabel1Text, emptyLabel2Text, postCodeText, telNoText, dobText, makeAndModelText, registrationNumberText, valuationText, yearFirstRegisteredText, estiamtionAnnualMilage, checkBoxYes, checkBoxThirdParty, engineCCText, client, logowanieText, this, klienci));
         
-//dodanie Footera na layout
+        //dodanie Footera na layout
         JPanel footer = new JPanel(new BorderLayout());
         JPanel breakLine1 = new JPanel();
         breakLine1.add(new JLabel("                               "));
@@ -947,12 +946,12 @@ public class InsuranceGui extends JFrame implements ActionListener, ItemListener
 
         JPanel footer3 = new JPanel();
         tworcy = new JLabel(" Created by: Bartosz Wasko & Krzysztof Gajdosz                          ");
-        //tworcy.setEditable(false);
+
         tworcy.setHorizontalAlignment(JTextField.LEFT);
         footer3.add(tworcy);
 
         copyWrights = new JLabel("                                     © Copyrights 2022 Dublin                                               ");
-        //copyWrights.setEditable(false);   
+ 
         footer3.add(copyWrights);
 
         zegarek = new JTextField("", 20);
@@ -1024,7 +1023,7 @@ public class InsuranceGui extends JFrame implements ActionListener, ItemListener
         //a tu dam nowe podmenu
         JMenu podmenu = new JMenu("Save");
         //dodaję elementy do podmenu
-        podmenu.add(saveFile);  // z ikona   podmenu.add(new JMenuItem("Save Now"),r);
+        podmenu.add(saveFile);  
         podmenu.add(saveAs);
         //dodaje podmenu do menu
         m1.add(podmenu);
@@ -1078,13 +1077,10 @@ public class InsuranceGui extends JFrame implements ActionListener, ItemListener
 
     //Listeners
     @Override
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(ActionEvent e) {}
         
-
         /*metody odpowiedzialne za plik*/
-    } 
-    
-    
+
            public void SaveAs()
     {            
         try
@@ -1119,7 +1115,7 @@ public class InsuranceGui extends JFrame implements ActionListener, ItemListener
         
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setDialogTitle("Choose A File");
-//        dodajemy filtry dla plikow .txt i usuwamy filtr "WSZYSTKIE PLIKI"
+        //dodajemy filtry dla plikow .txt i usuwamy filtr "WSZYSTKIE PLIKI"
         fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("Pliki tekstowe", "txt"));
         fileChooser.setAcceptAllFileFilterUsed(false);
         
@@ -1127,10 +1123,9 @@ public class InsuranceGui extends JFrame implements ActionListener, ItemListener
         System.out.println(path);
         
         
-//        wywolujemy okno do wybrania pliku
+        //wywolujemy okno do wybrania pliku
         fileChooser.showOpenDialog(this);
-        
-        
+
         path = fileChooser.getSelectedFile() != null ? fileChooser.getSelectedFile().getPath() : "";
         System.out.println(path);
         return path;
