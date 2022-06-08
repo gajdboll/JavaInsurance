@@ -109,7 +109,18 @@ public class InsuranceGui extends JFrame implements ActionListener, ItemListener
     private JLabel tworcy;
 
     //Ikony
-    Icon r1 = new ImageIcon("save.png");///?/???
+    Icon r1 = new ImageIcon(getClass().getResource("Icons/newFile.png")); 
+    Icon r2 = new ImageIcon(getClass().getResource("Icons/openFile.png")); 
+    Icon r3 = new ImageIcon(getClass().getResource("Icons/save.png")); 
+    Icon r4 = new ImageIcon(getClass().getResource("Icons/saveAs.png")); 
+    Icon r5 = new ImageIcon(getClass().getResource("Icons/login.png")); 
+    Icon r6 = new ImageIcon(getClass().getResource("Icons/signup.png")); 
+    Icon r7 = new ImageIcon(getClass().getResource("Icons/logout.png")); 
+    Icon r8 = new ImageIcon(getClass().getResource("Icons/yoda.png")); 
+    Icon r9 = new ImageIcon(getClass().getResource("Icons/links.png")); 
+    Icon r10 = new ImageIcon(getClass().getResource("Icons/star-wars.png")); 
+    Icon r11 = new ImageIcon(getClass().getResource("Icons/superman.png")); 
+    Icon r12 = new ImageIcon(getClass().getResource("Icons/batman.png")); 
     //baza danych 
     private DataBase bazaDanych;
 
@@ -118,7 +129,7 @@ public class InsuranceGui extends JFrame implements ActionListener, ItemListener
     JRadioButtonMenuItem loginMenu, signUPMenu, logoutMenu;
 
 // pomocniczy FontStyle
-    private Font font = new Font("Helvetica", Font.BOLD, 20);
+    private Font font ;
 
     //getters & setters
     //na koncu projektu wywalic i implementowac od poczatku wszystkie pola
@@ -665,8 +676,8 @@ public class InsuranceGui extends JFrame implements ActionListener, ItemListener
 
         //tworzenie obiektu tytul
         projectTitle = new JLabel("Direct Quote Motor Insurance");
-        projectTitle.setFont(font);
-
+        projectTitle.setFont(new Font("Magneto", Font.BOLD, 30));
+//Helvetica
         //dodanie labelow
         customerNameJLabel = new JLabel(" Name ");
         addressJLabel = new JLabel(" Address ");
@@ -684,15 +695,15 @@ public class InsuranceGui extends JFrame implements ActionListener, ItemListener
         yearFirstRegisteredJLabel = new JLabel(" Year first registered ");
         engineCCJLabel = new JLabel(" Engine cc ");
         annualPremiumLabel = new JLabel(" Annual Premium ");
-        annualPremiumLabel.setFont(font);
+        annualPremiumLabel.setFont(new Font("Helvetica", Font.BOLD, 20));
         monthlyPremiumLabel = new JLabel(" Monthly Premium ");
-        monthlyPremiumLabel.setFont(font);
+        monthlyPremiumLabel.setFont(new Font("Helvetica", Font.BOLD, 20));
         logowanieText = new JTextField("OFF-LINE ");
         logowanieText.setBackground(Color.red);
         logowanieText.setForeground(Color.WHITE);
         logowanieText.setEditable(false);
 
-        vehicleInformationLabel = new JLabel("        Vehicle Information ");
+        vehicleInformationLabel = new JLabel("                   Vehicle Information ");
         customerInformationLabel = new JLabel("Customer Information ");
         //input fileds
         customerNameText = new JTextField("", 20);
@@ -818,7 +829,7 @@ public class InsuranceGui extends JFrame implements ActionListener, ItemListener
         JPanel p1 = new JPanel(new BorderLayout());
         JPanel top = new JPanel();
         top.add(customerInformationLabel);
-        customerInformationLabel.setFont(font);
+        customerInformationLabel.setFont(new Font("Monotype Corsiva", Font.BOLD, 20));
         top.add(new JLabel("                                                                                    "));
         top.add(new JLabel("                                                                                    "));
         top.add(logowanieText);
@@ -850,7 +861,7 @@ public class InsuranceGui extends JFrame implements ActionListener, ItemListener
         JPanel p2 = new JPanel(new BorderLayout());
         JPanel p2Grid = new JPanel(new GridLayout(2, 1));
 
-        vehicleInformationLabel.setFont(font);
+        vehicleInformationLabel.setFont(new Font("Monotype Corsiva", Font.BOLD, 20));
         p2Grid.add(vehicleInformationLabel);
         p2Grid.add(new JLabel(" "));
         p2.add(p2Grid, BorderLayout.NORTH);
@@ -975,31 +986,31 @@ public class InsuranceGui extends JFrame implements ActionListener, ItemListener
         JMenu m2 = new JMenu("Options");
         JMenu m3 = new JMenu("About");
 
-        newFile = new JRadioButtonMenuItem("New File");
+        newFile = new JRadioButtonMenuItem("New File",r1);
         newFile.addItemListener(this);
 
-        openFile = new JRadioButtonMenuItem("Open");
+        openFile = new JRadioButtonMenuItem("Open",r2);
         openFile.addItemListener(this);
 
-        saveFile = new JRadioButtonMenuItem("Save Now");
+        saveFile = new JRadioButtonMenuItem("Save Now",r3);
         saveFile.addItemListener(this);
 
-        saveAs = new JRadioButtonMenuItem("Save As...");
+        saveAs = new JRadioButtonMenuItem("Save As...",r4);
         saveAs.addItemListener(this);
 
-        loginMenu = new JRadioButtonMenuItem("Login");
+        loginMenu = new JRadioButtonMenuItem("Login",r5);
         loginMenu.addItemListener(this);
 
-        signUPMenu = new JRadioButtonMenuItem("Sign UP");
+        signUPMenu = new JRadioButtonMenuItem("Sign UP",r6);
         signUPMenu.addItemListener(this);
 
-        logoutMenu = new JRadioButtonMenuItem("Logout");
+        logoutMenu = new JRadioButtonMenuItem("Logout",r7);
         logoutMenu.addItemListener(this);
 
-        about = new JRadioButtonMenuItem("About");
+        about = new JRadioButtonMenuItem("About",r8);
         about.addItemListener(this);
 
-        links = new JRadioButtonMenuItem("Links");
+        links = new JRadioButtonMenuItem("Links",r9);
         links.addItemListener(this);
 
         ButtonGroup grupaAbout = new ButtonGroup();
@@ -1128,33 +1139,33 @@ public class InsuranceGui extends JFrame implements ActionListener, ItemListener
     @Override
     public void itemStateChanged(ItemEvent e) {
 
-        if (e.getSource() == links) {
+        if (links.isSelected()) {
             System.out.println("nasze dane");
             JOptionPane.showMessageDialog(this,
                     "Product can be downloaded from:\nhttps://github.com/gajdboll/JavaInsurance\n Jira managment:\nhttps://bjwasko.atlassian.net/jira/software/projects/JAV/boards/1 ",
                     "Project directory",
                     JOptionPane.INFORMATION_MESSAGE);
         }
-        if (e.getSource() == about) {
+        if (about.isSelected()) {
             System.out.println("nasze dane");
             JOptionPane.showMessageDialog(this,
                     "Created by:\n Bartosz Wasko,\n Krzysztof Gajdosz",
                     "Created By",
                     JOptionPane.INFORMATION_MESSAGE);
         }
-        if (e.getSource() == loginMenu) {
+        if (loginMenu.isSelected()) {
             new Login(logowanieText, bazaDanych);
         }
-        if (e.getSource() == signUPMenu) {
+        if (signUPMenu.isSelected()) {
             new SignUp(bazaDanych);
 
         }
-        if (e.getSource() == logoutMenu) {
+        if (logoutMenu.isSelected()) {
             logowanieText.setText("OFF-LINE");
             logowanieText.setBackground(Color.red);
             logowanieText.setForeground(Color.WHITE);
         }
-         if(e.getSource() == saveFile)
+         if(saveFile.isSelected())
         {
             System.out.println(filePath);
             File file = new File(filePath);
@@ -1174,19 +1185,19 @@ public class InsuranceGui extends JFrame implements ActionListener, ItemListener
                 
             }
         }
-                  if(e.getSource() == saveAs)
+                  if(saveAs.isSelected())
         {
             SaveAs();
            
         }
     
-     if(e.getSource() == openFile)
+     if( openFile.isSelected())
         {
             
             chooseFile();
  
         }
-     if(e.getSource() == newFile)
+     if(newFile.isSelected())
         {
             klienci.clear();
             System.out.println("Clients list got cleared");
