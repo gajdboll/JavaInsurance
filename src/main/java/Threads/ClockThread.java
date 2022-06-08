@@ -1,5 +1,5 @@
 
-package com.mycompany.insurancejava;
+package Threads;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 import javax.swing.JTextField;
 
 
-public class Clock extends Thread
+public class ClockThread extends Thread
 {
 
     public JTextField getZegarek() {
@@ -22,7 +22,7 @@ public class Clock extends Thread
     }
   
 //konstruktor
-    public Clock(JTextField zegarek) {
+    public ClockThread(JTextField zegarek) {
         this.zegarek = zegarek;
     }
 
@@ -39,7 +39,7 @@ public class Clock extends Thread
             try {
                 sleep(1000);
             } catch (InterruptedException ex) {
-                Logger.getLogger(Clock.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ClockThread.class.getName()).log(Level.SEVERE, null, ex);
             }
         }        
     }

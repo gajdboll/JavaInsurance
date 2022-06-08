@@ -1,5 +1,6 @@
-package com.mycompany.insurancejava;
+package Windows;
 
+import DataBase.DataBase;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;

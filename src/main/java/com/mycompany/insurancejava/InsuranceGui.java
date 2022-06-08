@@ -1,6 +1,13 @@
 package com.mycompany.insurancejava;
 
+import DataBase.DataBase;
+import Windows.Login;
+import Windows.SignUp;
+import Threads.ClockThread;
 import Exceptions.*;
+import Listeners.CalculateMultipleListener;
+import Listeners.CalculatePremiumListener;
+import Listeners.SaveQuoteListener;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
@@ -9,6 +16,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -23,6 +33,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -35,12 +46,14 @@ import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class InsuranceGui extends JFrame implements ActionListener, ItemListener {
 // pola (buttony fieldy etc.) znajdujace sie na interfacie
     
     Client client;
-    List klienci;
+    ArrayList klienci;
+    String filePath;
 
     private JLabel projectTitle;
     private JTextField[] polaTekstowe;
@@ -109,371 +122,511 @@ public class InsuranceGui extends JFrame implements ActionListener, ItemListener
 
     //getters & setters
     //na koncu projektu wywalic i implementowac od poczatku wszystkie pola
-    public void setBazaDanych(DataBase bazaDanych) {
-        this.bazaDanych = bazaDanych;
+
+    public Client getClient() {
+        return client;
     }
 
-    public DataBase getBazaDanych() {
-        return bazaDanych;
+    public void setClient(Client client) {
+        this.client = client;
     }
 
-    public void setZegarek(JTextField zegarek) {
-        this.zegarek = zegarek;
+    public ArrayList getKlienci() {
+        return klienci;
     }
 
-    public void setCopyWrights(JLabel copyWrights) {
-        this.copyWrights = copyWrights;
+    public void setKlienci(ArrayList klienci) {
+        this.klienci = klienci;
     }
 
-    public void setTworcy(JLabel tworcy) {
-        this.tworcy = tworcy;
+    public String getFilePath() {
+        return filePath;
     }
 
-    public JTextField getZegarek() {
-        return zegarek;
-    }
-
-    public JLabel getCopyWrights() {
-        return copyWrights;
-    }
-
-    //footer
-    public JLabel getTworcy() {
-        return tworcy;
-    }
-
-    public JButton getCalculateMultiple() {
-        return calculateMultiple;
-    }
-
-    public JTextField getLogowanieLabel() {
-        return logowanieText;
-    }
-
-    public JTextField getMakeAndModelText() {
-        return makeAndModelText;
-    }
-
-    public JLabel getCustomerNameJLabel() {
-        return customerNameJLabel;
-    }
-
-    public JLabel getAnnualPremiumLabel() {
-        return annualPremiumLabel;
-    }
-
-    public JTextField getAnnualPremiumTekstowe() {
-        return annualPremiumTekstowe;
-    }
-
-    public JTextField getCustomerNameText() {
-        return customerNameText;
-    }
-
-    public JTextField getAddressText() {
-        return addressText;
-    }
-
-    public JTextField getEmptyLabel1Text() {
-        return emptyLabel1Text;
-    }
-
-    public JTextField getEmptyLabel2Text() {
-        return emptyLabel2Text;
-    }
-
-    public JTextField getPostCodeText() {
-        return postCodeText;
-    }
-
-    public JTextField getTelNoText() {
-        return telNoText;
-    }
-
-    public JTextField getDobText() {
-        return dobText;
-    }
-
-    public JTextField getRegistrationNumberText() {
-        return registrationNumberText;
-    }
-
-    public JTextField getValuationText() {
-        return valuationText;
-    }
-
-    public JTextField getYearFirstRegisteredText() {
-        return yearFirstRegisteredText;
-    }
-
-    public JComboBox getEngineCCText() {
-        return engineCCText;
-    }
-
-    public void setAnualPremiumLabel(JLabel anualPremiumLabel) {
-        this.annualPremiumLabel = anualPremiumLabel;
-    }
-
-    public void setMonthlyPremiumLabel(JLabel monthlyPremiumLabel) {
-        this.monthlyPremiumLabel = monthlyPremiumLabel;
-    }
-
-    public void setAnualPremiumTekstowe(JTextField anualPremiumTekstowe) {
-        this.annualPremiumTekstowe = anualPremiumTekstowe;
-    }
-
-    public void setMonthlyPremiumTekstowe(JTextField monthlyPremiumTekstowe) {
-        this.monthlyPremiumTekstowe = monthlyPremiumTekstowe;
-    }
-
-    public void setCalculateMultiple(JButton calculateMultiple) {
-        this.calculateMultiple = calculateMultiple;
-    }
-
-    public void setLogowanieLabel(JTextField logowanieLabel) {
-        this.logowanieText = logowanieLabel;
-    }
-
-    public void setMakeAndModelText(JTextField makeAndModelText) {
-        this.makeAndModelText = makeAndModelText;
-    }
-
-    public JLabel getAnualPremiumLabel() {
-        return annualPremiumLabel;
-    }
-
-    public JLabel getMonthlyPremiumLabel() {
-        return monthlyPremiumLabel;
-    }
-
-    public JTextField getAnualPremiumTekstowe() {
-        return annualPremiumTekstowe;
-    }
-
-    public JTextField getMonthlyPremiumTekstowe() {
-        return monthlyPremiumTekstowe;
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
     }
 
     public JLabel getProjectTitle() {
         return projectTitle;
     }
 
-    public JTextField[] getPolaTekstowe() {
-        return polaTekstowe;
-    }
-
-    public JButton getSaveQuote() {
-        return saveQuote;
-    }
-
-    public JButton getCalculatePremiun() {
-        return calculatePremiun;
-    }
-
-    public JButton getPrintQuote() {
-        return calculateMultiple;
-    }
-
-    public JLabel getCustomerNnameJLabel() {
-        return customerNameJLabel;
-    }
-
-    public JLabel getAddressJLabel() {
-        return addressJLabel;
-    }
-
-    public JLabel getEmptyLabel1() {
-        return emptyLabel1;
-    }
-
-    public JLabel getEmptyLabel2() {
-        return emptyLabel2;
-    }
-
-    public JLabel getRegistrationNumberJLabel() {
-        return registrationNumberJLabel;
-    }
-
-    public JLabel getValuationJLabel() {
-        return valuationJLabel;
-    }
-
-    public JLabel getEstimatedValuedMilageJLabel() {
-        return estimatedValuedMilageJLabel;
-    }
-
-    public JLabel getClaimInLast5YearsJLabel() {
-        return claimInLast5YearsJLabel;
-    }
-
-    public JLabel getPostCodeJLabel() {
-        return postCodeJLabel;
-    }
-
-    public JLabel getTelNoJLabel() {
-        return telNoJLabel;
-    }
-
-    public JLabel getDobJLabel() {
-        return dobJLabel;
-    }
-
-    public JLabel getCoverTypeJLabel() {
-        return coverTypeJLabel;
-    }
-
-    public JLabel getMakeAndModelJLabel() {
-        return makeAndModelJLabel;
-    }
-
-    public JLabel getYearFirstRegisteredJLabel() {
-        return yearFirstRegisteredJLabel;
-    }
-
-    public JLabel getEngineCCJLabel() {
-        return engineCCJLabel;
-    }
-//setters
-
-    public void setCustomerNameJLabel(JLabel customerNameJLabel) {
-        this.customerNameJLabel = customerNameJLabel;
-    }
-
-    public void setAnnualPremiumLabel(JLabel annualPremiumLabel) {
-        this.annualPremiumLabel = annualPremiumLabel;
-    }
-
-    public void setAnnualPremiumTekstowe(JTextField annualPremiumTekstowe) {
-        this.annualPremiumTekstowe = annualPremiumTekstowe;
-    }
-
-    public void setCustomerNameText(JTextField customerNameText) {
-        this.customerNameText = customerNameText;
-    }
-
-    public void setAddressText(JTextField addressText) {
-        this.addressText = addressText;
-    }
-
-    public void setEmptyLabel1Text(JTextField emptyLabel1Text) {
-        this.emptyLabel1Text = emptyLabel1Text;
-    }
-
-    public void setEmptyLabel2Text(JTextField emptyLabel2Text) {
-        this.emptyLabel2Text = emptyLabel2Text;
-    }
-
-    public void setPostCodeText(JTextField postCodeText) {
-        this.postCodeText = postCodeText;
-    }
-
-    public void setTelNoText(JTextField telNoText) {
-        this.telNoText = telNoText;
-    }
-
-    public void setDobText(JTextField dobText) {
-        this.dobText = dobText;
-    }
-
-    public void setRegistrationNumberText(JTextField registrationNumberText) {
-        this.registrationNumberText = registrationNumberText;
-    }
-
-    public void setValuationText(JTextField valuationText) {
-        this.valuationText = valuationText;
-    }
-
-    public void setYearFirstRegisteredText(JTextField yearFirstRegisteredText) {
-        this.yearFirstRegisteredText = yearFirstRegisteredText;
-    }
-
-    public void setEngineCCText(JComboBox engineCCText) {
-        this.engineCCText = engineCCText;
-    }
-
     public void setProjectTitle(JLabel projectTitle) {
         this.projectTitle = projectTitle;
+    }
+
+    public JTextField[] getPolaTekstowe() {
+        return polaTekstowe;
     }
 
     public void setPolaTekstowe(JTextField[] polaTekstowe) {
         this.polaTekstowe = polaTekstowe;
     }
 
+    public JButton getSaveQuote() {
+        return saveQuote;
+    }
+
     public void setSaveQuote(JButton saveQuote) {
         this.saveQuote = saveQuote;
+    }
+
+    public JButton getCalculatePremiun() {
+        return calculatePremiun;
     }
 
     public void setCalculatePremiun(JButton calculatePremiun) {
         this.calculatePremiun = calculatePremiun;
     }
 
-    public void setPrintQuote(JButton printQuote) {
-        this.calculateMultiple = printQuote;
+    public JButton getCalculateMultiple() {
+        return calculateMultiple;
     }
 
-    public void setCustomerNnameJLabel(JLabel customerNnameJLabel) {
-        this.customerNameJLabel = customerNnameJLabel;
+    public void setCalculateMultiple(JButton calculateMultiple) {
+        this.calculateMultiple = calculateMultiple;
+    }
+
+    public JLabel getCustomerNameJLabel() {
+        return customerNameJLabel;
+    }
+
+    public void setCustomerNameJLabel(JLabel customerNameJLabel) {
+        this.customerNameJLabel = customerNameJLabel;
+    }
+
+    public JLabel getAddressJLabel() {
+        return addressJLabel;
     }
 
     public void setAddressJLabel(JLabel addressJLabel) {
         this.addressJLabel = addressJLabel;
     }
 
+    public JLabel getEmptyLabel1() {
+        return emptyLabel1;
+    }
+
     public void setEmptyLabel1(JLabel emptyLabel1) {
         this.emptyLabel1 = emptyLabel1;
+    }
+
+    public JLabel getEmptyLabel2() {
+        return emptyLabel2;
     }
 
     public void setEmptyLabel2(JLabel emptyLabel2) {
         this.emptyLabel2 = emptyLabel2;
     }
 
+    public JLabel getRegistrationNumberJLabel() {
+        return registrationNumberJLabel;
+    }
+
     public void setRegistrationNumberJLabel(JLabel registrationNumberJLabel) {
         this.registrationNumberJLabel = registrationNumberJLabel;
+    }
+
+    public JLabel getValuationJLabel() {
+        return valuationJLabel;
     }
 
     public void setValuationJLabel(JLabel valuationJLabel) {
         this.valuationJLabel = valuationJLabel;
     }
 
+    public JLabel getEstimatedValuedMilageJLabel() {
+        return estimatedValuedMilageJLabel;
+    }
+
     public void setEstimatedValuedMilageJLabel(JLabel estimatedValuedMilageJLabel) {
         this.estimatedValuedMilageJLabel = estimatedValuedMilageJLabel;
+    }
+
+    public JLabel getClaimInLast5YearsJLabel() {
+        return claimInLast5YearsJLabel;
     }
 
     public void setClaimInLast5YearsJLabel(JLabel claimInLast5YearsJLabel) {
         this.claimInLast5YearsJLabel = claimInLast5YearsJLabel;
     }
 
+    public JLabel getPostCodeJLabel() {
+        return postCodeJLabel;
+    }
+
     public void setPostCodeJLabel(JLabel postCodeJLabel) {
         this.postCodeJLabel = postCodeJLabel;
+    }
+
+    public JLabel getTelNoJLabel() {
+        return telNoJLabel;
     }
 
     public void setTelNoJLabel(JLabel telNoJLabel) {
         this.telNoJLabel = telNoJLabel;
     }
 
+    public JLabel getDobJLabel() {
+        return dobJLabel;
+    }
+
     public void setDobJLabel(JLabel dobJLabel) {
         this.dobJLabel = dobJLabel;
+    }
+
+    public JLabel getCoverTypeJLabel() {
+        return coverTypeJLabel;
     }
 
     public void setCoverTypeJLabel(JLabel coverTypeJLabel) {
         this.coverTypeJLabel = coverTypeJLabel;
     }
 
+    public JLabel getMakeAndModelJLabel() {
+        return makeAndModelJLabel;
+    }
+
     public void setMakeAndModelJLabel(JLabel makeAndModelJLabel) {
         this.makeAndModelJLabel = makeAndModelJLabel;
+    }
+
+    public JLabel getYearFirstRegisteredJLabel() {
+        return yearFirstRegisteredJLabel;
     }
 
     public void setYearFirstRegisteredJLabel(JLabel yearFirstRegisteredJLabel) {
         this.yearFirstRegisteredJLabel = yearFirstRegisteredJLabel;
     }
 
+    public JLabel getEngineCCJLabel() {
+        return engineCCJLabel;
+    }
+
     public void setEngineCCJLabel(JLabel engineCCJLabel) {
         this.engineCCJLabel = engineCCJLabel;
     }
 
+    public JLabel getAnnualPremiumLabel() {
+        return annualPremiumLabel;
+    }
+
+    public void setAnnualPremiumLabel(JLabel annualPremiumLabel) {
+        this.annualPremiumLabel = annualPremiumLabel;
+    }
+
+    public JLabel getMonthlyPremiumLabel() {
+        return monthlyPremiumLabel;
+    }
+
+    public void setMonthlyPremiumLabel(JLabel monthlyPremiumLabel) {
+        this.monthlyPremiumLabel = monthlyPremiumLabel;
+    }
+
+    public JTextField getLogowanieText() {
+        return logowanieText;
+    }
+
+    public void setLogowanieText(JTextField logowanieText) {
+        this.logowanieText = logowanieText;
+    }
+
+    public JLabel getVehicleInformationLabel() {
+        return vehicleInformationLabel;
+    }
+
+    public void setVehicleInformationLabel(JLabel vehicleInformationLabel) {
+        this.vehicleInformationLabel = vehicleInformationLabel;
+    }
+
+    public JLabel getCustomerInformationLabel() {
+        return customerInformationLabel;
+    }
+
+    public void setCustomerInformationLabel(JLabel customerInformationLabel) {
+        this.customerInformationLabel = customerInformationLabel;
+    }
+
+    public JTextField getAnnualPremiumTekstowe() {
+        return annualPremiumTekstowe;
+    }
+
+    public void setAnnualPremiumTekstowe(JTextField annualPremiumTekstowe) {
+        this.annualPremiumTekstowe = annualPremiumTekstowe;
+    }
+
+    public JTextField getMonthlyPremiumTekstowe() {
+        return monthlyPremiumTekstowe;
+    }
+
+    public void setMonthlyPremiumTekstowe(JTextField monthlyPremiumTekstowe) {
+        this.monthlyPremiumTekstowe = monthlyPremiumTekstowe;
+    }
+
+    public JTextField getCustomerNameText() {
+        return customerNameText;
+    }
+
+    public void setCustomerNameText(JTextField customerNameText) {
+        this.customerNameText = customerNameText;
+    }
+
+    public JTextField getAddressText() {
+        return addressText;
+    }
+
+    public void setAddressText(JTextField addressText) {
+        this.addressText = addressText;
+    }
+
+    public JTextField getEmptyLabel1Text() {
+        return emptyLabel1Text;
+    }
+
+    public void setEmptyLabel1Text(JTextField emptyLabel1Text) {
+        this.emptyLabel1Text = emptyLabel1Text;
+    }
+
+    public JTextField getEmptyLabel2Text() {
+        return emptyLabel2Text;
+    }
+
+    public void setEmptyLabel2Text(JTextField emptyLabel2Text) {
+        this.emptyLabel2Text = emptyLabel2Text;
+    }
+
+    public JTextField getPostCodeText() {
+        return postCodeText;
+    }
+
+    public void setPostCodeText(JTextField postCodeText) {
+        this.postCodeText = postCodeText;
+    }
+
+    public JTextField getTelNoText() {
+        return telNoText;
+    }
+
+    public void setTelNoText(JTextField telNoText) {
+        this.telNoText = telNoText;
+    }
+
+    public JTextField getDobText() {
+        return dobText;
+    }
+
+    public void setDobText(JTextField dobText) {
+        this.dobText = dobText;
+    }
+
+    public JTextField getMakeAndModelText() {
+        return makeAndModelText;
+    }
+
+    public void setMakeAndModelText(JTextField makeAndModelText) {
+        this.makeAndModelText = makeAndModelText;
+    }
+
+    public JTextField getRegistrationNumberText() {
+        return registrationNumberText;
+    }
+
+    public void setRegistrationNumberText(JTextField registrationNumberText) {
+        this.registrationNumberText = registrationNumberText;
+    }
+
+    public JTextField getValuationText() {
+        return valuationText;
+    }
+
+    public void setValuationText(JTextField valuationText) {
+        this.valuationText = valuationText;
+    }
+
+    public JTextField getYearFirstRegisteredText() {
+        return yearFirstRegisteredText;
+    }
+
+    public void setYearFirstRegisteredText(JTextField yearFirstRegisteredText) {
+        this.yearFirstRegisteredText = yearFirstRegisteredText;
+    }
+
+    public JTextField getEstiamtionAnnualMilage() {
+        return estiamtionAnnualMilage;
+    }
+
+    public void setEstiamtionAnnualMilage(JTextField estiamtionAnnualMilage) {
+        this.estiamtionAnnualMilage = estiamtionAnnualMilage;
+    }
+
+    public JRadioButton getCheckBoxYes() {
+        return checkBoxYes;
+    }
+
+    public void setCheckBoxYes(JRadioButton checkBoxYes) {
+        this.checkBoxYes = checkBoxYes;
+    }
+
+    public JRadioButton getCheckBoxNo() {
+        return checkBoxNo;
+    }
+
+    public void setCheckBoxNo(JRadioButton checkBoxNo) {
+        this.checkBoxNo = checkBoxNo;
+    }
+
+    public JCheckBox getCheckBoxComprehensive() {
+        return checkBoxComprehensive;
+    }
+
+    public void setCheckBoxComprehensive(JCheckBox checkBoxComprehensive) {
+        this.checkBoxComprehensive = checkBoxComprehensive;
+    }
+
+    public JCheckBox getCheckBoxThirdParty() {
+        return checkBoxThirdParty;
+    }
+
+    public void setCheckBoxThirdParty(JCheckBox checkBoxThirdParty) {
+        this.checkBoxThirdParty = checkBoxThirdParty;
+    }
+
+    public JComboBox getEngineCCText() {
+        return engineCCText;
+    }
+
+    public void setEngineCCText(JComboBox engineCCText) {
+        this.engineCCText = engineCCText;
+    }
+
+    public JTextField getZegarek() {
+        return zegarek;
+    }
+
+    public void setZegarek(JTextField zegarek) {
+        this.zegarek = zegarek;
+    }
+
+    public JLabel getCopyWrights() {
+        return copyWrights;
+    }
+
+    public void setCopyWrights(JLabel copyWrights) {
+        this.copyWrights = copyWrights;
+    }
+
+    public JLabel getTworcy() {
+        return tworcy;
+    }
+
+    public void setTworcy(JLabel tworcy) {
+        this.tworcy = tworcy;
+    }
+
+    public Icon getR1() {
+        return r1;
+    }
+
+    public void setR1(Icon r1) {
+        this.r1 = r1;
+    }
+
+    public DataBase getBazaDanych() {
+        return bazaDanych;
+    }
+
+    public void setBazaDanych(DataBase bazaDanych) {
+        this.bazaDanych = bazaDanych;
+    }
+
+    public JMenuItem getNewFile() {
+        return newFile;
+    }
+
+    public void setNewFile(JMenuItem newFile) {
+        this.newFile = newFile;
+    }
+
+    public JMenuItem getSaveFile() {
+        return saveFile;
+    }
+
+    public void setSaveFile(JMenuItem saveFile) {
+        this.saveFile = saveFile;
+    }
+
+    public JMenuItem getSaveAs() {
+        return saveAs;
+    }
+
+    public void setSaveAs(JMenuItem saveAs) {
+        this.saveAs = saveAs;
+    }
+
+    public JMenuItem getOpenFile() {
+        return openFile;
+    }
+
+    public void setOpenFile(JMenuItem openFile) {
+        this.openFile = openFile;
+    }
+
+    public JMenuItem getAbout() {
+        return about;
+    }
+
+    public void setAbout(JMenuItem about) {
+        this.about = about;
+    }
+
+    public JMenuItem getLinks() {
+        return links;
+    }
+
+    public void setLinks(JMenuItem links) {
+        this.links = links;
+    }
+
+    public JRadioButtonMenuItem getLoginMenu() {
+        return loginMenu;
+    }
+
+    public void setLoginMenu(JRadioButtonMenuItem loginMenu) {
+        this.loginMenu = loginMenu;
+    }
+
+    public JRadioButtonMenuItem getSignUPMenu() {
+        return signUPMenu;
+    }
+
+    public void setSignUPMenu(JRadioButtonMenuItem signUPMenu) {
+        this.signUPMenu = signUPMenu;
+    }
+
+    public JRadioButtonMenuItem getLogoutMenu() {
+        return logoutMenu;
+    }
+
+    public void setLogoutMenu(JRadioButtonMenuItem logoutMenu) {
+        this.logoutMenu = logoutMenu;
+    }
+
+    public Font getFont() {
+        return font;
+    }
+
+    public void setFont(Font font) {
+        this.font = font;
+    }
+    
+
     //konstruktor
     public InsuranceGui() {
         super("Insurance Quote");
+        filePath = "";
+        while(filePath.isEmpty())
+            filePath=chooseFile();
+        klienci = new ArrayList<Client>();
         setSize(1050, 985);
         //new MenuDesign().tworzenieMenu();   // nie dziala gdy jest w innej klasie??    
         tworzenieMenu();
@@ -486,9 +639,9 @@ public class InsuranceGui extends JFrame implements ActionListener, ItemListener
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         settingToolTips();
         //zegar
-        new Clock(zegarek).start();
+        new ClockThread(zegarek).start();
         bazaDanych = new DataBase();
-        klienci = new ArrayList<Client>();
+        
 
     }
 
@@ -765,12 +918,13 @@ public class InsuranceGui extends JFrame implements ActionListener, ItemListener
         // panel przechowujacy przyciski
         JPanel jp6 = new JPanel();
         jp6.add(saveQuote);
-        saveQuote.addActionListener(this);
+        saveQuote.addActionListener(new SaveQuoteListener(annualPremiumTekstowe, monthlyPremiumTekstowe, customerNameText, addressText, emptyLabel1Text, emptyLabel2Text, postCodeText, telNoText, dobText, makeAndModelText, registrationNumberText, valuationText, yearFirstRegisteredText, estiamtionAnnualMilage, checkBoxYes, checkBoxThirdParty, engineCCText, client, logowanieText, this, klienci));
         jp6.add(calculatePremiun);
-        calculatePremiun.addActionListener(this);
+        calculatePremiun.addActionListener(new CalculatePremiumListener(annualPremiumTekstowe, monthlyPremiumTekstowe, customerNameText, addressText, emptyLabel1Text, emptyLabel2Text, postCodeText, telNoText, dobText, makeAndModelText, registrationNumberText, valuationText, yearFirstRegisteredText, estiamtionAnnualMilage, checkBoxYes, checkBoxThirdParty, engineCCText, client, logowanieText, this, klienci));
         jp6.add(calculateMultiple);
-        calculateMultiple.addActionListener(this);
-        //dodanie Footera na layout
+        calculateMultiple.addActionListener(new CalculateMultipleListener(annualPremiumTekstowe, monthlyPremiumTekstowe, customerNameText, addressText, emptyLabel1Text, emptyLabel2Text, postCodeText, telNoText, dobText, makeAndModelText, registrationNumberText, valuationText, yearFirstRegisteredText, estiamtionAnnualMilage, checkBoxYes, checkBoxThirdParty, engineCCText, client, logowanieText, this, klienci));
+        
+//dodanie Footera na layout
         JPanel footer = new JPanel(new BorderLayout());
         JPanel breakLine1 = new JPanel();
         breakLine1.add(new JLabel("                               "));
@@ -914,132 +1068,61 @@ public class InsuranceGui extends JFrame implements ActionListener, ItemListener
     //Listeners
     @Override
     public void actionPerformed(ActionEvent e) {
-        //Fields validation - date section
-        if (e.getSource() == calculatePremiun) {
-
-            try {//sprawdzanie pola daty
-                if (!isValid(dobText.getText()) || (dobText.getText() == "")) {
-                    throw new InvalidDateFormatException("Invalid Date Format");
-
-                }
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(this, "Date format is invalid\n Please enter date with format dd/MM/yyyy", "DATE info", JOptionPane.INFORMATION_MESSAGE);
-                dobText.setText("");
-
-                Logger.getLogger(InsuranceGui.class.getName()).log(Level.SEVERE, null, ex);
-                return;
-            }
-            //Fields validation - phone number section
-
-            try {
-                if (Double.valueOf(telNoText.getText()) < 0) {
-                    throw new NegativeNumberException("Negative Number Exception");
-                } else if (isANumber(telNoText.getText()) || (telNoText.getText() == "")) {
-
-                    throw new Exception("Phone Number Exception");
-
-                }
-            } catch (NegativeNumberException ex) {
-                JOptionPane.showMessageDialog(this, "Phone Number format is invalid\n Value should not be negative", "Value Info", JOptionPane.ERROR_MESSAGE);
-                valuationText.setText("");
-
-                Logger.getLogger(InsuranceGui.class.getName()).log(Level.SEVERE, null, ex);
-                return;
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(this, "Phone format is invalid\n Please enter phone using only digits\n ex: 08x xxx xxx", "Phone Info", JOptionPane.ERROR_MESSAGE);
-                telNoText.setText("");
-                Logger.getLogger(InsuranceGui.class.getName()).log(Level.SEVERE, null, ex);
-                return;
-            }
-            // valuation field
-            try {
-                if (Double.valueOf(valuationText.getText()) < 0) {
-                    throw new NegativeNumberException("Negative Number Exception");
-                } else if (isANumber(valuationText.getText()) || (valuationText.getText() == "")) {
-
-                    throw new Exception("Value Format Exception");
-                }
-            } catch (NegativeNumberException ex) {
-                JOptionPane.showMessageDialog(this, "Value format is invalid\n Value should not be negative", "Value Info", JOptionPane.ERROR_MESSAGE);
-                valuationText.setText("");
-
-                Logger.getLogger(InsuranceGui.class.getName()).log(Level.SEVERE, null, ex);
-                return;
-            } catch (Exception ex) {
-
-                JOptionPane.showMessageDialog(this, "Value format is invalid\n Value should have numeric value", "Value Info", JOptionPane.ERROR_MESSAGE);
-                valuationText.setText("");
-
-                Logger.getLogger(InsuranceGui.class.getName()).log(Level.SEVERE, null, ex);
-                return;
-
-            }
-
-            // annual milage
-            try {
-                if (Double.valueOf(estiamtionAnnualMilage.getText()) < 0) {
-                    throw new NegativeNumberException("Negative Number Exception");
-                } else if (isANumber(estiamtionAnnualMilage.getText()) || (estiamtionAnnualMilage.getText() == "")) {
-
-                    throw new Exception("Annual Milage Exception");
-
-                }
-            } catch (NegativeNumberException ex) {
-                JOptionPane.showMessageDialog(this, "Annual milage should not be negative", "Value Info", JOptionPane.ERROR_MESSAGE);
-                valuationText.setText("");
-
-                Logger.getLogger(InsuranceGui.class.getName()).log(Level.SEVERE, null, ex);
-                return;
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(this, "Annual milage format is invalid\n Annual milage should have numberic value", "Annual milage", JOptionPane.ERROR_MESSAGE);
-                estiamtionAnnualMilage.setText("");
-                Logger.getLogger(InsuranceGui.class.getName()).log(Level.SEVERE, null, ex);
-                return;
-            }
-
-            // registration year
-            try {
-                if (Double.valueOf(yearFirstRegisteredText.getText()) < 0) {
-                    throw new NegativeNumberException("Negative Number Exception");
-                } else if (isANumber(yearFirstRegisteredText.getText()) || (yearFirstRegisteredText.getText() == "")) {
-                    System.out.println(yearFirstRegisteredText.getText());
-                    throw new Exception("Registration Year Exception");
-
-                }
-            } catch (NegativeNumberException ex) {
-                JOptionPane.showMessageDialog(this, "Registration Year should not be negative", "Value Info", JOptionPane.ERROR_MESSAGE);
-                valuationText.setText("");
-
-                Logger.getLogger(InsuranceGui.class.getName()).log(Level.SEVERE, null, ex);
-                return;
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(this, "Registration Year format is invalid\n Registration Year should have numberic value", "Registration Info", JOptionPane.ERROR_MESSAGE);
-                yearFirstRegisteredText.setText("");
-                Logger.getLogger(InsuranceGui.class.getName()).log(Level.SEVERE, null, ex);
-                return;
-            }
-            if(logowanieText.getText().equals("ON-LINE"))
-            {
-                client = new Client(customerNameText.getText(),
-                postCodeText.getText(),
-                telNoText.getText(),
-                dobText.getText(),
-                (checkBoxYes.isSelected()+""),
-                (checkBoxThirdParty.isSelected()+""),
-                (engineCCText.getSelectedItem()+""));
-                System.out.println(client.toString());
-                ClientToServerConnect nowy = new ClientToServerConnect(client, annualPremiumTekstowe, monthlyPremiumTekstowe);
-                nowy.connect();
-            }
-            else
-            {
-                JOptionPane.showMessageDialog(this,"You are not logged in", "Message",JOptionPane.INFORMATION_MESSAGE);
-            }
-        }
-        
         
 
         /*metody odpowiedzialne za plik*/
+    } 
+    
+    
+           public void SaveAs()
+    {            
+        try
+        {
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setDialogTitle("Save As");
+            fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("Pliki tekstowe", "txt"));
+            fileChooser.setAcceptAllFileFilterUsed(false);
+        
+            String path = fileChooser.getSelectedFile() != null ? fileChooser.getSelectedFile().getPath() : "";
+            System.out.println(path);
+            fileChooser.showOpenDialog(this);
+      
+            path = fileChooser.getSelectedFile() != null ? fileChooser.getSelectedFile().getPath() : "";
+            System.out.println(path);
+        
+            File file = fileChooser.getSelectedFile();
+            FileWriter writer = new FileWriter(file);      
+            writer.write(client.toString());
+ 
+            writer.flush();
+            writer.close();
+            System.out.println("Save as file: " + file.getAbsolutePath());
+        }
+        catch(IOException e)
+        {
+                System.out.println("Wyjatek " + e.getClass().getSimpleName() + " "+ e.getMessage());
+        }
+    }
+    public String chooseFile()
+    {
+        
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Choose A File");
+//        dodajemy filtry dla plikow .txt i usuwamy filtr "WSZYSTKIE PLIKI"
+        fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("Pliki tekstowe", "txt"));
+        fileChooser.setAcceptAllFileFilterUsed(false);
+        
+        String path = fileChooser.getSelectedFile() != null ? fileChooser.getSelectedFile().getPath() : "";
+        System.out.println(path);
+        
+        
+//        wywolujemy okno do wybrania pliku
+        fileChooser.showOpenDialog(this);
+        
+        
+        path = fileChooser.getSelectedFile() != null ? fileChooser.getSelectedFile().getPath() : "";
+        System.out.println(path);
+        return path;
     }
 
     @Override
@@ -1071,6 +1154,44 @@ public class InsuranceGui extends JFrame implements ActionListener, ItemListener
             logowanieText.setBackground(Color.red);
             logowanieText.setForeground(Color.WHITE);
         }
+         if(e.getSource() == saveFile)
+        {
+            System.out.println(filePath);
+            File file = new File(filePath);
+            try
+            {
+                FileWriter writer = new FileWriter(file);
+                for(int i = 0; i<klienci.size(); i++)
+                {
+                    writer.write(((Client)klienci.get(i)).toString()+"\n");
+                    writer.flush();
+                    System.out.println(((Client)klienci.get(i)).toString());
+                }
+                writer.close();
+            }
+            catch (IOException ex)
+            {
+                
+            }
+        }
+                  if(e.getSource() == saveAs)
+        {
+            SaveAs();
+           
+        }
+    
+     if(e.getSource() == openFile)
+        {
+            
+            chooseFile();
+ 
+        }
+     if(e.getSource() == newFile)
+        {
+            klienci.clear();
+            System.out.println("Clients list got cleared");
+        }
+        
     }
 
 }

@@ -1,6 +1,7 @@
 
-package com.mycompany.insurancejava;
+package DataBase;
 
+import com.mycompany.insurancejava.User;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,8 +9,10 @@ import java.util.List;
 public class DataBase 
 {
         List<User> listaKlientow;
-        
-        
+
+    public List<User> getListaKlientow() {
+        return listaKlientow;
+    }
         public DataBase()
         {
         listaKlientow = new ArrayList<User>();

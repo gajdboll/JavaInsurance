@@ -1,5 +1,7 @@
-package com.mycompany.insurancejava;
+package Windows;
 
+import DataBase.DataBase;
+import com.mycompany.insurancejava.User;
 import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -183,7 +185,7 @@ public class SignUp extends JFrame implements ActionListener, KeyListener {
             } else if (!passwordText.getText().equals(re_passwordText.getText())) {
                 JOptionPane.showMessageDialog(null, "Passwords DO NOT MATCH!!!\nPlease try again ", "Sign-Up Warning", JOptionPane.WARNING_MESSAGE);
             } else {
-                bazaDanych.listaKlientow.add(new User(loginText.getText(), passwordText.getText()));
+                bazaDanych.getListaKlientow().add(new User(loginText.getText(), passwordText.getText()));
                 JOptionPane.showMessageDialog(this, "Successful Sign-Up\n Please login now", "Sign-Up Error", JOptionPane.INFORMATION_MESSAGE);
                 bazaDanych.WypiszLIsteUzytkownikow();
                 dispose();
