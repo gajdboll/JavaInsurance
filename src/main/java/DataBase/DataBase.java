@@ -52,8 +52,7 @@ public class DataBase
         {
             for(User e : listaKlientow)
             {
-                System.out.println("Login: " + e.getUserName()+ "\n password:  "+ e.getPassword() + "\n***********************");
-            
+                System.out.println("Login: " + e.getUserName()+ "\n password:  "+ e.getPassword() + "\n***********************");           
             }
         }
 }
