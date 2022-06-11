@@ -1,20 +1,24 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package com.mycompany.insurancejava;
-import javax.swing.*;
 
 /**
+ * Obiekt reprezentujący klienta firmy ubezpieczeniowej.
  *
- * @author pre12
+ * @author Bartosz Wasko i Krzysztoff Gajdosz
  */
-public class Client 
-{
-    String name, address1, address2, address3, postCode, telNo, dateOfBirth, 
+public class Client {
+
+    /**
+     * pola
+     */
+    String name, address1, address2, address3, postCode, telNo, dateOfBirth,
             claimIn5Years, thirdParty, engineCC,
             makeAndModel, registrationNumber, valuation, yearFirstRegistered, estimatedMileage, annualPremium, monthlyPremium;
 
+   /**
+    * Getters And setters
+    * @return 
+    */
     
     public String getName() {
         return name;
@@ -151,7 +155,9 @@ public class Client
     public void setEstimatedMileage(String estimatedMileage) {
         this.estimatedMileage = estimatedMileage;
     }
-
+/**
+ * Konstruktor zawierający wszystkie pola głównego programu GUI.
+ */
     public Client(String name, String address1, String address2, String address3, String postCode, String telNo, String dateOfBirth, String claimIn5Years, String thirdParty, String engineCC, String makeAndModel, String registrationNumber, String valuation, String yearFirstRegistered, String estimatedMileage, String annualPremium, String monthlyPremium) {
         this.name = name;
         this.address1 = address1;
@@ -171,24 +177,24 @@ public class Client
         this.annualPremium = annualPremium;
         this.monthlyPremium = monthlyPremium;
     }
-    
+/**
+ * nadpisana metoda toString zawierająca informacje o kazdym polu.
+ * @return String
+ */
+    @Override
+    public String toString() {
+        return name + ";" + address1 + ";" + address2 + ";" + address3 + ";" + postCode
+                + ";" + telNo + ";" + dateOfBirth + ";" + claimIn5Years + ";"
+                + thirdParty + ";" + engineCC + ";" + makeAndModel + ";"
+                + registrationNumber + ";" + valuation + ";" + yearFirstRegistered + ";"
+                + estimatedMileage + ";" + annualPremium + ";" + monthlyPremium;                  
+    }
+/**
+ * Metoda wykorzystywana do przesyłania koniecznych informacji na serwer w odpowiednim formacie.
+ * @return String
+ */
+    public String toStringDoWyslania() {
+        return dateOfBirth + ";" + engineCC + ";" + claimIn5Years + ";" + thirdParty + ";" + estimatedMileage;
+    }
 
-
-    
-        
-        @Override
-        public String toString()
-        {
-            return name+";"+address1+";"+address2+";"+address3+";"+postCode
-                    +";"+telNo+";"+dateOfBirth+";"+claimIn5Years+";"+
-                    thirdParty+";"+engineCC+";"+makeAndModel+";"+
-                    registrationNumber+";"+valuation+";"+yearFirstRegistered+";"+
-                    estimatedMileage+";"+annualPremium+";"+monthlyPremium;
-//                    
-        }
-        public String toStringDoWyslania()
-        {
-            return dateOfBirth+";"+engineCC+";"+ claimIn5Years+";"+thirdParty+";"+estimatedMileage;
-        }
-    
 }

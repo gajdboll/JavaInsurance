@@ -1,12 +1,15 @@
 
 package Exceptions;
-
+/**
+ * Negative Number Exception - wyjątek wywoływany, gdy jest wpisana liczba ujemna.
+ * 
+ */
 
 public class NegativeNumberException extends Exception{
 
 	public NegativeNumberException()
 	{
-		super("Nuber shouldn'tbe negative");
+		super("Number shouldn't be negative");
 	}
 	
 	public NegativeNumberException(String text)

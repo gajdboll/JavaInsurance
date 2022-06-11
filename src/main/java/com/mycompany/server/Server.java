@@ -8,8 +8,11 @@ import java.net.*;
 import java.io.*;
 
 /**
+ * 
+ * Klasa odpowiadająca za serwer, obsługujący wielu klientów jednocześnie
+ * przekazując ich strumienie danych do osobnych wątków.
  *
- * @author pre12
+ * @author Bartosz Wasko i Krzysztof Gajdosz
  */
 public class Server
 {
@@ -28,7 +31,7 @@ public class Server
             while(true)
             {
                 socket = socketServer.accept();
-                System.out.println("There is .new client: " + socket );
+                System.out.println("There is new client: " + socket );
                 
                 try
                 {

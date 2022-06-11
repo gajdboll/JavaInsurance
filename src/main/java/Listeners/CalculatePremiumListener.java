@@ -19,25 +19,21 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.EtchedBorder;
 
 /**
- *
- * @author pre12
- */
+     * Listener pozwalajacy na polaczenie z serverem jesli status bar jest
+     * ON-LINE i przycisk Calculate Premium zostal klikniety,
+     * w przeciwnym wypadku wyrzuca okno dialogowe 
+     * Wylicza wartość ubezpieczenia tworząc połączenie między programem a serwerem
+     * oraz biorąc dane prosto z wypełnionego formularza.
+     *
+     * 
+     */
 public class CalculatePremiumListener extends CalculateListener
 {
 
     public CalculatePremiumListener(JTextField annualPremiumTekstowe, JTextField monthlyPremiumTekstowe, JTextField customerNameText, JTextField addressText, JTextField emptyLabel1Text, JTextField emptyLabel2Text, JTextField postCodeText, JTextField telNoText, JTextField dobText, JTextField makeAndModelText, JTextField registrationNumberText, JTextField valuationText, JTextField yearFirstRegisteredText, JTextField estiamtionAnnualMilage, JRadioButton checkBoxYes, JCheckBox checkBoxThirdParty, JComboBox engineCCText, Client client, JTextField logowanieText, JFrame window, ArrayList<Client> clients) {
         super(annualPremiumTekstowe, monthlyPremiumTekstowe, customerNameText, addressText, emptyLabel1Text, emptyLabel2Text, postCodeText, telNoText, dobText, makeAndModelText, registrationNumberText, valuationText, yearFirstRegisteredText, estiamtionAnnualMilage, checkBoxYes, checkBoxThirdParty, engineCCText, client, logowanieText, window, clients);
     }
-
     
-
-    
-    
-
-    
-
-    
-
     @Override
     public void actionPerformed(ActionEvent e) 
     {
@@ -63,8 +59,6 @@ public class CalculatePremiumListener extends CalculateListener
                         getYearFirstRegisteredText().getText(),
                         getEstiamtionAnnualMilage().getText(),
                         "0","0");
-                
-                System.out.println(client.toString());
                 ClientToServerConnect nowy = new ClientToServerConnect(client, getAnnualPremiumTekstowe(), getMonthlyPremiumTekstowe(), false);
                 nowy.connect();
             }

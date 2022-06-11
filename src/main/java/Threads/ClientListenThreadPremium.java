@@ -10,8 +10,9 @@ import java.net.Socket;
 import javax.swing.JTextField;
 
 /**
- *
- * @author pre12
+ * Nasłuchiwacz po stronie klienta, który odbiera informacje od serwera.
+ * Po otrzymaniu informacji, wylicza kwotę ubezpieczenia oraz wpisuje ją 
+ * do pól klienta oraz do PÓL TEKSTOWYCH w programie klienckim.
  */
 public class ClientListenThreadPremium extends ClientListenThread
 {

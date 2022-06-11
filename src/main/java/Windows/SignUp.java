@@ -10,9 +10,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.*;
-import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
-
-public class SignUp extends JFrame implements ActionListener, KeyListener {
+/**
+ * Okno rejestracji do programu klienckiego.
+ * @author Bartosz Wasko i Krzysztof Gajdosz
+ */
+public class SignUp extends JFrame implements ActionListener{
 
     private JLabel loginLabel;
     private JLabel passwordLabel;
@@ -27,23 +29,48 @@ public class SignUp extends JFrame implements ActionListener, KeyListener {
     private DataBase bazaDanych;
 
     /**
-     * Gettery & Settery
+     * Gettery i Settery
      */
+    public DataBase getBazaDanych() {
+        return bazaDanych;
+    }
 
-    public void setCancel(JButton cancel) {
-        this.cancel = cancel;
+    public JLabel getLoginLabel() {
+
+        return loginLabel;
+
+    }
+
+    public JLabel getPasswordLabel() {
+        return passwordLabel;
+    }
+
+    public JLabel getRe_passwordLabel() {
+        return re_passwordLabel;
+    }
+
+    public JTextField getLoginText() {
+        return loginText;
+    }
+
+    public JPasswordField getPasswordText() {
+        return passwordText;
+    }
+
+    public JPasswordField getRe_passwordText() {
+        return re_passwordText;
+    }
+
+    public JButton getSignup() {
+        return signup;
     }
 
     public JButton getCancel() {
         return cancel;
     }
 
-    public JButton getSignin() {
-        return signup;
-    }
-
-    public void setSignin(JButton signin) {
-        this.signup = signin;
+    public Font getFont() {
+        return font;
     }
 
     public void setLoginLabel(JLabel loginLabel) {
@@ -70,35 +97,26 @@ public class SignUp extends JFrame implements ActionListener, KeyListener {
         this.re_passwordText = re_passwordText;
     }
 
-    public JLabel getLoginLabel() {
-        return loginLabel;
+    public void setSignup(JButton signup) {
+        this.signup = signup;
     }
 
-    public JLabel getPasswordLabel() {
-        return passwordLabel;
+    public void setCancel(JButton cancel) {
+        this.cancel = cancel;
     }
 
-    public JLabel getRe_passwordLabel() {
-        return re_passwordLabel;
+    public void setFont(Font font) {
+        this.font = font;
     }
 
-    public JTextField getLoginText() {
-        return loginText;
-    }
-
-    public JTextField getPasswordText() {
-        return passwordText;
-    }
-
-    public JTextField getRe_passwordText() {
-        return re_passwordText;
+    public void setBazaDanych(DataBase bazaDanych) {
+        this.bazaDanych = bazaDanych;
     }
 
     /**
      * Konstruktor
      */
     public SignUp(DataBase bazaDanych) {
-
         super("Sign UP Window");
         this.bazaDanych = bazaDanych;
         setSize(600, 200);
@@ -106,8 +124,7 @@ public class SignUp extends JFrame implements ActionListener, KeyListener {
         setContentPane(UstawLayoutElementy());
         setVisible(true);
         setResizable(false);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
 
     /**
@@ -140,13 +157,9 @@ public class SignUp extends JFrame implements ActionListener, KeyListener {
     public JPanel UstawLayoutElementy() {
         JPanel jpanel = new JPanel();
         jpanel.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
-
         JPanel border = new JPanel(new BorderLayout());
-
         border.add(new JLabel(""), BorderLayout.NORTH);
-
         JPanel grid = new JPanel(new GridLayout(3, 3));
-
         grid.add(loginLabel);
         grid.add(new JLabel("", 10));
         grid.add(loginText);
@@ -159,29 +172,32 @@ public class SignUp extends JFrame implements ActionListener, KeyListener {
         grid.add(new JLabel("", 10));
         grid.add(re_passwordText);
         re_passwordText.addActionListener(this);
-
         border.add(grid, BorderLayout.CENTER);
-
         JPanel footer = new JPanel();
         footer.add(signup);
         signup.addActionListener(this);
         footer.add(cancel);
         cancel.addActionListener(this);
-
         border.add(footer, BorderLayout.SOUTH);
-
         jpanel.add(border);
-
         return jpanel;
     }
-
+    /**
+     * Listener do mini okna rejestracji 
+     * @param e przyjmuje ActionEvent i wywoluje akcje
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
-        //potrzebne implementacja bazy danych i przeszukanie bazy
         if (e.getSource() == signup) {
 
             if (bazaDanych.szukajKLientow(loginText.getText())) {
                 JOptionPane.showMessageDialog(null, "User name already exist", "Sign-Up Warning", JOptionPane.WARNING_MESSAGE);
+            } else if (loginText.getText().equals("")) {
+                JOptionPane.showMessageDialog(null, "Login field cannot be empty!!!\nPlease try again ", "Sign-Up Warning", JOptionPane.WARNING_MESSAGE);
+            } else if (passwordText.getText().equals("")) {
+                JOptionPane.showMessageDialog(null, "Passwords cannot be empty!!!\nPlease try again ", "Sign-Up Warning", JOptionPane.WARNING_MESSAGE);
+            } else if (re_passwordText.getText().equals("")) {
+                JOptionPane.showMessageDialog(null, "Repeat Passwords field cannot be empty!!!\nPlease try again ", "Sign-Up Warning", JOptionPane.WARNING_MESSAGE);
             } else if (!passwordText.getText().equals(re_passwordText.getText())) {
                 JOptionPane.showMessageDialog(null, "Passwords DO NOT MATCH!!!\nPlease try again ", "Sign-Up Warning", JOptionPane.WARNING_MESSAGE);
             } else {
@@ -191,27 +207,11 @@ public class SignUp extends JFrame implements ActionListener, KeyListener {
                 dispose();
             }
         }
-        if (e.getSource() == cancel) {
-            //poprawic by tylko z okna wychodzil
-            // dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+        if (e.getSource() == cancel) 
+        {
             dispose();
         }
-
     }
-
-    @Override
-    public void keyTyped(KeyEvent e) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public void keyPressed(KeyEvent e) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
 }
+    
+

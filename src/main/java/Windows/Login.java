@@ -7,15 +7,17 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import javax.swing.*;
 
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
+
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
-public class Login extends JFrame implements ActionListener, KeyListener {
+
+/**
+ * Okno logowania do programu klienckiego.
+ * @author Bartosz Wasko i Krzysztof Gajdosz
+ */
+public class Login extends JFrame implements ActionListener {
 
     private JLabel loginLabel;
     private JLabel passwordLabel;
@@ -29,7 +31,9 @@ public class Login extends JFrame implements ActionListener, KeyListener {
     private Font font = new Font("Helvetica", Font.ITALIC, 15);
 
     private int i;
-    //setters & getters 
+    /**
+     * Gettery i Settery
+     */
     public JLabel getLoginLabel() {
         return loginLabel;
     }
@@ -85,7 +89,9 @@ public class Login extends JFrame implements ActionListener, KeyListener {
     public void setCancel(JButton cancel) {
         this.cancel = cancel;
     }
-
+    /**
+     * Konstruktor
+     */
     public Login(JTextField status, DataBase baza) {
 
         super("Login Window");
@@ -96,10 +102,12 @@ public class Login extends JFrame implements ActionListener, KeyListener {
         setContentPane(UstawLayoutElementy());
         setVisible(true);
         setResizable(false);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
     }
-
+    /**
+     * Inicjalizacja elementow
+     */
     public void init() {
         loginLabel = new JLabel("Login/Username");
         loginLabel.setFont(font);
@@ -115,7 +123,9 @@ public class Login extends JFrame implements ActionListener, KeyListener {
         cancel = new JButton("Cancel");
         cancel.setFont(font);
     }
-
+    /**
+     * Ustawienie layoutu
+     */
     public JPanel UstawLayoutElementy() {
         JPanel jpanel = new JPanel();
         jpanel.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
@@ -149,7 +159,10 @@ public class Login extends JFrame implements ActionListener, KeyListener {
 
         return jpanel;
     }
-
+    /**
+     * Listener do mini okna loginu 
+     * @param e przyjmuje ActionEvent i wywoluje akcje
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         
@@ -178,20 +191,7 @@ public class Login extends JFrame implements ActionListener, KeyListener {
             }
             
         }
+}
     
 
-    @Override
-    public void keyTyped(KeyEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); 
-    }
-
-    @Override
-    public void keyPressed(KeyEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); 
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); 
-    }
-}
+    

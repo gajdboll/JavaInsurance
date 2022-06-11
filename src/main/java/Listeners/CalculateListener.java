@@ -1,13 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Listeners;
 
 import Exceptions.InvalidDateFormatException;
 import Exceptions.NegativeNumberException;
 import com.mycompany.insurancejava.Client;
-import com.mycompany.insurancejava.ClientToServerConnect;
 import com.mycompany.insurancejava.InsuranceGui;
 import static com.mycompany.insurancejava.InsuranceGui.isANumber;
 import static com.mycompany.insurancejava.InsuranceGui.isValid;
@@ -23,11 +18,16 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 /**
+ * Klasa abstrakcyjna. Po niej powinny dziedziczyć klasy, które wykonują operacje na konkretnym kliencie,
+ * takie obliczenie kwot ubezpieczenia czy zapisania danych klienta do listy.
  *
- * @author pre12
+ * @author Bartosz Wasko i Krzysztof Gajdosz
  */
-public abstract class CalculateListener implements ActionListener
-{
+public abstract class CalculateListener implements ActionListener {
+
+    /**
+     * pola i wlasciwosci dla powyzszej klasy
+     */
     private JTextField annualPremiumTekstowe;
     private JTextField monthlyPremiumTekstowe;
     private JTextField customerNameText;
@@ -46,12 +46,15 @@ public abstract class CalculateListener implements ActionListener
     private JRadioButton checkBoxYes;
     private JCheckBox checkBoxThirdParty;
     private JComboBox engineCCText;
-    
+
     Client client;
     private JTextField logowanieText;
     private JFrame window;
     private ArrayList<Client> clients;
 
+    /**
+     * gettery i settery
+     */
     public ArrayList<Client> getClients() {
         return clients;
     }
@@ -60,7 +63,6 @@ public abstract class CalculateListener implements ActionListener
         this.clients = clients;
     }
 
-    
     public JFrame getWindow() {
         return window;
     }
@@ -68,7 +70,6 @@ public abstract class CalculateListener implements ActionListener
     public void setWindow(JFrame window) {
         this.window = window;
     }
-    
 
     public JTextField getLogowanieText() {
         return logowanieText;
@@ -77,7 +78,7 @@ public abstract class CalculateListener implements ActionListener
     public void setLogowanieText(JTextField logowanieText) {
         this.logowanieText = logowanieText;
     }
-    
+
     public Client getClient() {
         return client;
     }
@@ -85,7 +86,6 @@ public abstract class CalculateListener implements ActionListener
     public void setClient(Client client) {
         this.client = client;
     }
-    
 
     public JTextField getAnnualPremiumTekstowe() {
         return annualPremiumTekstowe;
@@ -223,6 +223,31 @@ public abstract class CalculateListener implements ActionListener
         this.engineCCText = engineCCText;
     }
 
+    /**
+     * Konstruktor ktory przyjmuje wszystkie pola wczesniej zsadeklarowane
+     *
+     * @param annualPremiumTekstowe
+     * @param monthlyPremiumTekstowe
+     * @param customerNameText
+     * @param addressText
+     * @param emptyLabel1Text
+     * @param emptyLabel2Text
+     * @param postCodeText
+     * @param telNoText
+     * @param dobText
+     * @param makeAndModelText
+     * @param registrationNumberText
+     * @param valuationText
+     * @param yearFirstRegisteredText
+     * @param estiamtionAnnualMilage
+     * @param checkBoxYes
+     * @param checkBoxThirdParty
+     * @param engineCCText
+     * @param client
+     * @param logowanieText
+     * @param window
+     * @param clients
+     */
     public CalculateListener(JTextField annualPremiumTekstowe, JTextField monthlyPremiumTekstowe, JTextField customerNameText, JTextField addressText, JTextField emptyLabel1Text, JTextField emptyLabel2Text, JTextField postCodeText, JTextField telNoText, JTextField dobText, JTextField makeAndModelText, JTextField registrationNumberText, JTextField valuationText, JTextField yearFirstRegisteredText, JTextField estiamtionAnnualMilage, JRadioButton checkBoxYes, JCheckBox checkBoxThirdParty, JComboBox engineCCText, Client client, JTextField logowanieText, JFrame window, ArrayList<Client> clients) {
         this.annualPremiumTekstowe = annualPremiumTekstowe;
         this.monthlyPremiumTekstowe = monthlyPremiumTekstowe;
@@ -247,140 +272,131 @@ public abstract class CalculateListener implements ActionListener
         this.clients = clients;
     }
 
-    
-
-    
-    
-    public boolean Validation()
-    {
+    /**
+     * metoda odpowiedzilana za walidacje pol
+     *
+     * @return true jesli pole jest poprawne, w przeciwnym wypadku false
+     */
+    public boolean Validation() {
         try {//sprawdzanie pola daty
-                if (!isValid(dobText.getText()) || (dobText.getText() == "")) {
-                    throw new InvalidDateFormatException("Invalid Date Format");
-
-                }
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(window, "Date format is invalid\n Please enter date with format dd/MM/yyyy", "DATE info", JOptionPane.INFORMATION_MESSAGE);
-                dobText.setText("");
-
-                Logger.getLogger(InsuranceGui.class.getName()).log(Level.SEVERE, null, ex);
-                return false;
-            }
-            //Fields validation - phone number section
-
-            try {
-                if (Double.valueOf(telNoText.getText()) < 0) {
-                    throw new NegativeNumberException("Negative Number Exception");
-                } else if (isANumber(telNoText.getText()) || (telNoText.getText() == "")) {
-
-                    throw new Exception("Phone Number Exception");
-
-                }
-            } catch (NegativeNumberException ex) {
-                JOptionPane.showMessageDialog(window, "Phone Number format is invalid\n Value should not be negative", "Value Info", JOptionPane.ERROR_MESSAGE);
-                valuationText.setText("");
-
-                Logger.getLogger(InsuranceGui.class.getName()).log(Level.SEVERE, null, ex);
-                return false;
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(window, "Phone format is invalid\n Please enter phone using only digits\n ex: 08x xxx xxx", "Phone Info", JOptionPane.ERROR_MESSAGE);
-                telNoText.setText("");
-                Logger.getLogger(InsuranceGui.class.getName()).log(Level.SEVERE, null, ex);
-                return false;
-            }
-            // valuation field
-            try {
-                if (Double.valueOf(valuationText.getText()) < 0) {
-                    throw new NegativeNumberException("Negative Number Exception");
-                } else if (isANumber(valuationText.getText()) || (valuationText.getText() == "")) {
-
-                    throw new Exception("Value Format Exception");
-                }
-            } catch (NegativeNumberException ex) {
-                JOptionPane.showMessageDialog(window, "Value format is invalid\n Value should not be negative", "Value Info", JOptionPane.ERROR_MESSAGE);
-                valuationText.setText("");
-
-                Logger.getLogger(InsuranceGui.class.getName()).log(Level.SEVERE, null, ex);
-                return false;
-            } catch (Exception ex) {
-
-                JOptionPane.showMessageDialog(window, "Value format is invalid\n Value should have numeric value", "Value Info", JOptionPane.ERROR_MESSAGE);
-                valuationText.setText("");
-
-                Logger.getLogger(InsuranceGui.class.getName()).log(Level.SEVERE, null, ex);
-                return false;
+            if (!isValid(dobText.getText()) || (dobText.getText() == "")) {
+                throw new InvalidDateFormatException("Invalid Date Format");
 
             }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(window, "Date format is invalid\n Please enter date with format dd/MM/yyyy", "DATE info", JOptionPane.INFORMATION_MESSAGE);
+            dobText.setText("");
 
-            // annual milage
-            try {
-                if (Double.valueOf(estiamtionAnnualMilage.getText()) < 0) {
-                    throw new NegativeNumberException("Negative Number Exception");
-                } else if (isANumber(estiamtionAnnualMilage.getText()) || (estiamtionAnnualMilage.getText() == "")) {
+            Logger.getLogger(InsuranceGui.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+        //Fields validation - phone number section
+        try {
+            if (Double.valueOf(telNoText.getText()) < 0) {
+                throw new NegativeNumberException("Negative Number Exception");
+            } else if (isANumber(telNoText.getText()) || (telNoText.getText() == "")) {
 
-                    throw new Exception("Annual Milage Exception");
+                throw new Exception("Phone Number Exception");
 
-                }
-            } catch (NegativeNumberException ex) {
-                JOptionPane.showMessageDialog(window, "Annual milage should not be negative", "Value Info", JOptionPane.ERROR_MESSAGE);
-                valuationText.setText("");
-
-                Logger.getLogger(InsuranceGui.class.getName()).log(Level.SEVERE, null, ex);
-                return false;
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(window, "Annual milage format is invalid\n Annual milage should have numberic value", "Annual milage", JOptionPane.ERROR_MESSAGE);
-                estiamtionAnnualMilage.setText("");
-                Logger.getLogger(InsuranceGui.class.getName()).log(Level.SEVERE, null, ex);
-                return false;
             }
+        } catch (NegativeNumberException ex) {
+            JOptionPane.showMessageDialog(window, "Phone Number format is invalid\n Value should not be negative", "Value Info", JOptionPane.ERROR_MESSAGE);
+            valuationText.setText("");
 
-            // registration year
-            try {
-                if (Double.valueOf(yearFirstRegisteredText.getText()) < 0) {
-                    throw new NegativeNumberException("Negative Number Exception");
-                } else if (isANumber(yearFirstRegisteredText.getText()) || (yearFirstRegisteredText.getText() == "")) {
-                    System.out.println(yearFirstRegisteredText.getText());
-                    throw new Exception("Registration Year Exception");
+            Logger.getLogger(InsuranceGui.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(window, "Phone format is invalid\n Please enter phone using only digits\n ex: 08x xxx xxx", "Phone Info", JOptionPane.ERROR_MESSAGE);
+            telNoText.setText("");
+            Logger.getLogger(InsuranceGui.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+        // valuation field
+        try {
+            if (Double.valueOf(valuationText.getText()) < 0) {
+                throw new NegativeNumberException("Negative Number Exception");
+            } else if (isANumber(valuationText.getText()) || (valuationText.getText() == "")) {
 
-                }
-            } catch (NegativeNumberException ex) {
-                JOptionPane.showMessageDialog(window, "Registration Year should not be negative", "Value Info", JOptionPane.ERROR_MESSAGE);
-                valuationText.setText("");
-
-                Logger.getLogger(InsuranceGui.class.getName()).log(Level.SEVERE, null, ex);
-                return false;
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(window, "Registration Year format is invalid\n Registration Year should have numberic value", "Registration Info", JOptionPane.ERROR_MESSAGE);
-                yearFirstRegisteredText.setText("");
-                Logger.getLogger(InsuranceGui.class.getName()).log(Level.SEVERE, null, ex);
-                return false;
+                throw new Exception("Value Format Exception");
             }
-            return true;
+        } catch (NegativeNumberException ex) {
+            JOptionPane.showMessageDialog(window, "Value format is invalid\n Value should not be negative", "Value Info", JOptionPane.ERROR_MESSAGE);
+            valuationText.setText("");
+
+            Logger.getLogger(InsuranceGui.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        } catch (Exception ex) {
+
+            JOptionPane.showMessageDialog(window, "Value format is invalid\n Value should have numeric value", "Value Info", JOptionPane.ERROR_MESSAGE);
+            valuationText.setText("");
+
+            Logger.getLogger(InsuranceGui.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+        // annual milage
+        try {
+            if (Double.valueOf(estiamtionAnnualMilage.getText()) < 0) {
+                throw new NegativeNumberException("Negative Number Exception");
+            } else if (isANumber(estiamtionAnnualMilage.getText()) || (estiamtionAnnualMilage.getText() == "")) {
+
+                throw new Exception("Annual Milage Exception");
+
+            }
+        } catch (NegativeNumberException ex) {
+            JOptionPane.showMessageDialog(window, "Annual milage should not be negative", "Value Info", JOptionPane.ERROR_MESSAGE);
+            valuationText.setText("");
+
+            Logger.getLogger(InsuranceGui.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(window, "Annual milage format is invalid\n Annual milage should have numberic value", "Annual milage", JOptionPane.ERROR_MESSAGE);
+            estiamtionAnnualMilage.setText("");
+            Logger.getLogger(InsuranceGui.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+
+        // registration year
+        try {
+            if (Double.valueOf(yearFirstRegisteredText.getText()) < 0) {
+                throw new NegativeNumberException("Negative Number Exception");
+            } else if (isANumber(yearFirstRegisteredText.getText()) || (yearFirstRegisteredText.getText() == "")) {
+                System.out.println(yearFirstRegisteredText.getText());
+                throw new Exception("Registration Year Exception");
+
+            }
+        } catch (NegativeNumberException ex) {
+            JOptionPane.showMessageDialog(window, "Registration Year should not be negative", "Value Info", JOptionPane.ERROR_MESSAGE);
+            valuationText.setText("");
+
+            Logger.getLogger(InsuranceGui.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(window, "Registration Year format is invalid\n Registration Year should have numberic value", "Registration Info", JOptionPane.ERROR_MESSAGE);
+            yearFirstRegisteredText.setText("");
+            Logger.getLogger(InsuranceGui.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+        return true;
     }
 
-    public void makeTextFieldsNull()
-    {
+    /**
+     * metoda czyszcząca wszystkie pola GUI
+     */
+    public void makeTextFieldsNull() {
         getCustomerNameText().setText("");
-                        getAddressText().setText("");
-                        getEmptyLabel1Text().setText("");
-                        getEmptyLabel2Text().setText("");
-                        getPostCodeText().setText("");
-                        getTelNoText().setText("");
-                        getDobText().setText("");
-                        getCheckBoxYes().setSelected(false);
-                        getCheckBoxThirdParty().setSelected(false);
-                        
-                        getMakeAndModelText().setText("");
-                        getRegistrationNumberText().setText("");
-                        getValuationText().setText("");
-                        getYearFirstRegisteredText().setText("");
-                        getEstiamtionAnnualMilage().setText("");
-        
-       
+        getAddressText().setText("");
+        getEmptyLabel1Text().setText("");
+        getEmptyLabel2Text().setText("");
+        getPostCodeText().setText("");
+        getTelNoText().setText("");
+        getDobText().setText("");
+        getCheckBoxYes().setSelected(false);
+        getCheckBoxThirdParty().setSelected(false);
+        getMakeAndModelText().setText("");
+        getRegistrationNumberText().setText("");
+        getValuationText().setText("");
+        getYearFirstRegisteredText().setText("");
+        getEstiamtionAnnualMilage().setText("");
     }
-    
-    
 
-    
-    
-  
 }

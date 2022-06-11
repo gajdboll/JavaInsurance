@@ -1,20 +1,28 @@
-
 package com.mycompany.insurancejava;
 
+/**
+ * Klasa przdstawiająca użytkowników mogących się zalogować do programu.
+ */
+public class User {
 
-public class User 
-{
-private int id;
-private String userName;
-private String password;
+    /**
+     * pola
+     */
+    private int id;
+    private String userName;
+    private String password;
 
-private static int numer;
+    private static int numer;
 
-public static int zwieksz_numer()
-{
-return numer++;
-}
+    public static int zwieksz_numer() {
+        return numer++;
+    }
 
+    /**
+     * settery i gettery
+     *
+     *
+     */
     public void setId(int id) {
         this.id = id;
     }
@@ -39,8 +47,10 @@ return numer++;
         this.password = password;
     }
 
-    public User() 
-    {
+    /**
+     * Konstruktory
+     */
+    public User() {
         this.userName = "admin";
         this.password = "admin";
     }
@@ -50,7 +60,5 @@ return numer++;
         this.password = password;
         this.id = zwieksz_numer();
     }
-
-
 
 }

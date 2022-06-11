@@ -4,10 +4,10 @@
  */
 package com.mycompany.server;
 
-/**
- *
- * @author pre12
- */
+    /**
+     * Klasa wyliczająca stawkę ubezpieczenia na podstawie podanych parametrów.
+
+     */
 public class Calculation 
 {
     private int age;
@@ -56,6 +56,7 @@ public class Calculation
         this.estimatedMileage = estimatedMileage;
     }
 
+
     public Calculation(int age, String engineClass, String claimInLast5Years, String coverType, String estimatedMileage) {
         this.age = age;
         this.engineClass = engineClass;
@@ -63,7 +64,10 @@ public class Calculation
         this.coverType = coverType;
         this.estimatedMileage = estimatedMileage;
     }
-    
+    /**
+     * Główna funkcja wyliczająca.
+     * @return discount
+     */
     public int CalculateRate()
     {
         int discount=100;
@@ -76,8 +80,6 @@ public class Calculation
             }
             case "false" ->
             {
-                //{"800 or less", "Between 800 - 1000", "Between 1000 - 1500",
-                //"Between 1500 - 2000", "More than 2000"}
                 if(age<25)
                 {
                     if( engineClass.equals("More than 2000") || engineClass.equals("Between 1500 - 2000") 
