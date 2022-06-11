@@ -38,13 +38,10 @@ public class SignUp extends JFrame implements ActionListener{
     public JLabel getLoginLabel() {
 
         return loginLabel;
-
     }
-
     public JLabel getPasswordLabel() {
         return passwordLabel;
     }
-
     public JLabel getRe_passwordLabel() {
         return re_passwordLabel;
     }
@@ -112,7 +109,6 @@ public class SignUp extends JFrame implements ActionListener{
     public void setBazaDanych(DataBase bazaDanych) {
         this.bazaDanych = bazaDanych;
     }
-
     /**
      * Konstruktor
      */
@@ -150,7 +146,6 @@ public class SignUp extends JFrame implements ActionListener{
         cancel = new JButton("Cancel");
         cancel.setFont(font);
     }
-
     /**
      * Ustawienie layoutu
      */

@@ -174,6 +174,7 @@ public class Login extends JFrame implements ActionListener {
         if (e.getActionCommand().equals("Cancel"))
             {
                dispose();
+               return;
             }
             if (baza.szukajHasla(loginText.getText(), passwordText.getText())) {
                 System.out.println("correct");
@@ -183,12 +184,16 @@ public class Login extends JFrame implements ActionListener {
                 status.setForeground(Color.BLACK);
                 dispose();
              
-            } else if (baza.szukajHasla(loginText.getText(), passwordText.getText()))
+            } else if (loginText.getText().equals("")) {
+                JOptionPane.showMessageDialog(null, "Login field cannot be empty!!!\nPlease try again ", "Login Warning", JOptionPane.WARNING_MESSAGE);
+            }
+            else if (!baza.szukajHasla(loginText.getText(), passwordText.getText()))
             {   
                 JOptionPane.showMessageDialog(null, "Invalid username or password\nTry again!!!", "Login", JOptionPane.WARNING_MESSAGE);
                 System.out.println("incorrect try"+i);
  
             }
+           
             
         }
 }

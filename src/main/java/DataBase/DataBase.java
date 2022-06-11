@@ -28,13 +28,12 @@ public class DataBase {
  */
     public boolean szukajKLientow(String name) {
         for (User e : listaKlientow) {
-            if (e.getUserName().equals(name)) {
+            if (e.getUserName().equals(name)) 
+            {
                 return true;
-            } else {
-                return false;
             }
         }
-        return true;
+        return false;
     }
 /**
  * 

@@ -5,7 +5,6 @@ import Windows.Login;
 import Windows.SignUp;
 import Windows.CalculateMultipleResults;
 import Threads.ClockThread;
-import Exceptions.*;
 import Listeners.CalculateMultipleListener;
 import Listeners.CalculatePremiumListener;
 import Listeners.SaveQuoteListener;
@@ -89,10 +88,10 @@ public class InsuranceGui extends JFrame implements ActionListener
     private JTextField logowanieText;
     private JLabel vehicleInformationLabel;
     private JLabel customerInformationLabel;
-
+    private JLabel carLabel;
+    
     private JTextField annualPremiumTekstowe;
     private JTextField monthlyPremiumTekstowe;
-
     private JTextField customerNameText;
     private JTextField addressText;
     private JTextField emptyLabel1Text;
@@ -130,304 +129,233 @@ public class InsuranceGui extends JFrame implements ActionListener
     Icon r10 = new ImageIcon(getClass().getResource("Icons/star-wars.png")); 
     Icon r11 = new ImageIcon(getClass().getResource("Icons/superman.png")); 
     Icon r12 = new ImageIcon(getClass().getResource("Icons/batman.png")); 
-    //Icon r13 = new ImageIcon(getClass().getResource("Icons/savegroup.png"));
+    Icon r13 = new ImageIcon(getClass().getResource("Icons/car.png"));
     Icon r14 = new ImageIcon(getClass().getResource("Icons/table.png"));
     //baza danych 
     private DataBase bazaDanych;
-
     //menu elementy
     JMenuItem newList, saveFile, saveAs, openFile, about, links, loginMenu, signUPMenu, logoutMenu, showCalculateMultiple;
 
 // pomocniczy FontStyle
     private Font font ;
-
     //getters & setters
-    //na koncu projektu wywalic i implementowac od poczatku wszystkie pola
-
     public Client getClient() {
         return client;
     }
 
+    public JLabel getCarLabel() {
+        return carLabel;
+    }
     public void setClient(Client client) {
         this.client = client;
     }
-
     public ArrayList getClients() {
         return clients;
     }
-
     public void setClients(ArrayList clients) {
         this.clients = clients;
     }
-
     public String getFilePath() {
         return filePath;
     }
-
     public void setFilePath(String filePath) {
         this.filePath = filePath;
     }
-
     public JLabel getProjectTitle() {
         return projectTitle;
     }
-
     public void setProjectTitle(JLabel projectTitle) {
         this.projectTitle = projectTitle;
     }
-
     public JTextField[] getPolaTekstowe() {
         return polaTekstowe;
     }
-
     public void setPolaTekstowe(JTextField[] polaTekstowe) {
         this.polaTekstowe = polaTekstowe;
     }
-
     public JButton getSaveQuote() {
         return saveQuote;
     }
-
     public void setSaveQuote(JButton saveQuote) {
         this.saveQuote = saveQuote;
     }
-
     public JButton getCalculatePremiun() {
         return calculatePremiun;
     }
-
     public void setCalculatePremiun(JButton calculatePremiun) {
         this.calculatePremiun = calculatePremiun;
     }
-
     public JButton getCalculateMultiple() {
         return calculateMultiple;
     }
-
     public void setCalculateMultiple(JButton calculateMultiple) {
         this.calculateMultiple = calculateMultiple;
     }
-
     public JLabel getCustomerNameJLabel() {
         return customerNameJLabel;
     }
-
     public void setCustomerNameJLabel(JLabel customerNameJLabel) {
         this.customerNameJLabel = customerNameJLabel;
     }
-
     public JLabel getAddressJLabel() {
         return addressJLabel;
     }
-
     public void setAddressJLabel(JLabel addressJLabel) {
         this.addressJLabel = addressJLabel;
     }
-
     public JLabel getEmptyLabel1() {
         return emptyLabel1;
     }
-
     public void setEmptyLabel1(JLabel emptyLabel1) {
         this.emptyLabel1 = emptyLabel1;
     }
-
     public JLabel getEmptyLabel2() {
         return emptyLabel2;
     }
-
     public void setEmptyLabel2(JLabel emptyLabel2) {
         this.emptyLabel2 = emptyLabel2;
     }
-
     public JLabel getRegistrationNumberJLabel() {
         return registrationNumberJLabel;
     }
-
     public void setRegistrationNumberJLabel(JLabel registrationNumberJLabel) {
         this.registrationNumberJLabel = registrationNumberJLabel;
     }
-
     public JLabel getValuationJLabel() {
         return valuationJLabel;
     }
-
     public void setValuationJLabel(JLabel valuationJLabel) {
         this.valuationJLabel = valuationJLabel;
     }
-
     public JLabel getEstimatedValuedMilageJLabel() {
         return estimatedValuedMilageJLabel;
     }
-
     public void setEstimatedValuedMilageJLabel(JLabel estimatedValuedMilageJLabel) {
         this.estimatedValuedMilageJLabel = estimatedValuedMilageJLabel;
     }
-
     public JLabel getClaimInLast5YearsJLabel() {
         return claimInLast5YearsJLabel;
     }
-
     public void setClaimInLast5YearsJLabel(JLabel claimInLast5YearsJLabel) {
         this.claimInLast5YearsJLabel = claimInLast5YearsJLabel;
     }
-
     public JLabel getPostCodeJLabel() {
         return postCodeJLabel;
     }
-
     public void setPostCodeJLabel(JLabel postCodeJLabel) {
         this.postCodeJLabel = postCodeJLabel;
     }
-
     public JLabel getTelNoJLabel() {
         return telNoJLabel;
     }
-
     public void setTelNoJLabel(JLabel telNoJLabel) {
         this.telNoJLabel = telNoJLabel;
     }
-
     public JLabel getDobJLabel() {
         return dobJLabel;
     }
-
     public void setDobJLabel(JLabel dobJLabel) {
         this.dobJLabel = dobJLabel;
     }
-
     public JLabel getCoverTypeJLabel() {
         return coverTypeJLabel;
     }
-
     public void setCoverTypeJLabel(JLabel coverTypeJLabel) {
         this.coverTypeJLabel = coverTypeJLabel;
     }
-
     public JLabel getMakeAndModelJLabel() {
         return makeAndModelJLabel;
     }
-
     public void setMakeAndModelJLabel(JLabel makeAndModelJLabel) {
         this.makeAndModelJLabel = makeAndModelJLabel;
     }
-
     public JLabel getYearFirstRegisteredJLabel() {
         return yearFirstRegisteredJLabel;
     }
-
     public void setYearFirstRegisteredJLabel(JLabel yearFirstRegisteredJLabel) {
         this.yearFirstRegisteredJLabel = yearFirstRegisteredJLabel;
     }
-
     public JLabel getEngineCCJLabel() {
         return engineCCJLabel;
     }
-
     public void setEngineCCJLabel(JLabel engineCCJLabel) {
         this.engineCCJLabel = engineCCJLabel;
     }
-
     public JLabel getAnnualPremiumLabel() {
         return annualPremiumLabel;
     }
-
     public void setAnnualPremiumLabel(JLabel annualPremiumLabel) {
         this.annualPremiumLabel = annualPremiumLabel;
     }
-
     public JLabel getMonthlyPremiumLabel() {
         return monthlyPremiumLabel;
     }
-
     public void setMonthlyPremiumLabel(JLabel monthlyPremiumLabel) {
         this.monthlyPremiumLabel = monthlyPremiumLabel;
     }
-
     public JTextField getLogowanieText() {
         return logowanieText;
     }
-
     public void setLogowanieText(JTextField logowanieText) {
         this.logowanieText = logowanieText;
     }
-
     public JLabel getVehicleInformationLabel() {
         return vehicleInformationLabel;
     }
-
     public void setVehicleInformationLabel(JLabel vehicleInformationLabel) {
         this.vehicleInformationLabel = vehicleInformationLabel;
     }
-
     public JLabel getCustomerInformationLabel() {
         return customerInformationLabel;
     }
-
     public void setCustomerInformationLabel(JLabel customerInformationLabel) {
         this.customerInformationLabel = customerInformationLabel;
     }
-
     public JTextField getAnnualPremiumTekstowe() {
         return annualPremiumTekstowe;
     }
-
     public void setAnnualPremiumTekstowe(JTextField annualPremiumTekstowe) {
         this.annualPremiumTekstowe = annualPremiumTekstowe;
     }
-
     public JTextField getMonthlyPremiumTekstowe() {
         return monthlyPremiumTekstowe;
     }
-
     public void setMonthlyPremiumTekstowe(JTextField monthlyPremiumTekstowe) {
         this.monthlyPremiumTekstowe = monthlyPremiumTekstowe;
     }
-
     public JTextField getCustomerNameText() {
         return customerNameText;
     }
-
     public void setCustomerNameText(JTextField customerNameText) {
         this.customerNameText = customerNameText;
     }
-
     public JTextField getAddressText() {
         return addressText;
     }
-
     public void setAddressText(JTextField addressText) {
         this.addressText = addressText;
     }
-
     public JTextField getEmptyLabel1Text() {
         return emptyLabel1Text;
     }
-
     public void setEmptyLabel1Text(JTextField emptyLabel1Text) {
         this.emptyLabel1Text = emptyLabel1Text;
     }
-
     public JTextField getEmptyLabel2Text() {
         return emptyLabel2Text;
     }
-
     public void setEmptyLabel2Text(JTextField emptyLabel2Text) {
         this.emptyLabel2Text = emptyLabel2Text;
     }
-
     public JTextField getPostCodeText() {
         return postCodeText;
     }
-
     public void setPostCodeText(JTextField postCodeText) {
         this.postCodeText = postCodeText;
     }
-
     public JTextField getTelNoText() {
         return telNoText;
     }
-
     public void setTelNoText(JTextField telNoText) {
         this.telNoText = telNoText;
     }
@@ -674,8 +602,8 @@ public class InsuranceGui extends JFrame implements ActionListener
     }
 
     /**
-     * *******************************GUI colors
-     * etc*************************************************
+     * Setting up GUI colors
+     *   
      */
     public void guiLook() {
         //GUI Graphical Look
@@ -686,15 +614,15 @@ public class InsuranceGui extends JFrame implements ActionListener
     }
 
     /**
-     * *******************************Initialising
-     * Elements*************************************************
+     * Elements Initialising
      */
     public void elementsInitiator() {
 
         //tworzenie obiektu tytul
+        carLabel = new JLabel(" ",r13, JLabel.LEFT);
         projectTitle = new JLabel("Direct Quote Motor Insurance");
         projectTitle.setFont(new Font("Magneto", Font.BOLD, 30));
-//Helvetica
+
         //dodanie labelow
         customerNameJLabel = new JLabel(" Name ");
         addressJLabel = new JLabel(" Address ");
@@ -719,7 +647,6 @@ public class InsuranceGui extends JFrame implements ActionListener
         logowanieText.setBackground(Color.red);
         logowanieText.setForeground(Color.WHITE);
         logowanieText.setEditable(false);
-
         vehicleInformationLabel = new JLabel("                   Vehicle Information ");
         customerInformationLabel = new JLabel("Customer Information ");
         //input fileds
@@ -758,8 +685,7 @@ public class InsuranceGui extends JFrame implements ActionListener
     }
 
     /**
-     * *******************************Setting up Tool
-     * tips*************************************************
+     * Tool Tips Setting up 
      */
     public void settingToolTips() {
         customerNameJLabel.setToolTipText(" Name ");
@@ -776,7 +702,9 @@ public class InsuranceGui extends JFrame implements ActionListener
         yearFirstRegisteredJLabel.setToolTipText(" Year first registered ");
         engineCCJLabel.setToolTipText(" Engine cc ");
         annualPremiumLabel.setToolTipText(" Annual Premium ");
+        annualPremiumLabel.setFont(new Font("Monotype Corsiva", Font.BOLD, 30));
         monthlyPremiumLabel.setToolTipText(" Monthly Premium ");
+        monthlyPremiumLabel.setFont(new Font("Monotype Corsiva", Font.BOLD, 30));
         logowanieText.setToolTipText("Status");
         vehicleInformationLabel.setToolTipText("   Vehicle Information ");
         customerInformationLabel.setToolTipText("Customer Information ");
@@ -811,8 +739,7 @@ public class InsuranceGui extends JFrame implements ActionListener
     }
 
     /**
-     * **************************************************Setting Up
-     * Layout**************************************
+     * Adding Elements to the Layouts
      */
     protected JPanel SetLayoutAndElements() {
 
@@ -839,9 +766,9 @@ public class InsuranceGui extends JFrame implements ActionListener
         main.add(breakLine);
         //tytul
         JPanel mainHeader = new JPanel();
+                 mainHeader.add(carLabel);
         mainHeader.add(projectTitle);
-
-        //pierwszy kontener podzielony na regiony
+  //pierwszy kontener podzielony na regiony
         JPanel p1 = new JPanel(new BorderLayout());
         JPanel top = new JPanel();
         top.add(customerInformationLabel);
@@ -876,14 +803,11 @@ public class InsuranceGui extends JFrame implements ActionListener
         // tworzenie drugiego kontenera z regionami  
         JPanel p2 = new JPanel(new BorderLayout());
         JPanel p2Grid = new JPanel(new GridLayout(2, 1));
-
         vehicleInformationLabel.setFont(new Font("Monotype Corsiva", Font.BOLD, 20));
         p2Grid.add(vehicleInformationLabel);
         p2Grid.add(new JLabel(" "));
         p2.add(p2Grid, BorderLayout.NORTH);
-
         JPanel jp5 = new JPanel(new GridLayout(8, 2));
-
         //check boxy
         jp5.add(claimInLast5YearsJLabel);
         //dodanie do grupy by jeden radio sie wlaczal
@@ -936,12 +860,9 @@ public class InsuranceGui extends JFrame implements ActionListener
             premium2.add(premiumLabelTable[i]);
             premium2.add(premiumTekstoweTable[i]);
         }
-
         kubelek.add(premium2);
-
         // dodanie przyciskow do ostatniego kontenera
         p2.add(kubelek, BorderLayout.SOUTH);
-
         // panel przechowujacy przyciski
         JPanel jp6 = new JPanel();
         jp6.add(saveQuote);
@@ -949,8 +870,7 @@ public class InsuranceGui extends JFrame implements ActionListener
         jp6.add(calculatePremiun);
         calculatePremiun.addActionListener(new CalculatePremiumListener(annualPremiumTekstowe, monthlyPremiumTekstowe, customerNameText, addressText, emptyLabel1Text, emptyLabel2Text, postCodeText, telNoText, dobText, makeAndModelText, registrationNumberText, valuationText, yearFirstRegisteredText, estiamtionAnnualMilage, checkBoxYes, checkBoxThirdParty, engineCCText, client, logowanieText, this, clients));
         jp6.add(calculateMultiple);
-        calculateMultiple.addActionListener(new CalculateMultipleListener(annualPremiumTekstowe, monthlyPremiumTekstowe, customerNameText, addressText, emptyLabel1Text, emptyLabel2Text, postCodeText, telNoText, dobText, makeAndModelText, registrationNumberText, valuationText, yearFirstRegisteredText, estiamtionAnnualMilage, checkBoxYes, checkBoxThirdParty, engineCCText, client, logowanieText, this, clients));
-        
+        calculateMultiple.addActionListener(new CalculateMultipleListener(annualPremiumTekstowe, monthlyPremiumTekstowe, customerNameText, addressText, emptyLabel1Text, emptyLabel2Text, postCodeText, telNoText, dobText, makeAndModelText, registrationNumberText, valuationText, yearFirstRegisteredText, estiamtionAnnualMilage, checkBoxYes, checkBoxThirdParty, engineCCText, client, logowanieText, this, clients));        
         //dodanie Footera na layout
         JPanel footer = new JPanel(new BorderLayout());
         JPanel breakLine1 = new JPanel();
@@ -966,33 +886,25 @@ public class InsuranceGui extends JFrame implements ActionListener
 
         tworcy.setHorizontalAlignment(JTextField.LEFT);
         footer3.add(tworcy);
-
         copyWrights = new JLabel("                                     © Copyrights 2022 Dublin                                               ");
- 
         footer3.add(copyWrights);
-
         zegarek = new JTextField("", 20);
         zegarek.addActionListener(this);
         zegarek.setEditable(false);
         zegarek.setHorizontalAlignment(JTextField.RIGHT);
-
         footer3.add(zegarek);
-
         footer.add(footer3, BorderLayout.SOUTH);
-
         // dodanie wszystkich kontenerow na glowny panel main
         main.add(mainHeader);
         main.add(p1);
         main.add(p2);
         main.add(jp6);
         main.add(footer);
-
         return main;
     }
 
     /**
-     * **************************************************Setting Up Header Main
-     * Menu**************************************
+     * ****************************************Setting Up Header Main Menu******
      */
     public void SetMenuBar() {
         //tworzę listwę menu
@@ -1002,8 +914,7 @@ public class InsuranceGui extends JFrame implements ActionListener
         JMenu m2 = new JMenu("Options");
         JMenu m3 = new JMenu("About");
         JMenu m4 = new JMenu("List");
-
-        
+      
         newList = new JMenuItem("New List",r1);
         newList.addActionListener(this);
 
@@ -1033,13 +944,7 @@ public class InsuranceGui extends JFrame implements ActionListener
         
         showCalculateMultiple = new JMenuItem("Show table", r14);
         showCalculateMultiple.addActionListener(this);
-
-        ButtonGroup grupaAbout = new ButtonGroup();
-        grupaAbout.add(about);
-        grupaAbout.add(links);
         // konstrukcja pierwszej głównej pozycji menu
-        
-        
         m1.add(openFile);
         m1.addSeparator();
         //a tu dam nowe podmenu
@@ -1049,30 +954,23 @@ public class InsuranceGui extends JFrame implements ActionListener
         podmenu.add(saveAs);
         //dodaje podmenu do menu
         m1.add(podmenu);
-        
-        
-
         m2.add(loginMenu);
         m2.addSeparator();
         m2.add(signUPMenu);
         m2.addSeparator();
-        m2.add(logoutMenu);
-        
+        m2.add(logoutMenu);        
         m4.add(newList);
         m4.add(showCalculateMultiple);
         m3.add(about);
         m3.add(links);
-
         mBar.add(m1);
         mBar.add(m4);
         mBar.add(m2);
         mBar.add(m3);
         setJMenuBar(mBar);
     }
-
     /**
-     * **************************************************Methods
-     * **************************************
+     * ******************Methods********************
      */
     //Date validator
     //@Override
@@ -1089,10 +987,8 @@ public class InsuranceGui extends JFrame implements ActionListener
             return false;
         }
     }
-
     // Numbers Validator
     public static boolean isANumber(String number) {
-
         try {
             Long.parseLong(number);
             return false;
@@ -1175,8 +1071,7 @@ public class InsuranceGui extends JFrame implements ActionListener
      {
          new CalculateMultipleResults(clients);
      }
-    }
-        
+    }        
         /*metody odpowiedzialne za plik*/
 
            public void SaveAs()
@@ -1210,20 +1105,17 @@ public class InsuranceGui extends JFrame implements ActionListener
     }
     private String chooseFile()
     {
-        
+  
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setDialogTitle("Choose A File");
         //dodajemy filtry dla plikow .txt i usuwamy filtr "WSZYSTKIE PLIKI"
         fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("Pliki tekstowe", "txt"));
-        fileChooser.setAcceptAllFileFilterUsed(false);
-        
+        fileChooser.setAcceptAllFileFilterUsed(false); 
         String path = fileChooser.getSelectedFile() != null ? fileChooser.getSelectedFile().getPath() : "";
         System.out.println(path);
-        
-        
+
         //wywolujemy okno do wybrania pliku
         fileChooser.showOpenDialog(this);
-
         path = fileChooser.getSelectedFile() != null ? fileChooser.getSelectedFile().getPath() : "";
         System.out.println(path);
         return path;
@@ -1239,8 +1131,7 @@ public class InsuranceGui extends JFrame implements ActionListener
             
             System.out.println(line);
             while((line = out.readLine()) != null)
-            {
-                
+            { 
                 try
                 {
                     String[] list = line.split(";");
@@ -1256,17 +1147,12 @@ public class InsuranceGui extends JFrame implements ActionListener
                 catch(Exception e)
                 {
                     System.out.println("Exception: " + e.getLocalizedMessage());
-                }
-                
+                }     
             }
         }
         catch(IOException e)
-        {
-            
+        {     
         }
     }
-
-
-     
 
 }
