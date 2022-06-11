@@ -13,9 +13,11 @@ import java.util.ArrayList;
 
 /**
  *
- * @author pre12
+ * Klasa wątkowalna obsługująca komunikację po stronie serwera.
+ * Zawiera funkcję CalculateInsurance()
+ * @author Bartosz Wasko i Krzysztof Gajdosz
  */
-//do odbierania informacji przez serwer
+
 public class ServerThread extends Thread
 {
     private Socket socket;
@@ -39,7 +41,11 @@ public class ServerThread extends Thread
             System.out.println("Jest błąd6: " + e);
         }        
     }
-    
+    /**
+     * Funkcja fomatująca odebrane dane oraz przekazująca je do funkcji wyliczającej w klasie Calculation.
+     * @param info
+     * @return 
+     */
     public int CalculateInsurance(String info)
     {
         String[] lista = info.split(";");
@@ -61,20 +67,12 @@ public class ServerThread extends Thread
             String kolejna = "";
             String str = "";
             str = in.readLine();
-//            while((kolejna = in.readLine()).isEmpty())
-//            {
-//                str = str + "\n" + kolejna;
-//                kolejna = "";
-//            }
-System.out.println("Teraz to co pobrano:");
-            System.out.println(str);
             System.out.println("End of downloading data");
             int discount = CalculateInsurance(str);
             //tu bedzie wyslanie info zwrotnej do klienta;
             out.println(discount+"");
-            System.out.println(discount+"");
-            //in.close();
-            //out.close();
+            System.out.println("Zniżka: " + discount);
+
         }
         catch(Exception e)
         {

@@ -10,12 +10,13 @@ import java.io.*;
 import java.net.*;
 import javax.swing.JTextField;
 
+
 /**
- *
- * @author pre12
+ * Klasa wykorzystywana do tworzenia nowych połączeń klient-serwer od strony klienta.
+ * Określa operacje wykonywane od strony klienta w nawiązanym już połączeniu.
+ * 
+ *  * @author Bartosz Wasko i Krzysztof Gajdosz
  */
-//do tworzenia nowych polaczen klient-serwer od strony klienta
-//oraz określa operacje wykonywane od strony klienta w nawiazanym juz polaczeniu klient-serwer
 public class ClientToServerConnect
 {
     PrintWriter out;
@@ -62,22 +63,15 @@ public class ClientToServerConnect
         {
             System.out.println("Blad2: "+ e);
         }
-        Wyslij();
+        Send();
         
-        
-        try
-        {
-            //out.close();
-            //socket.close();
-        }
-        catch(Exception e)
-        {
-            System.out.println("Blad3: "+ e);
-        }
     }
-    public void Wyslij()
+    /**
+     * Wysyła sformatowany w odpowiedni sposób tekst do serwera, 
+     * a on na jego podstawie wylicza zniżkę.
+     */
+    public void Send()
     {
-        //System.out.println(client.toString());
         out.println(client.toStringDoWyslania());
     }
     
