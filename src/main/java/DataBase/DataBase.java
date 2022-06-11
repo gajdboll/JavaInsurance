@@ -48,7 +48,6 @@ public class DataBase
             }
             return false;
         }
-        
         public void WypiszLIsteUzytkownikow()
         {
             for(User e : listaKlientow)
